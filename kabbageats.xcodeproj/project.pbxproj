@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		76B5DEF41CC5312E00166200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DEF31CC5312E00166200 /* AppDelegate.swift */; };
+		76B5DEF61CC5312E00166200 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DEF51CC5312E00166200 /* ViewController.swift */; };
+		76B5DEF91CC5312E00166200 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DEF71CC5312E00166200 /* Main.storyboard */; };
+		76B5DEFC1CC5312E00166200 /* kabbageats.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DEFA1CC5312E00166200 /* kabbageats.xcdatamodeld */; };
+		76B5DEFE1CC5312E00166200 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DEFD1CC5312E00166200 /* Assets.xcassets */; };
+		76B5DF011CC5312E00166200 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */; };
+		76B5DF0C1CC5312E00166200 /* kabbageatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF0B1CC5312E00166200 /* kabbageatsTests.swift */; };
+		76B5DF171CC5312E00166200 /* kabbageatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF161CC5312E00166200 /* kabbageatsUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76B5DF081CC5312E00166200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76B5DEE81CC5312E00166200 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76B5DEEF1CC5312E00166200;
+			remoteInfo = kabbageats;
+		};
+		76B5DF131CC5312E00166200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76B5DEE81CC5312E00166200 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76B5DEEF1CC5312E00166200;
+			remoteInfo = kabbageats;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		76B5DEF01CC5312E00166200 /* kabbageats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kabbageats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76B5DEF31CC5312E00166200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		76B5DEF51CC5312E00166200 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		76B5DEF81CC5312E00166200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76B5DEFB1CC5312E00166200 /* kabbageats.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = kabbageats.xcdatamodel; sourceTree = "<group>"; };
+		76B5DEFD1CC5312E00166200 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		76B5DF001CC5312E00166200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		76B5DF021CC5312E00166200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76B5DF071CC5312E00166200 /* kabbageatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kabbageatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76B5DF0B1CC5312E00166200 /* kabbageatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kabbageatsTests.swift; sourceTree = "<group>"; };
+		76B5DF0D1CC5312E00166200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76B5DF121CC5312E00166200 /* kabbageatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kabbageatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76B5DF161CC5312E00166200 /* kabbageatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kabbageatsUITests.swift; sourceTree = "<group>"; };
+		76B5DF181CC5312E00166200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76B5DEED1CC5312E00166200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B5DF041CC5312E00166200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B5DF0F1CC5312E00166200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76B5DEE71CC5312E00166200 = {
+			isa = PBXGroup;
+			children = (
+				76B5DEF21CC5312E00166200 /* kabbageats */,
+				76B5DF0A1CC5312E00166200 /* kabbageatsTests */,
+				76B5DF151CC5312E00166200 /* kabbageatsUITests */,
+				76B5DEF11CC5312E00166200 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76B5DEF11CC5312E00166200 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76B5DEF01CC5312E00166200 /* kabbageats.app */,
+				76B5DF071CC5312E00166200 /* kabbageatsTests.xctest */,
+				76B5DF121CC5312E00166200 /* kabbageatsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76B5DEF21CC5312E00166200 /* kabbageats */ = {
+			isa = PBXGroup;
+			children = (
+				76B5DEF31CC5312E00166200 /* AppDelegate.swift */,
+				76B5DEF51CC5312E00166200 /* ViewController.swift */,
+				76B5DEF71CC5312E00166200 /* Main.storyboard */,
+				76B5DEFD1CC5312E00166200 /* Assets.xcassets */,
+				76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */,
+				76B5DF021CC5312E00166200 /* Info.plist */,
+				76B5DEFA1CC5312E00166200 /* kabbageats.xcdatamodeld */,
+			);
+			path = kabbageats;
+			sourceTree = "<group>";
+		};
+		76B5DF0A1CC5312E00166200 /* kabbageatsTests */ = {
+			isa = PBXGroup;
+			children = (
+				76B5DF0B1CC5312E00166200 /* kabbageatsTests.swift */,
+				76B5DF0D1CC5312E00166200 /* Info.plist */,
+			);
+			path = kabbageatsTests;
+			sourceTree = "<group>";
+		};
+		76B5DF151CC5312E00166200 /* kabbageatsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				76B5DF161CC5312E00166200 /* kabbageatsUITests.swift */,
+				76B5DF181CC5312E00166200 /* Info.plist */,
+			);
+			path = kabbageatsUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76B5DEEF1CC5312E00166200 /* kabbageats */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76B5DF1B1CC5312E00166200 /* Build configuration list for PBXNativeTarget "kabbageats" */;
+			buildPhases = (
+				76B5DEEC1CC5312E00166200 /* Sources */,
+				76B5DEED1CC5312E00166200 /* Frameworks */,
+				76B5DEEE1CC5312E00166200 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kabbageats;
+			productName = kabbageats;
+			productReference = 76B5DEF01CC5312E00166200 /* kabbageats.app */;
+			productType = "com.apple.product-type.application";
+		};
+		76B5DF061CC5312E00166200 /* kabbageatsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76B5DF1E1CC5312E00166200 /* Build configuration list for PBXNativeTarget "kabbageatsTests" */;
+			buildPhases = (
+				76B5DF031CC5312E00166200 /* Sources */,
+				76B5DF041CC5312E00166200 /* Frameworks */,
+				76B5DF051CC5312E00166200 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76B5DF091CC5312E00166200 /* PBXTargetDependency */,
+			);
+			name = kabbageatsTests;
+			productName = kabbageatsTests;
+			productReference = 76B5DF071CC5312E00166200 /* kabbageatsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		76B5DF111CC5312E00166200 /* kabbageatsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76B5DF211CC5312E00166200 /* Build configuration list for PBXNativeTarget "kabbageatsUITests" */;
+			buildPhases = (
+				76B5DF0E1CC5312E00166200 /* Sources */,
+				76B5DF0F1CC5312E00166200 /* Frameworks */,
+				76B5DF101CC5312E00166200 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76B5DF141CC5312E00166200 /* PBXTargetDependency */,
+			);
+			name = kabbageatsUITests;
+			productName = kabbageatsUITests;
+			productReference = 76B5DF121CC5312E00166200 /* kabbageatsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76B5DEE81CC5312E00166200 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = marisalaneous;
+				TargetAttributes = {
+					76B5DEEF1CC5312E00166200 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					76B5DF061CC5312E00166200 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 76B5DEEF1CC5312E00166200;
+					};
+					76B5DF111CC5312E00166200 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 76B5DEEF1CC5312E00166200;
+					};
+				};
+			};
+			buildConfigurationList = 76B5DEEB1CC5312E00166200 /* Build configuration list for PBXProject "kabbageats" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76B5DEE71CC5312E00166200;
+			productRefGroup = 76B5DEF11CC5312E00166200 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76B5DEEF1CC5312E00166200 /* kabbageats */,
+				76B5DF061CC5312E00166200 /* kabbageatsTests */,
+				76B5DF111CC5312E00166200 /* kabbageatsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76B5DEEE1CC5312E00166200 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76B5DF011CC5312E00166200 /* LaunchScreen.storyboard in Resources */,
+				76B5DEFE1CC5312E00166200 /* Assets.xcassets in Resources */,
+				76B5DEF91CC5312E00166200 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B5DF051CC5312E00166200 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B5DF101CC5312E00166200 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76B5DEEC1CC5312E00166200 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76B5DEFC1CC5312E00166200 /* kabbageats.xcdatamodeld in Sources */,
+				76B5DEF61CC5312E00166200 /* ViewController.swift in Sources */,
+				76B5DEF41CC5312E00166200 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B5DF031CC5312E00166200 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76B5DF0C1CC5312E00166200 /* kabbageatsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B5DF0E1CC5312E00166200 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76B5DF171CC5312E00166200 /* kabbageatsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76B5DF091CC5312E00166200 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76B5DEEF1CC5312E00166200 /* kabbageats */;
+			targetProxy = 76B5DF081CC5312E00166200 /* PBXContainerItemProxy */;
+		};
+		76B5DF141CC5312E00166200 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76B5DEEF1CC5312E00166200 /* kabbageats */;
+			targetProxy = 76B5DF131CC5312E00166200 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		76B5DEF71CC5312E00166200 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76B5DEF81CC5312E00166200 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76B5DF001CC5312E00166200 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		76B5DF191CC5312E00166200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76B5DF1A1CC5312E00166200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76B5DF1C1CC5312E00166200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = kabbageats/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		76B5DF1D1CC5312E00166200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = kabbageats/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		76B5DF1F1CC5312E00166200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = kabbageatsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageatsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kabbageats.app/kabbageats";
+			};
+			name = Debug;
+		};
+		76B5DF201CC5312E00166200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = kabbageatsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageatsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kabbageats.app/kabbageats";
+			};
+			name = Release;
+		};
+		76B5DF221CC5312E00166200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = kabbageatsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageatsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = kabbageats;
+			};
+			name = Debug;
+		};
+		76B5DF231CC5312E00166200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = kabbageatsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageatsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = kabbageats;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76B5DEEB1CC5312E00166200 /* Build configuration list for PBXProject "kabbageats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76B5DF191CC5312E00166200 /* Debug */,
+				76B5DF1A1CC5312E00166200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76B5DF1B1CC5312E00166200 /* Build configuration list for PBXNativeTarget "kabbageats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76B5DF1C1CC5312E00166200 /* Debug */,
+				76B5DF1D1CC5312E00166200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		76B5DF1E1CC5312E00166200 /* Build configuration list for PBXNativeTarget "kabbageatsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76B5DF1F1CC5312E00166200 /* Debug */,
+				76B5DF201CC5312E00166200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		76B5DF211CC5312E00166200 /* Build configuration list for PBXNativeTarget "kabbageatsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76B5DF221CC5312E00166200 /* Debug */,
+				76B5DF231CC5312E00166200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		76B5DEFA1CC5312E00166200 /* kabbageats.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				76B5DEFB1CC5312E00166200 /* kabbageats.xcdatamodel */,
+			);
+			currentVersion = 76B5DEFB1CC5312E00166200 /* kabbageats.xcdatamodel */;
+			path = kabbageats.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 76B5DEE81CC5312E00166200 /* Project object */;
+}
