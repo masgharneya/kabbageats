@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2b6-VS-8P5">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Lunch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MenuViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +17,118 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Kjm-pn-ktr"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="0.0"/>
+                                    <color key="textColor" red="0.6588235294117647" green="0.81176470588235294" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Thursday, April 14" id="P4a-hx-bBb"/>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="turkeySandwich" translatesAutoresizingMaskIntoConstraints="NO" id="tPS-XH-CS1">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7MO-9S-7Hp" userLabel="Menu View">
+                                <rect key="frame" x="0.0" y="491" width="600" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turkey, avocado, bacon sandwiches" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tz1-sS-cfJ">
+                                        <rect key="frame" x="20" y="3" width="560" height="32"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="with Kettle Chips and Sauteed Kale" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoB-dJ-13u">
+                                        <rect key="frame" x="20" y="42" width="560" height="21"/>
+                                        <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="17"/>
+                                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="KoB-dJ-13u" firstAttribute="top" secondItem="Tz1-sS-cfJ" secondAttribute="bottom" constant="8" id="E1h-Wa-6zT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tz1-sS-cfJ" secondAttribute="trailing" constant="20" id="Kg7-ok-yQQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="KoB-dJ-13u" secondAttribute="bottom" constant="3" id="bCN-ag-ozw"/>
+                                    <constraint firstItem="Tz1-sS-cfJ" firstAttribute="leading" secondItem="7MO-9S-7Hp" secondAttribute="leading" constant="20" id="dNt-W5-OeR"/>
+                                    <constraint firstItem="KoB-dJ-13u" firstAttribute="leading" secondItem="7MO-9S-7Hp" secondAttribute="leading" constant="20" id="lbp-EJ-egm"/>
+                                    <constraint firstAttribute="trailing" secondItem="KoB-dJ-13u" secondAttribute="trailing" constant="20" id="tOg-Vz-NqE"/>
+                                    <constraint firstItem="Tz1-sS-cfJ" firstAttribute="top" secondItem="7MO-9S-7Hp" secondAttribute="top" constant="3" id="wpP-rf-px4"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzS-6w-bEd">
+                                <rect key="frame" x="25" y="564" width="22" height="22"/>
+                                <color key="tintColor" red="0.6588235294" green="0.81176470590000005" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pG-pd-G5J">
+                                <rect key="frame" x="62" y="564" width="22" height="22"/>
+                                <color key="tintColor" red="0.6588235294" green="0.81176470590000005" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tPS-XH-CS1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2tB-DL-6Uz"/>
+                            <constraint firstItem="8pG-pd-G5J" firstAttribute="leading" secondItem="BzS-6w-bEd" secondAttribute="trailing" constant="15" id="34t-M8-6lp"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BzS-6w-bEd" secondAttribute="bottom" constant="14" id="6vq-yI-92r"/>
+                            <constraint firstItem="U2n-sU-KED" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7d3-Hg-WPl"/>
+                            <constraint firstAttribute="trailing" secondItem="tPS-XH-CS1" secondAttribute="trailing" id="GG6-pZ-BeJ"/>
+                            <constraint firstItem="U2n-sU-KED" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Gws-kr-fNV"/>
+                            <constraint firstAttribute="trailing" secondItem="U2n-sU-KED" secondAttribute="trailing" id="LrO-D2-3ME"/>
+                            <constraint firstItem="7MO-9S-7Hp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Xge-u3-UZN"/>
+                            <constraint firstItem="tPS-XH-CS1" firstAttribute="top" secondItem="U2n-sU-KED" secondAttribute="bottom" id="bbm-JG-siV"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="tPS-XH-CS1" secondAttribute="bottom" id="eXg-DG-trN"/>
+                            <constraint firstItem="8pG-pd-G5J" firstAttribute="top" secondItem="7MO-9S-7Hp" secondAttribute="bottom" constant="8" id="jga-Bx-VRZ"/>
+                            <constraint firstAttribute="trailing" secondItem="7MO-9S-7Hp" secondAttribute="trailing" id="l3g-bL-xLh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8pG-pd-G5J" secondAttribute="bottom" constant="14" id="ubL-Kd-eET"/>
+                            <constraint firstItem="BzS-6w-bEd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="xsU-2t-tS1"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Lunch" id="Ooo-Fj-jCG">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="4AC-3u-J1n">
+                            <color key="tintColor" red="0.6588235294" green="0.81176470590000005" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1117" y="370"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XsH-GG-nYD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2b6-VS-8P5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="mcf-Gk-09h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="0.0"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hAH-q8-TXS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m3N-JQ-JYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="370"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="turkeySandwich" width="736" height="735"/>
+    </resources>
 </document>
