@@ -18,6 +18,7 @@
 		76B5DF251CC58B7200166200 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5DF241CC58B7200166200 /* Alamofire.framework */; };
 		76B5DF2A1CC5DB9900166200 /* Lunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF291CC5DB9900166200 /* Lunch.swift */; };
 		76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */; };
+		76B5DF301CC6C86800166200 /* NSDate+GetWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		76B5DF241CC58B7200166200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		76B5DF291CC5DB9900166200 /* Lunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lunch.swift; path = ../Lunch.swift; sourceTree = "<group>"; };
 		76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
+		76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+GetWeekDay.swift"; path = "../NSDate+GetWeekDay.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,11 +113,11 @@
 				76B5DF291CC5DB9900166200 /* Lunch.swift */,
 				76B5DEF51CC5312E00166200 /* MenuViewController.swift */,
 				76B5DEF71CC5312E00166200 /* Main.storyboard */,
+				76B5DF311CC6C87200166200 /* Extensions */,
 				76B5DEFD1CC5312E00166200 /* Assets.xcassets */,
 				76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */,
 				76B5DF021CC5312E00166200 /* Info.plist */,
 				76B5DEFA1CC5312E00166200 /* kabbageats.xcdatamodeld */,
-				76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */,
 			);
 			path = kabbageats;
 			sourceTree = "<group>";
@@ -136,6 +138,15 @@
 				76B5DF181CC5312E00166200 /* Info.plist */,
 			);
 			path = kabbageatsUITests;
+			sourceTree = "<group>";
+		};
+		76B5DF311CC6C87200166200 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */,
+				76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B5DF301CC6C86800166200 /* NSDate+GetWeekDay.swift in Sources */,
 				76B5DF2A1CC5DB9900166200 /* Lunch.swift in Sources */,
 				76B5DEFC1CC5312E00166200 /* kabbageats.xcdatamodeld in Sources */,
 				76B5DEF61CC5312E00166200 /* MenuViewController.swift in Sources */,

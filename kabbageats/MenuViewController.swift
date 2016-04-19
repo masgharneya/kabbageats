@@ -22,6 +22,7 @@ class MenuViewController: UIViewController {
   var lunch = Lunch()
   var isLoading = false
   
+  // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -41,19 +42,30 @@ class MenuViewController: UIViewController {
     self.dateNavBarTitle.title = self.lunch.todayString
   }
   
+  // MARK: - Actions
   @IBAction func refreshLunch(sender: UIBarButtonItem) {
     getLunch(lunch.date)
   }
   
   @IBAction func getTomorrowLunch(sender: UISwipeGestureRecognizer) {
     if sender.direction == .Left {
-      print("swiped left")
-      updateDate(1)
+      // Check if current day is Friday, if so skip to Monday
+      if lunch.date.dayOfWeek() == 6 {
+        updateDate(3)
+      } else {
+        updateDate(1)
+      }
     } else if sender.direction == .Right {
-      updateDate(-1)
+      // Check if current day is Monday, if so skip to Friday
+      if lunch.date.dayOfWeek() == 2 {
+        updateDate(-3)
+      } else {
+        updateDate(-1)
+      }
     }
   }
   
+  // MARK: - Methods
   func getLunch(date: NSDate) {
     activityIndicatorView.hidden = false
     activityIndicator.startAnimating()
@@ -61,7 +73,9 @@ class MenuViewController: UIViewController {
     Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
       response in
       guard response.result.isSuccess else {
+        self.showNetworkError()
         print("Error while retrieving lunch: \(response.result.error)")
+        self.hideActivityIndicator()
         return
       }
       
@@ -80,8 +94,7 @@ class MenuViewController: UIViewController {
       
       // Update UI
       dispatch_async(dispatch_get_main_queue()) {
-        self.activityIndicator.stopAnimating()
-        self.activityIndicatorView.hidden = true
+        self.hideActivityIndicator()
         self.mainDishLabel.text = self.lunch.mainDish
         self.sideDishLabel.text = self.lunch.sideDishes
         if let url = NSURL(string: self.lunch.imageURL) {
@@ -101,6 +114,19 @@ class MenuViewController: UIViewController {
     
     lunch.date = tomorrow
     getLunch(lunch.date)
+  }
+  
+  func showNetworkError() {
+    let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch. Please try again.", preferredStyle: .Alert)
+    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alert.addAction(action)
+    
+    presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  func hideActivityIndicator() {
+    activityIndicator.stopAnimating()
+    activityIndicatorView.hidden = true
   }
 }
 
