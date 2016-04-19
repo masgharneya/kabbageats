@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED">
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Kjm-pn-ktr"/>
@@ -39,8 +39,13 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="turkeySandwich" translatesAutoresizingMaskIntoConstraints="NO" id="tPS-XH-CS1">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="turkeySandwich" translatesAutoresizingMaskIntoConstraints="NO" id="tPS-XH-CS1">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="5yn-tU-rYD" appends="YES" id="GOz-71-NGS"/>
+                                    <outletCollection property="gestureRecognizers" destination="p1r-6E-Ch0" appends="YES" id="5oh-Bz-b6e"/>
+                                </connections>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MO-9S-7Hp" userLabel="Menu View">
                                 <rect key="frame" x="0.0" y="489" width="600" height="67"/>
@@ -83,9 +88,33 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
+                                <rect key="frame" x="263" y="262" width="75" height="75"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
+                                        <rect key="frame" x="19" y="19" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerX" secondItem="SO3-84-C0i" secondAttribute="centerX" id="Geg-Aj-6PV"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="leading" secondItem="SO3-84-C0i" secondAttribute="leading" constant="19" id="MJz-Fb-ncg"/>
+                                    <constraint firstAttribute="bottom" secondItem="bYp-7P-enr" secondAttribute="bottom" constant="19" id="drr-j3-XR2"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerY" secondItem="SO3-84-C0i" secondAttribute="centerY" id="mav-II-QmV"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerX" secondItem="SO3-84-C0i" secondAttribute="centerX" id="sQk-Pi-pvH"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerY" secondItem="SO3-84-C0i" secondAttribute="centerY" id="yBn-f2-tlc"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Geg-Aj-6PV"/>
+                                        <exclude reference="mav-II-QmV"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="2Pl-Rm-7qh"/>
                             <constraint firstItem="tPS-XH-CS1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2tB-DL-6Uz"/>
                             <constraint firstItem="8pG-pd-G5J" firstAttribute="leading" secondItem="BzS-6w-bEd" secondAttribute="trailing" constant="15" id="34t-M8-6lp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BzS-6w-bEd" secondAttribute="bottom" constant="14" id="6vq-yI-92r"/>
@@ -94,22 +123,46 @@
                             <constraint firstItem="U2n-sU-KED" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Gws-kr-fNV"/>
                             <constraint firstAttribute="trailing" secondItem="U2n-sU-KED" secondAttribute="trailing" id="LrO-D2-3ME"/>
                             <constraint firstItem="7MO-9S-7Hp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Xge-u3-UZN"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZAk-sq-jas"/>
                             <constraint firstItem="tPS-XH-CS1" firstAttribute="top" secondItem="U2n-sU-KED" secondAttribute="bottom" id="bbm-JG-siV"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="262" id="cCH-Bn-GJ0"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="tPS-XH-CS1" secondAttribute="bottom" id="eXg-DG-trN"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="263" id="gBk-bL-2Cc"/>
                             <constraint firstItem="8pG-pd-G5J" firstAttribute="top" secondItem="7MO-9S-7Hp" secondAttribute="bottom" constant="8" id="jga-Bx-VRZ"/>
                             <constraint firstAttribute="trailing" secondItem="7MO-9S-7Hp" secondAttribute="trailing" id="l3g-bL-xLh"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rUt-rq-o9v"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8pG-pd-G5J" secondAttribute="bottom" constant="14" id="ubL-Kd-eET"/>
                             <constraint firstItem="BzS-6w-bEd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="xsU-2t-tS1"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZAk-sq-jas"/>
+                                <exclude reference="cCH-Bn-GJ0"/>
+                                <exclude reference="gBk-bL-2Cc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Lunch" id="Ooo-Fj-jCG"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="bYp-7P-enr" id="hmr-go-UYA"/>
+                        <outlet property="activityIndicatorView" destination="SO3-84-C0i" id="6BZ-4Y-dkI"/>
+                        <outlet property="dateNavBarTitle" destination="P4a-hx-bBb" id="KJ1-mI-eYY"/>
                         <outlet property="lunchImage" destination="tPS-XH-CS1" id="kVr-uu-B8c"/>
                         <outlet property="mainDishLabel" destination="Tz1-sS-cfJ" id="c5A-I1-Whf"/>
                         <outlet property="sideDishLabel" destination="KoB-dJ-13u" id="zKm-3v-ojY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="5yn-tU-rYD" userLabel="Left Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="getTomorrowLunch:" destination="BYZ-38-t0r" id="P2c-5L-BSy"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="p1r-6E-Ch0" userLabel="Right Swipe Gesture Recognizer">
+                    <connections>
+                        <action selector="getTomorrowLunch:" destination="BYZ-38-t0r" id="8RK-0K-mzQ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1117" y="370"/>
         </scene>
