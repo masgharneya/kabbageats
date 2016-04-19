@@ -15,6 +15,7 @@
 		76B5DF011CC5312E00166200 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */; };
 		76B5DF0C1CC5312E00166200 /* kabbageatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF0B1CC5312E00166200 /* kabbageatsTests.swift */; };
 		76B5DF171CC5312E00166200 /* kabbageatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF161CC5312E00166200 /* kabbageatsUITests.swift */; };
+		76B5DF251CC58B7200166200 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5DF241CC58B7200166200 /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		76B5DF121CC5312E00166200 /* kabbageatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kabbageatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B5DF161CC5312E00166200 /* kabbageatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kabbageatsUITests.swift; sourceTree = "<group>"; };
 		76B5DF181CC5312E00166200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76B5DF241CC58B7200166200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B5DF251CC58B7200166200 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		76B5DEE71CC5312E00166200 = {
 			isa = PBXGroup;
 			children = (
+				76B5DF241CC58B7200166200 /* Alamofire.framework */,
 				76B5DEF21CC5312E00166200 /* kabbageats */,
 				76B5DF0A1CC5312E00166200 /* kabbageatsTests */,
 				76B5DF151CC5312E00166200 /* kabbageatsUITests */,
@@ -138,6 +142,7 @@
 				76B5DEEC1CC5312E00166200 /* Sources */,
 				76B5DEED1CC5312E00166200 /* Frameworks */,
 				76B5DEEE1CC5312E00166200 /* Resources */,
+				76B5DF261CC58C1800166200 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -254,6 +259,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		76B5DF261CC58C1800166200 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		76B5DEEC1CC5312E00166200 /* Sources */ = {
@@ -408,6 +430,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = kabbageats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
@@ -422,6 +448,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = kabbageats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
