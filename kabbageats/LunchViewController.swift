@@ -1,5 +1,5 @@
 //
-//  MenuViewController.swift
+//  LunchViewController.swift
 //  kabbageats
 //
 //  Created by Marisa Toodle on 4/18/16.
@@ -9,8 +9,8 @@
 import UIKit
 import Alamofire
 
-class MenuViewController: UIViewController {
-  
+class LunchViewController: UIViewController {
+
   @IBOutlet weak var mainDishLabel: UILabel!
   @IBOutlet weak var sideDishLabel: UILabel!
   @IBOutlet weak var lunchImage: UIImageView!
@@ -18,9 +18,16 @@ class MenuViewController: UIViewController {
   @IBOutlet weak var activityIndicatorView: UIView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
+  var mainDish: String = ""
+  var sideDish: String = ""
+  var date: String = ""
+  var lunchImgURL: String = ""
+  var lunchIndex: Int = 0
+  
   var downloadTask: NSURLSessionDownloadTask?
-  var lunch = Lunch()
   var isLoading = false
+  var lunchDate = NSDate()
+  var lunches = [Lunch]()
   
   // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
@@ -37,17 +44,19 @@ class MenuViewController: UIViewController {
     
     activityIndicatorView.layer.cornerRadius = 5
     activityIndicatorView.hidden = true
+    setStartDate()
+    getLunches()
     
-    getLunch(lunch.date)
-    self.dateNavBarTitle.title = self.lunch.todayString
+    //self.dateNavBarTitle.title = lunches[0].todayString
   }
   
   // MARK: - Actions
+  /*
   @IBAction func refreshLunch(sender: UIBarButtonItem) {
     getLunch(lunch.date)
   }
   
-  @IBAction func getTomorrowLunch(sender: UISwipeGestureRecognizer) {
+  @IBAction func getNextLunch(sender: UISwipeGestureRecognizer) {
     if sender.direction == .Left {
       // Check if current day is Friday, if so skip to Monday
       if lunch.date.dayOfWeek() == 6 {
@@ -67,6 +76,7 @@ class MenuViewController: UIViewController {
   
   // MARK: - Methods
   func getLunch(date: NSDate) {
+    downloadTask?.cancel()
     activityIndicatorView.hidden = false
     activityIndicator.startAnimating()
     let dateStr = lunch.jsonDateString
@@ -95,7 +105,7 @@ class MenuViewController: UIViewController {
       // Update UI
       dispatch_async(dispatch_get_main_queue()) {
         self.hideActivityIndicator()
-        self.mainDishLabel.text = self.lunch.mainDish
+        self.mainDishLabel.text = self.lunch.dishes[0]
         self.sideDishLabel.text = self.lunch.sideDishes
         if let url = NSURL(string: self.lunch.imageURL) {
           self.downloadTask = self.lunchImage.loadImageWithURL(url)
@@ -104,20 +114,83 @@ class MenuViewController: UIViewController {
       }
     }
   }
+ */
   
-  func updateDate(nextDay: Int) {
-    let oneDay = NSDateComponents()
-    oneDay.day = nextDay
-    guard let tomorrow = NSCalendar.currentCalendar().dateByAddingComponents(oneDay, toDate: lunch.date, options: .WrapComponents) else {
-      print("Invalid date")
-      return }
+  func getLunches() {
+    // Make Get Request
+      let dateStr = lunchDate.jsonStringFromDate(lunchDate)
+      print("Date Str: \(dateStr)")
+      Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
+        response in
+        print(response)
+        guard response.result.isSuccess else {
+          self.showNetworkError()
+          print("Error while retrieving lunch: \(response.result.error)")
+          self.hideActivityIndicator()
+          return
+        }
+        
+        // Parse JSON
+        guard let lunchDict = response.result.value as? [String: AnyObject],
+          date = lunchDict["date"] as? String,
+          menu = lunchDict["menu"] as? String,
+          image = lunchDict["image"] as? String else {
+            self.showNetworkError()
+            print("Received data not in the correct format")
+            return
+        }
+        
+        // Set lunch properties
+        var lunch = Lunch()
+        lunch.date = date
+        lunch.fullMenu = menu
+        lunch.imageURL = image
+        print(lunch)
+        lunch.getDishes()
+        print("Lunch: \(lunch)")
+        
+        dispatch_async(dispatch_get_main_queue()) {
+          self.lunches.append(lunch)
+          print("Lunches: \(self.lunches.count)")
+          self.lunchDate = self.getNextWeekday(self.lunchDate)
+          if self.lunches.count < 5 {
+            self.getLunches()
+          } else {
+            self.mainDishLabel.text = self.lunches[2].dishes[0]
+            self.sideDishLabel.text = self.lunches[2].sideDishes
+            if let url = NSURL(string: self.lunches[2].imageURL) {
+              self.downloadTask = self.lunchImage.loadImageWithURL(url)
+            }
+            self.dateNavBarTitle.title = self.lunches[2].todayString
+
+          }
+        }
+      }
     
-    lunch.date = tomorrow
-    getLunch(lunch.date)
+  }
+  
+  func getNextWeekday(date: NSDate) -> NSDate {
+    if date.dayOfWeek() == 6 {
+      return updateDate(date, numOfDays: 3)
+    } else {
+      return updateDate(date, numOfDays: 1)
+    }
+  }
+  
+  func updateDate(date: NSDate, numOfDays: Int) -> NSDate {
+    let daysToAdd = NSDateComponents()
+    daysToAdd.day = numOfDays
+    guard let newDate = NSCalendar.currentCalendar().dateByAddingComponents(daysToAdd, toDate: date, options: .MatchNextTime) else {
+      print("Invalid new date")
+      return date }
+    
+    return newDate
+    //lunch.date = tomorrow
+    //getLunch(lunch.date)
   }
   
   func showNetworkError() {
-    let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch. Please try again.", preferredStyle: .Alert)
+    let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
     alert.addAction(action)
     
@@ -127,6 +200,21 @@ class MenuViewController: UIViewController {
   func hideActivityIndicator() {
     activityIndicator.stopAnimating()
     activityIndicatorView.hidden = true
+  }
+  
+  func setStartDate() {
+    // if Monday, set start day at Thursday
+    if lunchDate.dayOfWeek() == 2 {
+      lunchDate = updateDate(lunchDate, numOfDays: -4)
+      
+      // if Tuesday, set start day at Friday
+    } else if lunchDate.dayOfWeek() == 3 {
+      lunchDate = updateDate(lunchDate, numOfDays: -3)
+      
+      // Otherwise, set start day two days back
+    } else {
+      lunchDate = updateDate(lunchDate, numOfDays: -2)
+    }
   }
 }
 

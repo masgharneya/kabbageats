@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 struct Lunch {
-  var date = NSDate()
+  //var date_ = NSDate()
   var fullMenu = ""
-  var mainDish = ""
   var dishes = [String]()
   var imageURL = ""
   var image = UIImage()
   var ratings = [String: AnyObject]()
   var comments = [String: AnyObject]()
+  var date = ""
   
   let dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
@@ -35,7 +35,6 @@ struct Lunch {
   mutating func getDishes() {
     if !fullMenu.isEmpty {
       dishes = fullMenu.componentsSeparatedByString("; ")
-      mainDish = dishes[0]
     }
   }
   
@@ -44,12 +43,13 @@ struct Lunch {
   }
   
   var todayString: String {
-    return dateFormatter.stringFromDate(date)
+    return dateFormatter.stringFromDate(NSDate())
   }
-  
+  /*
   var jsonDateString: String {
-    return jsonFormatter.stringFromDate(date)
+    return jsonFormatter.stringFromDate(date_)
   }
+ */
 }
 
 

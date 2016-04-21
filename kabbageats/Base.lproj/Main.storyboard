@@ -9,7 +9,7 @@
         <!--Lunch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MenuViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LunchViewController" id="BYZ-38-t0r" customClass="LunchViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -155,16 +155,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="left" id="5yn-tU-rYD" userLabel="Left Swipe Gesture Recognizer">
                     <connections>
-                        <action selector="getTomorrowLunch:" destination="BYZ-38-t0r" id="P2c-5L-BSy"/>
+                        <action selector="getNextLunch:" destination="BYZ-38-t0r" id="Vfc-17-bfM"/>
                     </connections>
                 </swipeGestureRecognizer>
                 <swipeGestureRecognizer direction="right" id="p1r-6E-Ch0" userLabel="Right Swipe Gesture Recognizer">
                     <connections>
-                        <action selector="getTomorrowLunch:" destination="BYZ-38-t0r" id="8RK-0K-mzQ"/>
+                        <action selector="getNextLunch:" destination="BYZ-38-t0r" id="C0T-Bv-8P7"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1117" y="370"/>
+        </scene>
+        <!--Lunch Page View Controller-->
+        <scene sceneID="C6n-cx-tED">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="XPi-uv-hZ8" customClass="LunchPageViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="48m-VB-Wi9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1859" y="371"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XsH-GG-nYD">

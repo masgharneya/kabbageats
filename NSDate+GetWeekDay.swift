@@ -14,4 +14,11 @@ extension NSDate {
       let comp: NSDateComponents = cal.components(.Weekday, fromDate: self) else { return nil }
     return comp.weekday
   }
+  
+  func jsonStringFromDate(date: NSDate) -> String {
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.stringFromDate(date)
+  }
+  
 }
