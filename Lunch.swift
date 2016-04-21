@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 struct Lunch {
-  //var date_ = NSDate()
   var fullMenu = ""
   var dishes = [String]()
   var imageURL = ""

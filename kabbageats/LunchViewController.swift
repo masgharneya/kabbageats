@@ -15,8 +15,6 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var sideDishLabel: UILabel!
   @IBOutlet weak var lunchImage: UIImageView!
   @IBOutlet weak var dateNavBarTitle: UINavigationItem!
-  @IBOutlet weak var activityIndicatorView: UIView!
-  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   var mainDish: String = ""
   var sideDish: String = ""
@@ -32,7 +30,10 @@ class LunchViewController: UIViewController {
   // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
     
+    
+    /*
     // Hide bottom border on navigation bar
     for parent in self.navigationController!.navigationBar.subviews {
       for childView in parent.subviews {
@@ -41,13 +42,21 @@ class LunchViewController: UIViewController {
         }
       }
     }
+ */
     
-    activityIndicatorView.layer.cornerRadius = 5
-    activityIndicatorView.hidden = true
-    setStartDate()
-    getLunches()
+    //activityIndicatorView.layer.cornerRadius = 5
+    //activityIndicatorView.hidden = true
     
     //self.dateNavBarTitle.title = lunches[0].todayString
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    //mainDishLabel.text = mainDish
+    //sideDishLabel.text = sideDish
+    //if let url = NSURL(string: lunchImgURL) {
+      //downloadTask = lunchImage.loadImageWithURL(url)
+    //}
   }
   
   // MARK: - Actions
@@ -116,58 +125,6 @@ class LunchViewController: UIViewController {
   }
  */
   
-  func getLunches() {
-    // Make Get Request
-      let dateStr = lunchDate.jsonStringFromDate(lunchDate)
-      print("Date Str: \(dateStr)")
-      Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
-        response in
-        print(response)
-        guard response.result.isSuccess else {
-          self.showNetworkError()
-          print("Error while retrieving lunch: \(response.result.error)")
-          self.hideActivityIndicator()
-          return
-        }
-        
-        // Parse JSON
-        guard let lunchDict = response.result.value as? [String: AnyObject],
-          date = lunchDict["date"] as? String,
-          menu = lunchDict["menu"] as? String,
-          image = lunchDict["image"] as? String else {
-            self.showNetworkError()
-            print("Received data not in the correct format")
-            return
-        }
-        
-        // Set lunch properties
-        var lunch = Lunch()
-        lunch.date = date
-        lunch.fullMenu = menu
-        lunch.imageURL = image
-        print(lunch)
-        lunch.getDishes()
-        print("Lunch: \(lunch)")
-        
-        dispatch_async(dispatch_get_main_queue()) {
-          self.lunches.append(lunch)
-          print("Lunches: \(self.lunches.count)")
-          self.lunchDate = self.getNextWeekday(self.lunchDate)
-          if self.lunches.count < 5 {
-            self.getLunches()
-          } else {
-            self.mainDishLabel.text = self.lunches[2].dishes[0]
-            self.sideDishLabel.text = self.lunches[2].sideDishes
-            if let url = NSURL(string: self.lunches[2].imageURL) {
-              self.downloadTask = self.lunchImage.loadImageWithURL(url)
-            }
-            self.dateNavBarTitle.title = self.lunches[2].todayString
-
-          }
-        }
-      }
-    
-  }
   
   func getNextWeekday(date: NSDate) -> NSDate {
     if date.dayOfWeek() == 6 {
@@ -189,51 +146,6 @@ class LunchViewController: UIViewController {
     //getLunch(lunch.date)
   }
   
-  func showNetworkError() {
-    let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
-    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alert.addAction(action)
-    
-    presentViewController(alert, animated: true, completion: nil)
-  }
   
-  func hideActivityIndicator() {
-    activityIndicator.stopAnimating()
-    activityIndicatorView.hidden = true
-  }
-  
-  func setStartDate() {
-    // if Monday, set start day at Thursday
-    if lunchDate.dayOfWeek() == 2 {
-      lunchDate = updateDate(lunchDate, numOfDays: -4)
-      
-      // if Tuesday, set start day at Friday
-    } else if lunchDate.dayOfWeek() == 3 {
-      lunchDate = updateDate(lunchDate, numOfDays: -3)
-      
-      // Otherwise, set start day two days back
-    } else {
-      lunchDate = updateDate(lunchDate, numOfDays: -2)
-    }
-  }
+
 }
-
-
-
-// Server Trust Policy Manager for Alamofire (to accept self-signed certificate, from http://stackoverflow.com/questions/31945078/how-to-connect-to-self-signed-servers-using-alamofire-1-3 )
-private var Manager : Alamofire.Manager = {
-  // Create the server trust policies
-  let serverTrustPolicies: [String: ServerTrustPolicy] = [
-    "lunch.kabbage.com": .DisableEvaluation
-  ]
-  
-  // Create custom manager
-  let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-  configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-  let man = Alamofire.Manager(
-    configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-    serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-  )
-  return man
-}()
-
