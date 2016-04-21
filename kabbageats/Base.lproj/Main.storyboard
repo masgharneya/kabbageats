@@ -18,6 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZ5-16-2d9">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <connections>
+                                    <segue destination="rt9-WQ-THP" kind="embed" id="T3g-lT-7bo"/>
+                                </connections>
+                            </containerView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
+                                <rect key="frame" x="263" y="316" width="75" height="75"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
+                                        <rect key="frame" x="19" y="19" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="Egp-0Y-9uG"/>
+                                    <constraint firstAttribute="height" constant="75" id="QFt-eE-mPj"/>
+                                </constraints>
+                            </view>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
@@ -39,35 +58,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZ5-16-2d9">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
-                                <connections>
-                                    <segue destination="rt9-WQ-THP" kind="embed" id="T3g-lT-7bo"/>
-                                </connections>
-                            </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
-                                <rect key="frame" x="263" y="316" width="75" height="75"/>
-                                <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
-                                        <rect key="frame" x="19" y="19" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerX" secondItem="SO3-84-C0i" secondAttribute="centerX" id="Geg-Aj-6PV"/>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="leading" secondItem="SO3-84-C0i" secondAttribute="leading" constant="19" id="MJz-Fb-ncg"/>
-                                    <constraint firstAttribute="bottom" secondItem="bYp-7P-enr" secondAttribute="bottom" constant="19" id="drr-j3-XR2"/>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerY" secondItem="SO3-84-C0i" secondAttribute="centerY" id="mav-II-QmV"/>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerX" secondItem="SO3-84-C0i" secondAttribute="centerX" id="sQk-Pi-pvH"/>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="centerY" secondItem="SO3-84-C0i" secondAttribute="centerY" id="yBn-f2-tlc"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Geg-Aj-6PV"/>
-                                        <exclude reference="mav-II-QmV"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -75,8 +65,12 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AZ5-16-2d9" secondAttribute="bottom" id="4OK-Ct-gjT"/>
                             <constraint firstItem="U2n-sU-KED" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7d3-Hg-WPl"/>
                             <constraint firstItem="AZ5-16-2d9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="EmR-A6-xkZ"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G3d-d7-4d5"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="bottom" constant="209" id="GJy-m3-KNw"/>
                             <constraint firstItem="U2n-sU-KED" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Gws-kr-fNV"/>
                             <constraint firstAttribute="trailing" secondItem="U2n-sU-KED" secondAttribute="trailing" id="LrO-D2-3ME"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mfg-Gt-z9a"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="top" secondItem="U2n-sU-KED" secondAttribute="bottom" constant="208" id="Uy7-8O-Y26"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZAk-sq-jas"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="262" id="cCH-Bn-GJ0"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="263" id="gBk-bL-2Cc"/>
@@ -94,7 +88,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Lunch" id="Ooo-Fj-jCG"/>
                     <connections>
-                        <outlet property="dateNavBarTitle" destination="P4a-hx-bBb" id="KJ1-mI-eYY"/>
+                        <outlet property="activityIndicator" destination="bYp-7P-enr" id="Ml8-SK-f8a"/>
+                        <outlet property="activityIndicatorView" destination="SO3-84-C0i" id="Zyz-cB-jS2"/>
+                        <outlet property="dateNavBarTitle" destination="P4a-hx-bBb" id="a3D-LE-kpu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -136,7 +132,7 @@
         <!--Lunch Page View Controller-->
         <scene sceneID="Bk9-jH-gz2">
             <objects>
-                <pageViewController storyboardIdentifier="LunchPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="rt9-WQ-THP" customClass="LunchPageViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="LunchPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rt9-WQ-THP" customClass="LunchPageViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="492"/>
                 </pageViewController>
@@ -241,6 +237,11 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="492"/>
+                    <connections>
+                        <outlet property="lunchImage" destination="adx-EO-hzO" id="yRU-OU-pg1"/>
+                        <outlet property="mainDishLabel" destination="GjT-y4-EbC" id="kev-6L-Pvk"/>
+                        <outlet property="sideDishLabel" destination="AFd-WC-9eo" id="aL2-RB-D0C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rr3-rl-JSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -15,11 +15,14 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var sideDishLabel: UILabel!
   @IBOutlet weak var lunchImage: UIImageView!
   @IBOutlet weak var dateNavBarTitle: UINavigationItem!
+  @IBOutlet weak var activityIndicatorView: UIView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   var mainDish: String = ""
   var sideDish: String = ""
   var date: String = ""
   var lunchImgURL: String = ""
+  var lunchImg: UIImage?
   var lunchIndex: Int = 0
   
   var downloadTask: NSURLSessionDownloadTask?
@@ -30,8 +33,10 @@ class LunchViewController: UIViewController {
   // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    //TODO: Hook up activity indicator
 
-    
+    //activityIndicatorView.layer.cornerRadius = 5
+    //activityIndicatorView.hidden = true
     
     /*
     // Hide bottom border on navigation bar
@@ -44,19 +49,18 @@ class LunchViewController: UIViewController {
     }
  */
     
-    //activityIndicatorView.layer.cornerRadius = 5
-    //activityIndicatorView.hidden = true
-    
-    //self.dateNavBarTitle.title = lunches[0].todayString
   }
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    //mainDishLabel.text = mainDish
-    //sideDishLabel.text = sideDish
-    //if let url = NSURL(string: lunchImgURL) {
-      //downloadTask = lunchImage.loadImageWithURL(url)
-    //}
+    if !mainDish.isEmpty {
+      mainDishLabel.text = mainDish
+      sideDishLabel.text = sideDish
+      if let url = NSURL(string: lunchImgURL) {
+        downloadTask = lunchImage.loadImageWithURL(url)
+      }
+      // TODO: Update date in Navigation bar
+    }
   }
   
   // MARK: - Actions
@@ -82,70 +86,6 @@ class LunchViewController: UIViewController {
       }
     }
   }
-  
-  // MARK: - Methods
-  func getLunch(date: NSDate) {
-    downloadTask?.cancel()
-    activityIndicatorView.hidden = false
-    activityIndicator.startAnimating()
-    let dateStr = lunch.jsonDateString
-    Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
-      response in
-      guard response.result.isSuccess else {
-        self.showNetworkError()
-        print("Error while retrieving lunch: \(response.result.error)")
-        self.hideActivityIndicator()
-        return
-      }
-      
-      guard let lunchDict = response.result.value as? [String: AnyObject],
-        menu = lunchDict["menu"] as? String,
-        image = lunchDict["image"] as? String else {
-          print("Received data not in the correct format")
-          return
-      }
-      
-      // Set lunch properties
-      self.lunch.fullMenu = menu
-      self.lunch.imageURL = image
-      print(self.lunch)
-      self.lunch.getDishes()
-      
-      // Update UI
-      dispatch_async(dispatch_get_main_queue()) {
-        self.hideActivityIndicator()
-        self.mainDishLabel.text = self.lunch.dishes[0]
-        self.sideDishLabel.text = self.lunch.sideDishes
-        if let url = NSURL(string: self.lunch.imageURL) {
-          self.downloadTask = self.lunchImage.loadImageWithURL(url)
-        }
-        self.dateNavBarTitle.title = self.lunch.todayString
-      }
-    }
-  }
  */
-  
-  
-  func getNextWeekday(date: NSDate) -> NSDate {
-    if date.dayOfWeek() == 6 {
-      return updateDate(date, numOfDays: 3)
-    } else {
-      return updateDate(date, numOfDays: 1)
-    }
-  }
-  
-  func updateDate(date: NSDate, numOfDays: Int) -> NSDate {
-    let daysToAdd = NSDateComponents()
-    daysToAdd.day = numOfDays
-    guard let newDate = NSCalendar.currentCalendar().dateByAddingComponents(daysToAdd, toDate: date, options: .MatchNextTime) else {
-      print("Invalid new date")
-      return date }
-    
-    return newDate
-    //lunch.date = tomorrow
-    //getLunch(lunch.date)
-  }
-  
-  
 
 }

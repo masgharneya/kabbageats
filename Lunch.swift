@@ -13,7 +13,7 @@ struct Lunch {
   var fullMenu = ""
   var dishes = [String]()
   var imageURL = ""
-  var image = UIImage()
+  var image = UIImageView()
   var ratings = [String: AnyObject]()
   var comments = [String: AnyObject]()
   var date = ""

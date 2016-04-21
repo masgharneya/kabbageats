@@ -13,6 +13,7 @@ class LunchPageViewController: UIPageViewController {
   var lunches = [Lunch]()
   var currentIndex: Int!
   var lunchDate = NSDate()
+  var downloadTask: NSURLSessionDownloadTask?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,7 +21,6 @@ class LunchPageViewController: UIPageViewController {
     getLunches()
     
     dataSource = self
-    
   }
   
   func lunchViewController(index: Int) -> LunchViewController? {
@@ -29,11 +29,7 @@ class LunchPageViewController: UIPageViewController {
       lunch.mainDish = lunches[index].dishes[0]
       lunch.sideDish = lunches[index].sideDishes
       lunch.lunchImgURL = lunches[index].imageURL
-      //if let url = NSURL(string: self.lunches[2].imageURL) {
-        //self.downloadTask = self.lunchImage.loadImageWithURL(url)
-      //}
       lunch.lunchIndex = index
-      //self.dateNavBarTitle.title = self.lunches[2].todayString
       return lunch
     }
     return nil
@@ -78,7 +74,7 @@ class LunchPageViewController: UIPageViewController {
         if self.lunches.count < 5 {
           self.getLunches()
         } else {
-          self.currentIndex = 3
+          self.currentIndex = 2
           if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
             let viewControllers = [viewController]
             self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
@@ -104,8 +100,6 @@ class LunchPageViewController: UIPageViewController {
       return date }
     
     return newDate
-    //lunch.date = tomorrow
-    //getLunch(lunch.date)
   }
   
   func setStartDate() {
