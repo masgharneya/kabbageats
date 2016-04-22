@@ -11,11 +11,13 @@ import UIKit
 class MainViewController: UIViewController {
 
   @IBOutlet weak var dateNav: UINavigationItem!
+  @IBOutlet weak var indicatorView: UIView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+      super.viewDidLoad()
+      indicatorView.layer.cornerRadius = 5
     }
+  
 
 }

@@ -13,11 +13,13 @@ class LunchPageViewController: UIPageViewController {
   var lunches = [Lunch]()
   var currentIndex: Int!
   var lunchDate = NSDate()
-  var downloadTask: NSURLSessionDownloadTask?
+  var isLoading = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setStartDate()
+    isLoading = true
+    showLoading()
     getLunches()
     
     dataSource = self
@@ -39,7 +41,7 @@ class LunchPageViewController: UIPageViewController {
   func getLunches() {
     // Make Get Request
     let dateStr = lunchDate.jsonStringFromDate(lunchDate)
-    print("Date Str: \(dateStr)")
+    isLoading = true
     Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
       response in
       print(response)
@@ -65,6 +67,7 @@ class LunchPageViewController: UIPageViewController {
       lunch.date = self.getTodayString(date)
       lunch.fullMenu = menu
       lunch.imageURL = imageURL
+      // Download Image
       if let url = NSURL(string: imageURL), data = NSData(contentsOfURL: url) {
         lunch.image = UIImage(data: data)!
       }
@@ -81,6 +84,8 @@ class LunchPageViewController: UIPageViewController {
           let viewControllers = [viewController]
           self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
         }
+        self.isLoading = false
+        self.showLoading()
       }
     }
   }
@@ -140,6 +145,18 @@ class LunchPageViewController: UIPageViewController {
     alert.addAction(action)
     
     presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  func showLoading() {
+    if let mainVC = self.parentViewController as? MainViewController {
+      if isLoading {
+        mainVC.activityIndicator.startAnimating()
+        mainVC.activityIndicator.hidden = false
+      } else {
+        mainVC.activityIndicator.stopAnimating()
+        mainVC.indicatorView.hidden = true
+      }
+    }
   }
   
   /*

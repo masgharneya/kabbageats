@@ -113,8 +113,8 @@
 		76B5DEF21CC5312E00166200 /* kabbageats */ = {
 			isa = PBXGroup;
 			children = (
-				76F5D6811CC9AA9E00517E9D /* ViewControllers */,
 				76B5DEF31CC5312E00166200 /* AppDelegate.swift */,
+				76F5D6811CC9AA9E00517E9D /* ViewControllers */,
 				76B5DF291CC5DB9900166200 /* Lunch.swift */,
 				76B5DEF71CC5312E00166200 /* Main.storyboard */,
 				76B5DF311CC6C87200166200 /* Extensions */,
@@ -156,9 +156,9 @@
 		76F5D6811CC9AA9E00517E9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				76B5DEF51CC5312E00166200 /* LunchViewController.swift */,
 				76F5D67F1CC9A9B600517E9D /* MainViewController.swift */,
 				76B5DF561CC824F900166200 /* LunchPageViewController.swift */,
+				76B5DEF51CC5312E00166200 /* LunchViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -475,6 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -493,6 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

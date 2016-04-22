@@ -25,17 +25,21 @@
                                     <segue destination="rt9-WQ-THP" kind="embed" id="T3g-lT-7bo"/>
                                 </connections>
                             </containerView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
                                 <rect key="frame" x="263" y="316" width="75" height="75"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
                                         <rect key="frame" x="19" y="19" width="37" height="37"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Egp-0Y-9uG"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="leading" secondItem="SO3-84-C0i" secondAttribute="leading" constant="19" id="JoA-VU-hCO"/>
                                     <constraint firstAttribute="height" constant="75" id="QFt-eE-mPj"/>
+                                    <constraint firstAttribute="bottom" secondItem="bYp-7P-enr" secondAttribute="bottom" constant="19" id="Qgc-CV-Uck"/>
+                                    <constraint firstAttribute="trailing" secondItem="bYp-7P-enr" secondAttribute="trailing" constant="19" id="W2w-U5-9dl"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="top" constant="19" id="tMQ-0q-stS"/>
                                 </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" restorationIdentifier="DateNavigationBar" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
@@ -69,29 +73,37 @@
                             <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G3d-d7-4d5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="bottom" constant="209" id="GJy-m3-KNw"/>
                             <constraint firstItem="U2n-sU-KED" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Gws-kr-fNV"/>
+                            <constraint firstItem="AZ5-16-2d9" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="bottom" constant="-283" id="Ic7-0t-UQl"/>
                             <constraint firstAttribute="trailing" secondItem="U2n-sU-KED" secondAttribute="trailing" id="LrO-D2-3ME"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mfg-Gt-z9a"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="top" secondItem="U2n-sU-KED" secondAttribute="bottom" constant="208" id="Uy7-8O-Y26"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZAk-sq-jas"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="262" id="cCH-Bn-GJ0"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="263" id="gBk-bL-2Cc"/>
+                            <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hwA-bx-wxJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AZ5-16-2d9" secondAttribute="trailing" constant="-20" id="jCG-g9-jPV"/>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rUt-rq-o9v"/>
                             <constraint firstItem="AZ5-16-2d9" firstAttribute="top" secondItem="U2n-sU-KED" secondAttribute="bottom" id="tLL-t1-wDU"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="2Pl-Rm-7qh"/>
                                 <exclude reference="G3d-d7-4d5"/>
+                                <exclude reference="Mfg-Gt-z9a"/>
+                                <exclude reference="Uy7-8O-Y26"/>
                                 <exclude reference="ZAk-sq-jas"/>
                                 <exclude reference="cCH-Bn-GJ0"/>
                                 <exclude reference="gBk-bL-2Cc"/>
                                 <exclude reference="rUt-rq-o9v"/>
+                                <exclude reference="GJy-m3-KNw"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Lunch" id="Ooo-Fj-jCG"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="bYp-7P-enr" id="dg4-A9-p0N"/>
                         <outlet property="dateNav" destination="P4a-hx-bBb" id="U8H-ge-rpl"/>
+                        <outlet property="indicatorView" destination="SO3-84-C0i" id="CEb-68-UQc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -14,8 +14,6 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var mainDishLabel: UILabel!
   @IBOutlet weak var sideDishLabel: UILabel!
   @IBOutlet weak var lunchImage: UIImageView!
-  @IBOutlet weak var activityIndicatorView: UIView!
-  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   var mainDish: String = ""
   var sideDish: String = ""
@@ -25,7 +23,6 @@ class LunchViewController: UIViewController {
   var lunchIndex: Int = 0
   
   var downloadTask: NSURLSessionDownloadTask?
-  var isLoading = false
   var lunchDate = NSDate()
   
   // MARK: - View Controller Lifecycle
