@@ -28,7 +28,8 @@ class LunchPageViewController: UIPageViewController {
       lunch.date = lunches[index].date
       lunch.mainDish = lunches[index].dishes[0]
       lunch.sideDish = lunches[index].sideDishes
-      lunch.lunchImgURL = lunches[index].imageURL
+      lunch.imageURL = lunches[index].imageURL
+      lunch.image = lunches[index].image
       lunch.lunchIndex = index
       return lunch
     }
@@ -53,7 +54,7 @@ class LunchPageViewController: UIPageViewController {
       guard let lunchDict = response.result.value as? [String: AnyObject],
         date = lunchDict["date"] as? String,
         menu = lunchDict["menu"] as? String,
-        image = lunchDict["image"] as? String else {
+        imageURL = lunchDict["image"] as? String else {
           self.showNetworkError()
           print("Received data not in the correct format")
           return
@@ -61,24 +62,24 @@ class LunchPageViewController: UIPageViewController {
       
       // Set lunch properties
       var lunch = Lunch()
-      lunch.date = date
+      lunch.date = self.getTodayString(date)
       lunch.fullMenu = menu
-      lunch.imageURL = image
-      //print(lunch)
+      lunch.imageURL = imageURL
+      if let url = NSURL(string: imageURL), data = NSData(contentsOfURL: url) {
+        lunch.image = UIImage(data: data)!
+      }
       lunch.getDishes()
+      self.lunches.append(lunch)
       
-      dispatch_async(dispatch_get_main_queue()) {
-        self.lunches.append(lunch)
+      if self.lunches.count < 5 {
         print("Lunches: \(self.lunches.count)")
         self.lunchDate = self.getNextWeekday(self.lunchDate)
-        if self.lunches.count < 5 {
-          self.getLunches()
-        } else {
-          self.currentIndex = 2
-          if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
-            let viewControllers = [viewController]
-            self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
-          }
+        self.getLunches()
+      } else {
+        self.currentIndex = 2
+        if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
+          let viewControllers = [viewController]
+          self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
         }
       }
     }
@@ -97,7 +98,8 @@ class LunchPageViewController: UIPageViewController {
     daysToAdd.day = numOfDays
     guard let newDate = NSCalendar.currentCalendar().dateByAddingComponents(daysToAdd, toDate: date, options: .MatchNextTime) else {
       print("Invalid new date")
-      return date }
+      return date
+    }
     
     return newDate
   }
@@ -117,6 +119,21 @@ class LunchPageViewController: UIPageViewController {
     }
   }
   
+  func getTodayString(dateStr: String) -> String {
+    // Convert string to a date
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let date = dateFormatter.dateFromString(dateStr)
+    
+    if let date = date {
+      // Convert date to sentence string
+      let strFormatter = NSDateFormatter()
+      strFormatter.dateFormat = "EEEE, MMMM d"
+      return strFormatter.stringFromDate(date)
+    }
+    return dateStr
+  }
+
   func showNetworkError() {
     let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)

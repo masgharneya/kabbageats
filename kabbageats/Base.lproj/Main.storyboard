@@ -3,13 +3,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Lunch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LunchOldViewController" id="BYZ-38-t0r" customClass="LunchViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -37,7 +38,7 @@
                                     <constraint firstAttribute="height" constant="75" id="QFt-eE-mPj"/>
                                 </constraints>
                             </view>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
+                            <navigationBar contentMode="scaleToFill" restorationIdentifier="DateNavigationBar" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Kjm-pn-ktr"/>
@@ -80,17 +81,17 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="G3d-d7-4d5"/>
                                 <exclude reference="ZAk-sq-jas"/>
                                 <exclude reference="cCH-Bn-GJ0"/>
                                 <exclude reference="gBk-bL-2Cc"/>
+                                <exclude reference="rUt-rq-o9v"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Lunch" id="Ooo-Fj-jCG"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="bYp-7P-enr" id="Ml8-SK-f8a"/>
-                        <outlet property="activityIndicatorView" destination="SO3-84-C0i" id="Zyz-cB-jS2"/>
-                        <outlet property="dateNavBarTitle" destination="P4a-hx-bBb" id="a3D-LE-kpu"/>
+                        <outlet property="dateNav" destination="P4a-hx-bBb" id="U8H-ge-rpl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -148,7 +149,7 @@
                         <viewControllerLayoutGuide type="top" id="I9x-w2-qNl"/>
                         <viewControllerLayoutGuide type="bottom" id="KYY-hp-uMs"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="t9f-lY-l5r">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="t9f-lY-l5r">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -157,7 +158,7 @@
                                 <gestureRecognizers/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvb-5d-dRm" userLabel="Menu View">
-                                <rect key="frame" x="0.0" y="355" width="600" height="67"/>
+                                <rect key="frame" x="0.0" y="354" width="600" height="68"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken and Beef Tacos" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjT-y4-EbC">
                                         <rect key="frame" x="20" y="3" width="560" height="32"/>
@@ -166,8 +167,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="with Red Beans and Rice" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFd-WC-9eo">
-                                        <rect key="frame" x="20" y="43" width="560" height="21"/>
-                                        <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="17"/>
+                                        <rect key="frame" x="20" y="43" width="560" height="22"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
                                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -217,8 +218,12 @@
                             <constraint firstItem="adx-EO-hzO" firstAttribute="top" secondItem="t9f-lY-l5r" secondAttribute="top" id="8qo-sa-QCP"/>
                             <constraint firstItem="KYY-hp-uMs" firstAttribute="top" secondItem="Qvh-5E-bHW" secondAttribute="bottom" constant="15" id="904-9F-qYx"/>
                             <constraint firstAttribute="trailing" secondItem="fvb-5d-dRm" secondAttribute="trailing" id="A09-U4-MVM"/>
+                            <constraint firstItem="adx-EO-hzO" firstAttribute="width" secondItem="t9f-lY-l5r" secondAttribute="height" multiplier="50:41" id="DIj-hE-nEV"/>
+                            <constraint firstItem="adx-EO-hzO" firstAttribute="centerX" secondItem="t9f-lY-l5r" secondAttribute="centerX" id="G1V-rv-8oW"/>
                             <constraint firstItem="KYY-hp-uMs" firstAttribute="top" secondItem="adx-EO-hzO" secondAttribute="bottom" id="H72-eq-Sg2"/>
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="leading" secondItem="t9f-lY-l5r" secondAttribute="leadingMargin" constant="20" id="JOf-9u-25G"/>
+                            <constraint firstItem="adx-EO-hzO" firstAttribute="width" secondItem="t9f-lY-l5r" secondAttribute="height" multiplier="50:41" id="Lml-qH-N8O"/>
+                            <constraint firstItem="adx-EO-hzO" firstAttribute="centerX" secondItem="t9f-lY-l5r" secondAttribute="centerX" id="Nab-zZ-g6U"/>
                             <constraint firstItem="Qvh-5E-bHW" firstAttribute="top" secondItem="fvb-5d-dRm" secondAttribute="bottom" constant="15" id="OHB-0a-45Q"/>
                             <constraint firstItem="adx-EO-hzO" firstAttribute="leading" secondItem="t9f-lY-l5r" secondAttribute="leading" id="RQn-2w-irm"/>
                             <constraint firstItem="KYY-hp-uMs" firstAttribute="top" secondItem="9Ed-KB-TU2" secondAttribute="bottom" constant="15" id="Rb3-43-egM"/>
@@ -226,12 +231,20 @@
                             <constraint firstItem="Qvh-5E-bHW" firstAttribute="leading" secondItem="9Ed-KB-TU2" secondAttribute="trailing" constant="10" id="b6w-gU-iQB"/>
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="top" secondItem="fvb-5d-dRm" secondAttribute="bottom" constant="8" id="buj-75-nCg"/>
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="top" secondItem="fvb-5d-dRm" secondAttribute="bottom" constant="15" id="sIt-pM-GJN"/>
+                            <constraint firstItem="adx-EO-hzO" firstAttribute="height" secondItem="t9f-lY-l5r" secondAttribute="height" id="u6f-fa-yQX"/>
                             <constraint firstItem="fvb-5d-dRm" firstAttribute="leading" secondItem="t9f-lY-l5r" secondAttribute="leading" id="uKU-3e-y22"/>
+                            <constraint firstItem="adx-EO-hzO" firstAttribute="width" secondItem="t9f-lY-l5r" secondAttribute="width" id="zFz-7n-uIs"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="6n0-UV-PXB"/>
+                                <exclude reference="Lml-qH-N8O"/>
+                                <exclude reference="Nab-zZ-g6U"/>
+                                <exclude reference="RQn-2w-irm"/>
+                                <exclude reference="zFz-7n-uIs"/>
                                 <exclude reference="VI0-wS-nqI"/>
                                 <exclude reference="buj-75-nCg"/>
+                                <exclude reference="H72-eq-Sg2"/>
                             </mask>
                         </variation>
                     </view>

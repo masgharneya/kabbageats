@@ -13,16 +13,12 @@ struct Lunch {
   var fullMenu = ""
   var dishes = [String]()
   var imageURL = ""
-  var image = UIImageView()
+  var image = UIImage()
   var ratings = [String: AnyObject]()
   var comments = [String: AnyObject]()
   var date = ""
   
-  let dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "EEEE, MMMM d"
-    return formatter
-  }()
+
   
   let jsonFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
@@ -41,9 +37,7 @@ struct Lunch {
     return "with \(dishes[1]) and \(dishes[2])"
   }
   
-  var todayString: String {
-    return dateFormatter.stringFromDate(NSDate())
-  }
+
   /*
   var jsonDateString: String {
     return jsonFormatter.stringFromDate(date_)

@@ -20,6 +20,7 @@
 		76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */; };
 		76B5DF301CC6C86800166200 /* NSDate+GetWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */; };
 		76B5DF571CC824F900166200 /* LunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF561CC824F900166200 /* LunchPageViewController.swift */; };
+		76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D67F1CC9A9B600517E9D /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+GetWeekDay.swift"; path = "../NSDate+GetWeekDay.swift"; sourceTree = "<group>"; };
 		76B5DF561CC824F900166200 /* LunchPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunchPageViewController.swift; sourceTree = "<group>"; };
+		76F5D67F1CC9A9B600517E9D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,11 +113,10 @@
 		76B5DEF21CC5312E00166200 /* kabbageats */ = {
 			isa = PBXGroup;
 			children = (
+				76F5D6811CC9AA9E00517E9D /* ViewControllers */,
 				76B5DEF31CC5312E00166200 /* AppDelegate.swift */,
 				76B5DF291CC5DB9900166200 /* Lunch.swift */,
-				76B5DEF51CC5312E00166200 /* LunchViewController.swift */,
 				76B5DEF71CC5312E00166200 /* Main.storyboard */,
-				76B5DF561CC824F900166200 /* LunchPageViewController.swift */,
 				76B5DF311CC6C87200166200 /* Extensions */,
 				76B5DEFD1CC5312E00166200 /* Assets.xcassets */,
 				76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */,
@@ -150,6 +151,16 @@
 				76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		76F5D6811CC9AA9E00517E9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				76B5DEF51CC5312E00166200 /* LunchViewController.swift */,
+				76F5D67F1CC9A9B600517E9D /* MainViewController.swift */,
+				76B5DF561CC824F900166200 /* LunchPageViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +320,7 @@
 				76B5DEF61CC5312E00166200 /* LunchViewController.swift in Sources */,
 				76B5DEF41CC5312E00166200 /* AppDelegate.swift in Sources */,
 				76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */,
+				76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
