@@ -15,7 +15,7 @@ extension NSDate {
     return comp.weekday
   }
   
-  func jsonStringFromDate(date: NSDate) -> String {
+  func apiDateStringFromDate(date: NSDate) -> String {
     let formatter = NSDateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"
     return formatter.stringFromDate(date)

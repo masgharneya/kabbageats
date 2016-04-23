@@ -42,18 +42,18 @@
                                     <constraint firstItem="bYp-7P-enr" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="top" constant="19" id="tMQ-0q-stS"/>
                                 </constraints>
                             </view>
-                            <navigationBar contentMode="scaleToFill" restorationIdentifier="DateNavigationBar" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
+                            <navigationBar contentMode="scaleToFill" restorationIdentifier="DateNavigationBar" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Kjm-pn-ktr"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="0.0"/>
                                     <color key="textColor" red="0.6588235294117647" green="0.81176470588235294" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Thursday, April 14" id="P4a-hx-bBb">
+                                    <navigationItem title="Grabbing lunch..." id="P4a-hx-bBb">
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="TS8-Ey-Wna">
                                             <color key="tintColor" red="0.6588235294" green="0.81176470590000005" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -64,7 +64,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SO3-84-C0i" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="53.5" id="2Pl-Rm-7qh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AZ5-16-2d9" secondAttribute="bottom" id="4OK-Ct-gjT"/>
@@ -224,7 +224,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20784313725490194" green="0.20784313725490194" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="adx-EO-hzO" secondAttribute="trailing" id="6n0-UV-PXB"/>
                             <constraint firstItem="adx-EO-hzO" firstAttribute="top" secondItem="t9f-lY-l5r" secondAttribute="top" id="8qo-sa-QCP"/>

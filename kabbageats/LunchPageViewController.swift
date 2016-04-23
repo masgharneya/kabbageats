@@ -28,6 +28,7 @@ class LunchPageViewController: UIPageViewController {
   func lunchViewController(index: Int) -> LunchViewController? {
     if let lunch = storyboard?.instantiateViewControllerWithIdentifier("LunchViewController") as? LunchViewController {
       lunch.date = lunches[index].date
+      lunch.dateWithYear = lunches[index].dateWithYear
       lunch.mainDish = lunches[index].dishes[0]
       lunch.sideDish = lunches[index].sideDishes
       lunch.imageURL = lunches[index].imageURL
@@ -40,7 +41,7 @@ class LunchPageViewController: UIPageViewController {
   
   func getLunches() {
     // Make Get Request
-    let dateStr = lunchDate.jsonStringFromDate(lunchDate)
+    let dateStr = lunchDate.apiDateStringFromDate(lunchDate)
     isLoading = true
     Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
       response in
@@ -64,6 +65,7 @@ class LunchPageViewController: UIPageViewController {
       
       // Set lunch properties
       var lunch = Lunch()
+      lunch.dateWithYear = date
       lunch.date = self.getTodayString(date)
       lunch.fullMenu = menu
       lunch.imageURL = imageURL
@@ -74,12 +76,12 @@ class LunchPageViewController: UIPageViewController {
       lunch.getDishes()
       self.lunches.append(lunch)
       
-      if self.lunches.count < 5 {
+      if self.lunches.count < 3 {
         print("Lunches: \(self.lunches.count)")
         self.lunchDate = self.getNextWeekday(self.lunchDate)
         self.getLunches()
       } else {
-        self.currentIndex = 2
+        self.currentIndex = 1
         if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
           let viewControllers = [viewController]
           self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
@@ -90,6 +92,54 @@ class LunchPageViewController: UIPageViewController {
     }
   }
   
+  func getNextLunch(index: Int) {
+    // Make Get Request
+    let lastDayInArray = lunches[lunches.count - 1].dateWithYear
+    let dateStr = getJSONStringFromString(lastDayInArray)
+    isLoading = true
+    showLoading()
+    Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
+      response in
+      print(response)
+      guard response.result.isSuccess else {
+        //self.showNetworkError()
+        print("Error while retrieving lunch: \(response.result.error)")
+        return
+      }
+      
+      // Parse JSON
+      guard let lunchDict = response.result.value as? [String: AnyObject],
+        date = lunchDict["date"] as? String,
+        menu = lunchDict["menu"] as? String,
+        imageURL = lunchDict["image"] as? String else {
+          self.showNetworkError()
+          print("Received data not in the correct format")
+          return
+      }
+      
+      // Set lunch properties
+      var lunch = Lunch()
+      lunch.dateWithYear = date
+      lunch.date = self.getTodayString(date)
+      lunch.fullMenu = menu
+      lunch.imageURL = imageURL
+      // Download Image
+      if let url = NSURL(string: imageURL), data = NSData(contentsOfURL: url) {
+        lunch.image = UIImage(data: data)!
+      }
+      lunch.getDishes()
+      self.lunches.append(lunch)
+      
+      self.isLoading = false
+      self.showLoading()
+      if let viewController = self.lunchViewController(index - 1) {
+        let viewControllers = [viewController]
+        self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+      }
+    }
+  }
+  
+  // MARK: - Helper Methods
   func getNextWeekday(date: NSDate) -> NSDate {
     if date.dayOfWeek() == 6 {
       return updateDate(date, numOfDays: 3)
@@ -110,17 +160,17 @@ class LunchPageViewController: UIPageViewController {
   }
   
   func setStartDate() {
-    // if Monday, set start day at Thursday
-    if lunchDate.dayOfWeek() == 2 {
-      lunchDate = updateDate(lunchDate, numOfDays: -4)
+    // if Sunday, set start day at Friday
+    if lunchDate.dayOfWeek() == 1 {
+      lunchDate = updateDate(lunchDate, numOfDays: -2)
       
-      // if Tuesday, set start day at Friday
-    } else if lunchDate.dayOfWeek() == 3 {
+      // if Monday, set start day at Friday
+    } else if lunchDate.dayOfWeek() == 2 {
       lunchDate = updateDate(lunchDate, numOfDays: -3)
       
       // Otherwise, set start day two days back
     } else {
-      lunchDate = updateDate(lunchDate, numOfDays: -2)
+      lunchDate = updateDate(lunchDate, numOfDays: -1)
     }
   }
   
@@ -135,6 +185,18 @@ class LunchPageViewController: UIPageViewController {
       let strFormatter = NSDateFormatter()
       strFormatter.dateFormat = "EEEE, MMMM d"
       return strFormatter.stringFromDate(date)
+    }
+    return dateStr
+  }
+  
+  func getJSONStringFromString(dateStr: String) -> String {
+    // Convert string to date
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    if let date = dateFormatter.dateFromString(dateStr) {
+      let nextDate = getNextWeekday(date)
+      
+      return nextDate.apiDateStringFromDate(nextDate)
     }
     return dateStr
   }
@@ -158,14 +220,6 @@ class LunchPageViewController: UIPageViewController {
       }
     }
   }
-  
-  /*
-  func hideActivityIndicator() {
-    activityIndicator.stopAnimating()
-    activityIndicatorView.hidden = true
-  }
- */
-
 }
 
 extension LunchPageViewController: UIPageViewControllerDataSource {
@@ -184,8 +238,11 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
       var index = viewController.lunchIndex
       guard index != NSNotFound else { return nil }
       index = index + 1
-      guard index != lunches.count else { return nil }
-      return lunchViewController(index)
+      if index == lunches.count {
+        getNextLunch(index)
+      } else {
+        return lunchViewController(index)
+      }
     }
     return nil
   }

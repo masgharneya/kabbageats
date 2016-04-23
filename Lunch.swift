@@ -17,9 +17,9 @@ struct Lunch {
   var ratings = [String: AnyObject]()
   var comments = [String: AnyObject]()
   var date = ""
+  var dateWithYear = ""
   
 
-  
   let jsonFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"

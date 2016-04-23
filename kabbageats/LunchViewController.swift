@@ -15,12 +15,13 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var sideDishLabel: UILabel!
   @IBOutlet weak var lunchImage: UIImageView!
   
-  var mainDish: String = ""
-  var sideDish: String = ""
-  var date: String = ""
-  var imageURL: String = ""
+  var mainDish = ""
+  var sideDish = ""
+  var date = ""
+  var dateWithYear = ""
+  var imageURL = ""
   var image = UIImage()
-  var lunchIndex: Int = 0
+  var lunchIndex = 0
   
   var downloadTask: NSURLSessionDownloadTask?
   var lunchDate = NSDate()
