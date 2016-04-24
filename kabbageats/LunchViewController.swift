@@ -14,6 +14,8 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var mainDishLabel: UILabel!
   @IBOutlet weak var sideDishLabel: UILabel!
   @IBOutlet weak var lunchImage: UIImageView!
+  @IBOutlet weak var indicatorView: UIView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   var mainDish = ""
   var sideDish = ""
@@ -36,8 +38,7 @@ class LunchViewController: UIViewController {
     }
     //TODO: Hook up activity indicator
 
-    //activityIndicatorView.layer.cornerRadius = 5
-    //activityIndicatorView.hidden = true
+
     
     /*
     // Hide bottom border on navigation bar
@@ -57,30 +58,15 @@ class LunchViewController: UIViewController {
     if let mainVC = self.parentViewController?.parentViewController as? MainViewController {
       mainVC.dateNav.title = date
     }
+    indicatorView.layer.cornerRadius = 5
+    activityIndicator.stopAnimating()
+    indicatorView.hidden = true
   }
   
   // MARK: - Actions
   /*
   @IBAction func refreshLunch(sender: UIBarButtonItem) {
     getLunch(lunch.date)
-  }
-  
-  @IBAction func getNextLunch(sender: UISwipeGestureRecognizer) {
-    if sender.direction == .Left {
-      // Check if current day is Friday, if so skip to Monday
-      if lunch.date.dayOfWeek() == 6 {
-        updateDate(3)
-      } else {
-        updateDate(1)
-      }
-    } else if sender.direction == .Right {
-      // Check if current day is Monday, if so skip to Friday
-      if lunch.date.dayOfWeek() == 2 {
-        updateDate(-3)
-      } else {
-        updateDate(-1)
-      }
-    }
   }
  */
 

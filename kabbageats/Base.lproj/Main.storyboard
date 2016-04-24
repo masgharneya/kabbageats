@@ -223,6 +223,31 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="th0-vC-1Wy" userLabel="IndicatorView">
+                                <rect key="frame" x="263" y="208" width="75" height="75"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="G6x-qe-81F">
+                                        <rect key="frame" x="19" y="19" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="37" id="Kqd-Jm-c6D"/>
+                                            <constraint firstAttribute="height" constant="37" id="PaO-E1-9xZ"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="G6x-qe-81F" secondAttribute="trailing" constant="19" id="66h-TW-bs3"/>
+                                    <constraint firstItem="G6x-qe-81F" firstAttribute="leading" secondItem="th0-vC-1Wy" secondAttribute="leading" constant="19" id="A3D-8i-olp"/>
+                                    <constraint firstItem="G6x-qe-81F" firstAttribute="top" secondItem="th0-vC-1Wy" secondAttribute="top" constant="19" id="CVx-Gu-BQz"/>
+                                    <constraint firstAttribute="bottom" secondItem="G6x-qe-81F" secondAttribute="bottom" constant="19" id="IAs-Nf-gue"/>
+                                    <constraint firstItem="G6x-qe-81F" firstAttribute="top" secondItem="th0-vC-1Wy" secondAttribute="top" constant="19" id="SPY-iL-vbL"/>
+                                    <constraint firstAttribute="trailing" secondItem="G6x-qe-81F" secondAttribute="trailing" constant="19" id="Tjg-nn-nIK"/>
+                                    <constraint firstItem="G6x-qe-81F" firstAttribute="leading" secondItem="th0-vC-1Wy" secondAttribute="leading" constant="19" id="U7d-3b-o8g"/>
+                                    <constraint firstAttribute="bottom" secondItem="G6x-qe-81F" secondAttribute="bottom" constant="19" id="ek6-3D-rxH"/>
+                                    <constraint firstAttribute="height" constant="75" id="qLv-qZ-dkV"/>
+                                    <constraint firstAttribute="width" constant="75" id="xhI-wD-FDD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313725490194" green="0.20784313725490194" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -231,6 +256,7 @@
                             <constraint firstItem="KYY-hp-uMs" firstAttribute="top" secondItem="Qvh-5E-bHW" secondAttribute="bottom" constant="15" id="904-9F-qYx"/>
                             <constraint firstAttribute="trailing" secondItem="fvb-5d-dRm" secondAttribute="trailing" id="A09-U4-MVM"/>
                             <constraint firstItem="adx-EO-hzO" firstAttribute="width" secondItem="t9f-lY-l5r" secondAttribute="height" multiplier="50:41" id="DIj-hE-nEV"/>
+                            <constraint firstItem="th0-vC-1Wy" firstAttribute="centerX" secondItem="t9f-lY-l5r" secondAttribute="centerX" id="DZa-X0-BdG"/>
                             <constraint firstItem="adx-EO-hzO" firstAttribute="centerX" secondItem="t9f-lY-l5r" secondAttribute="centerX" id="G1V-rv-8oW"/>
                             <constraint firstItem="KYY-hp-uMs" firstAttribute="top" secondItem="adx-EO-hzO" secondAttribute="bottom" id="H72-eq-Sg2"/>
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="leading" secondItem="t9f-lY-l5r" secondAttribute="leadingMargin" constant="20" id="JOf-9u-25G"/>
@@ -242,6 +268,7 @@
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="leading" secondItem="Qvh-5E-bHW" secondAttribute="trailing" constant="15" id="VI0-wS-nqI"/>
                             <constraint firstItem="Qvh-5E-bHW" firstAttribute="leading" secondItem="9Ed-KB-TU2" secondAttribute="trailing" constant="10" id="b6w-gU-iQB"/>
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="top" secondItem="fvb-5d-dRm" secondAttribute="bottom" constant="8" id="buj-75-nCg"/>
+                            <constraint firstItem="th0-vC-1Wy" firstAttribute="centerY" secondItem="t9f-lY-l5r" secondAttribute="centerY" id="qhd-U3-sLK"/>
                             <constraint firstItem="9Ed-KB-TU2" firstAttribute="top" secondItem="fvb-5d-dRm" secondAttribute="bottom" constant="15" id="sIt-pM-GJN"/>
                             <constraint firstItem="adx-EO-hzO" firstAttribute="height" secondItem="t9f-lY-l5r" secondAttribute="height" id="u6f-fa-yQX"/>
                             <constraint firstItem="fvb-5d-dRm" firstAttribute="leading" secondItem="t9f-lY-l5r" secondAttribute="leading" id="uKU-3e-y22"/>
@@ -263,6 +290,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="492"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="G6x-qe-81F" id="Rxg-Xh-XLJ"/>
+                        <outlet property="indicatorView" destination="th0-vC-1Wy" id="8KE-B3-y2H"/>
                         <outlet property="lunchImage" destination="adx-EO-hzO" id="yRU-OU-pg1"/>
                         <outlet property="mainDishLabel" destination="GjT-y4-EbC" id="kev-6L-Pvk"/>
                         <outlet property="sideDishLabel" destination="AFd-WC-9eo" id="aL2-RB-D0C"/>

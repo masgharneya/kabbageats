@@ -97,12 +97,16 @@ class LunchPageViewController: UIPageViewController {
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear
     let dateStr = getJSONStringFromString(lastDayInArray)
     isLoading = true
-    showLoading()
+    
+    // TODO: Extract Get Request to separate method for use here and in getLunches method
     Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
       response in
       print(response)
       guard response.result.isSuccess else {
-        //self.showNetworkError()
+        if let lunch = self.viewControllers![self.viewControllers!.count - 1] as? LunchViewController {
+          lunch.activityIndicator.stopAnimating()
+          lunch.indicatorView.hidden = true
+        }
         print("Error while retrieving lunch: \(response.result.error)")
         return
       }
@@ -131,7 +135,6 @@ class LunchPageViewController: UIPageViewController {
       self.lunches.append(lunch)
       
       self.isLoading = false
-      self.showLoading()
       if let viewController = self.lunchViewController(index - 1) {
         let viewControllers = [viewController]
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
@@ -240,6 +243,8 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
       index = index + 1
       if index == lunches.count {
         getNextLunch(index)
+        viewController.activityIndicator.startAnimating()
+        viewController.indicatorView.hidden = false
       } else {
         return lunchViewController(index)
       }
