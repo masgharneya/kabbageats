@@ -23,6 +23,7 @@
 		76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D67F1CC9A9B600517E9D /* MainViewController.swift */; };
 		76F5D6851CCC91EE00517E9D /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6841CCC91EE00517E9D /* RateViewController.swift */; };
 		76F5D6871CCD12C600517E9D /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6861CCD12C600517E9D /* DimmingPresentationController.swift */; };
+		76F5D6891CCEB80000517E9D /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6881CCEB80000517E9D /* CommentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		76F5D67F1CC9A9B600517E9D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		76F5D6841CCC91EE00517E9D /* RateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
 		76F5D6861CCD12C600517E9D /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
+		76F5D6881CCEB80000517E9D /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				76B5DF561CC824F900166200 /* LunchPageViewController.swift */,
 				76B5DEF51CC5312E00166200 /* LunchViewController.swift */,
 				76F5D6841CCC91EE00517E9D /* RateViewController.swift */,
+				76F5D6881CCEB80000517E9D /* CommentViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				76B5DEF41CC5312E00166200 /* AppDelegate.swift in Sources */,
 				76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */,
 				76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */,
+				76F5D6891CCEB80000517E9D /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

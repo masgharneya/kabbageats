@@ -38,6 +38,7 @@ class RateViewController: UIViewController {
     }
   }
   
+  // MARK: - Methods
   
   func updateUI() {
     mainDishLabel.text = dishes[0]
@@ -46,7 +47,6 @@ class RateViewController: UIViewController {
   }
   
 
-  
   func upVoteDish(dish: String, button: UIButton) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
@@ -77,6 +77,8 @@ class RateViewController: UIViewController {
     }
   }
   
+  // MARK: - Actions
+  
   @IBAction func upVote(sender: UIButton) {
     if let id = sender.accessibilityIdentifier {
       switch id {
@@ -106,8 +108,6 @@ class RateViewController: UIViewController {
   @IBAction func close() {
     dismissViewControllerAnimated(true, completion: nil)
   }
-  
-  
 }
 
 extension RateViewController: UIViewControllerTransitioningDelegate {
