@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class RateViewController: UIViewController {
   
@@ -44,6 +45,64 @@ class RateViewController: UIViewController {
     sideDish2Labael.text = dishes[2]
   }
   
+
+  
+  func upVoteDish(dish: String, button: UIButton) {
+    let params: [String : AnyObject] = [
+      "dish": "\(dish)",
+      "rating": 1,
+      "source": "iOS App"
+    ]
+    
+    Manager.request(.POST, "https://lunch.kabbage.com/api/v2/lunches/\(date)/ratings", parameters: params).response {
+      request, response, data, error in
+      if response?.statusCode == 204 {
+        button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
+      }
+    }
+  }
+  
+  func downVoteDish(dish: String, button: UIButton) {
+    let params: [String : AnyObject] = [
+      "dish": "\(dish)",
+      "rating": -1,
+      "source": "iOS App"
+    ]
+    
+    Manager.request(.POST, "https://lunch.kabbage.com/api/v2/lunches/\(date)/ratings", parameters: params).response {
+      request, response, data, error in
+      if response?.statusCode == 204 {
+         button.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
+      }
+    }
+  }
+  
+  @IBAction func upVote(sender: UIButton) {
+    if let id = sender.accessibilityIdentifier {
+      switch id {
+      case "ThumbsUpMain":
+        upVoteDish(dishes[0], button: sender)
+      case "ThumbsUpSide1":
+        upVoteDish(dishes[1], button: sender)
+      default:
+        upVoteDish(dishes[2], button: sender)
+      }
+    }
+  }
+  
+  @IBAction func downVote(sender: UIButton) {
+    if let id = sender.accessibilityIdentifier {
+      switch id {
+      case "ThumbsDownMain":
+        downVoteDish(dishes[0], button: sender)
+      case "ThumbsDownSide1":
+        downVoteDish(dishes[1], button: sender)
+      default:
+        downVoteDish(dishes[2], button: sender)
+      }
+    }
+  }
+  
   @IBAction func close() {
     dismissViewControllerAnimated(true, completion: nil)
   }
@@ -69,3 +128,20 @@ extension RateViewController: UIGestureRecognizerDelegate {
     return (touch.view === self.view)
   }
 }
+
+// Server Trust Policy Manager for Alamofire (to accept self-signed certificate, from http://stackoverflow.com/questions/31945078/how-to-connect-to-self-signed-servers-using-alamofire-1-3 )
+private var Manager : Alamofire.Manager = {
+  // Create the server trust policies
+  let serverTrustPolicies: [String: ServerTrustPolicy] = [
+    "lunch.kabbage.com": .DisableEvaluation
+  ]
+  
+  // Create custom manager
+  let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+  configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
+  let man = Alamofire.Manager(
+    configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+    serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
+  )
+  return man
+}()

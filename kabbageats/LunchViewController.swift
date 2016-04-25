@@ -68,6 +68,7 @@ class LunchViewController: UIViewController {
     if segue.identifier == "RateLunch" {
       let rateVC = segue.destinationViewController as! RateViewController
       rateVC.dishes = dishes
+      rateVC.date = dateWithYear
     }
   }
   
