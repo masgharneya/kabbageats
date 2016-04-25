@@ -29,6 +29,7 @@ class LunchPageViewController: UIPageViewController {
     if let lunch = storyboard?.instantiateViewControllerWithIdentifier("LunchViewController") as? LunchViewController {
       lunch.date = lunches[index].date
       lunch.dateWithYear = lunches[index].dateWithYear
+      lunch.dishes = lunches[index].dishes
       lunch.mainDish = lunches[index].dishes[0]
       lunch.sideDish = lunches[index].sideDishes
       lunch.imageURL = lunches[index].imageURL

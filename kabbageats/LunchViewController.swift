@@ -17,6 +17,7 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var indicatorView: UIView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
+  var dishes = [String]()
   var mainDish = ""
   var sideDish = ""
   var date = ""
@@ -63,6 +64,16 @@ class LunchViewController: UIViewController {
     indicatorView.hidden = true
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "RateLunch" {
+      let rateVC = segue.destinationViewController as! RateViewController
+      rateVC.dishes = dishes
+    }
+  }
+  
+  @IBAction func rateLunch(sender: UIButton) {
+    performSegueWithIdentifier("RateLunch", sender: sender)
+  }
   // MARK: - Actions
   /*
   @IBAction func refreshLunch(sender: UIBarButtonItem) {
