@@ -247,7 +247,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="5KF-dA-pLT" kind="presentation" id="VlL-Km-bqg"/>
+                                    <segue destination="5KF-dA-pLT" kind="presentation" identifier="Comment" id="VlL-Km-bqg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvh-5E-bHW">
@@ -595,14 +595,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K6a-bW-B9r">
                                 <rect key="frame" x="20" y="28" width="360" height="194"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7sv-tW-5tD">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a comment (be nice!)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7sv-tW-5tD">
                                         <rect key="frame" x="8" y="76" width="344" height="110"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </string>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PL-W5-x3H">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6PL-W5-x3H">
                                         <rect key="frame" x="306" y="0.0" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ezd-x7-kta"/>
@@ -631,7 +631,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JnZ-LX-5Mh">
                                         <rect key="frame" x="8" y="38" width="344" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RG8-3G-YTC">
                                         <rect key="frame" x="141" y="8" width="79" height="21"/>
@@ -670,7 +670,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="492"/>
                     <connections>
+                        <outlet property="nameField" destination="JnZ-LX-5Mh" id="ulg-pK-bsQ"/>
                         <outlet property="popupView" destination="K6a-bW-B9r" id="bU5-Ey-2r8"/>
+                        <outlet property="sendButton" destination="6PL-W5-x3H" id="PVw-Ow-ac4"/>
+                        <outlet property="textView" destination="7sv-tW-5tD" id="qGi-kK-fGf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yeu-91-FFz" userLabel="First Responder" sceneMemberID="firstResponder"/>

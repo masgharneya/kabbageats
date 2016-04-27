@@ -12,6 +12,10 @@ import Alamofire
 class CommentViewController: UIViewController {
 
   @IBOutlet weak var popupView: UIView!
+  @IBOutlet weak var nameField: UITextField!
+  @IBOutlet weak var textView: UITextView!
+  @IBOutlet weak var sendButton: UIButton!
+  var date = ""
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -23,16 +27,41 @@ class CommentViewController: UIViewController {
     super.viewDidLoad()
     popupView.layer.cornerRadius = 10
     
+    textView.delegate = self
+    nameField.delegate = self
+    
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentViewController.close))
     gestureRecognizer.cancelsTouchesInView = false
     gestureRecognizer.delegate = self
     view.addGestureRecognizer(gestureRecognizer)
+    
+    nameField.becomeFirstResponder()
   }
   
   // MARK: - Actions
   
   @IBAction func sendComment(sender: UIButton) {
-    // TODO: Send comment
+    sendButton.enabled = false
+    var params = [String : AnyObject]()
+    if let message = textView.text {
+      if let name = nameField.text {
+        params = [
+          "name": name,
+          "message": message
+        ]
+      } else {
+      params = [
+        "message": message
+        ]
+      }
+      Manager.request(.POST, "https://lunch.kabbage.com/api/v2/lunches/\(date)/comments", parameters: params).response {
+        request, response, data, error in
+        if response?.statusCode == 204 {
+          print("Comment successful")
+          self.close()
+        }
+      }
+    }
   }
   
   @IBAction func close() {
@@ -56,6 +85,46 @@ extension CommentViewController: UIGestureRecognizerDelegate {
   // Close popup view if user taps outside of popup. Function returns true only if the user taps on the background and false if user taps inside the popup.
   func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
     return (touch.view === self.view)
+  }
+}
+
+extension CommentViewController: UITextFieldDelegate {
+ 
+  // Limit name field to 30 characters
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    
+    let currentCharacterCount = textField.text?.characters.count ?? 0
+    if (range.length + range.location > currentCharacterCount){
+      return false
+    }
+    
+    let newLength = currentCharacterCount + string.characters.count - range.length
+    return newLength <= 30
+  }
+}
+
+extension CommentViewController: UITextViewDelegate {
+  func textViewDidBeginEditing(textView: UITextView) {
+    if textView.text == "Enter a comment (be nice!)" {
+      textView.text = ""
+      textView.textColor = UIColor.blackColor()
+    }
+  }
+  
+  func textViewDidChange(textView: UITextView) {
+    if textView.text != "" {
+      sendButton.enabled = true
+    } else {
+      sendButton.enabled = false
+    }
+  }
+  
+  func textViewDidEndEditing(textView: UITextView) {
+    if textView.text == "" {
+      textView.text = "Enter a comment (be nice!)"
+      textView.textColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.30)
+      sendButton.enabled = false
+    }
   }
 }
 

@@ -70,6 +70,10 @@ class LunchViewController: UIViewController {
       rateVC.dishes = dishes
       rateVC.date = dateWithYear
     }
+    if segue.identifier == "Comment" {
+      let commentVC = segue.destinationViewController as! CommentViewController
+      commentVC.date = dateWithYear
+    }
   }
   
   @IBAction func rateLunch(sender: UIButton) {
