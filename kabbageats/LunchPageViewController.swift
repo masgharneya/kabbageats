@@ -42,7 +42,7 @@ class LunchPageViewController: UIPageViewController {
   
   func getLunches() {
     // Make Get Request
-    let dateStr = lunchDate.apiDateStringFromDate(lunchDate)
+    let dateStr = lunchDate.apiDateStringFromDate()
     isLoading = true
     Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
       response in
@@ -67,7 +67,7 @@ class LunchPageViewController: UIPageViewController {
       // Set lunch properties
       var lunch = Lunch()
       lunch.dateWithYear = date
-      lunch.date = self.getTodayString(date)
+      lunch.date = date.getTodayString()
       lunch.fullMenu = menu
       lunch.imageURL = imageURL
       // Download Image
@@ -79,7 +79,7 @@ class LunchPageViewController: UIPageViewController {
       
       if self.lunches.count < 3 {
         print("Lunches: \(self.lunches.count)")
-        self.lunchDate = self.getNextWeekday(self.lunchDate)
+        self.lunchDate = self.lunchDate.getNextWeekday()
         self.getLunches()
       } else {
         self.currentIndex = 1
@@ -96,7 +96,7 @@ class LunchPageViewController: UIPageViewController {
   func getNextLunch(index: Int) {
     // Make Get Request
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear
-    let dateStr = getJSONStringFromString(lastDayInArray)
+    let dateStr = lastDayInArray.getJSONStringFromString()
     isLoading = true
     
     // TODO: Extract Get Request to separate method for use here and in getLunches method
@@ -125,7 +125,7 @@ class LunchPageViewController: UIPageViewController {
       // Set lunch properties
       var lunch = Lunch()
       lunch.dateWithYear = date
-      lunch.date = self.getTodayString(date)
+      lunch.date = date.getTodayString()
       lunch.fullMenu = menu
       lunch.imageURL = imageURL
       // Download Image
@@ -144,67 +144,21 @@ class LunchPageViewController: UIPageViewController {
   }
   
   // MARK: - Helper Methods
-  func getNextWeekday(date: NSDate) -> NSDate {
-    if date.dayOfWeek() == 6 {
-      return updateDate(date, numOfDays: 3)
-    } else {
-      return updateDate(date, numOfDays: 1)
-    }
-  }
-  
-  func updateDate(date: NSDate, numOfDays: Int) -> NSDate {
-    let daysToAdd = NSDateComponents()
-    daysToAdd.day = numOfDays
-    guard let newDate = NSCalendar.currentCalendar().dateByAddingComponents(daysToAdd, toDate: date, options: .MatchNextTime) else {
-      print("Invalid new date")
-      return date
-    }
-    
-    return newDate
-  }
-  
   func setStartDate() {
     // if Sunday, set start day at Friday
     if lunchDate.dayOfWeek() == 1 {
-      lunchDate = updateDate(lunchDate, numOfDays: -2)
+      lunchDate.updateByNumOfDays(-2)
       
       // if Monday, set start day at Friday
     } else if lunchDate.dayOfWeek() == 2 {
-      lunchDate = updateDate(lunchDate, numOfDays: -3)
+      lunchDate.updateByNumOfDays(-3)
       
-      // Otherwise, set start day two days back
+      // Otherwise, set start day one day back
     } else {
-      lunchDate = updateDate(lunchDate, numOfDays: -1)
+      lunchDate.updateByNumOfDays(-1)
     }
   }
   
-  func getTodayString(dateStr: String) -> String {
-    // Convert string to a date
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    let date = dateFormatter.dateFromString(dateStr)
-    
-    if let date = date {
-      // Convert date to sentence string
-      let strFormatter = NSDateFormatter()
-      strFormatter.dateFormat = "EEEE, MMMM d"
-      return strFormatter.stringFromDate(date)
-    }
-    return dateStr
-  }
-  
-  func getJSONStringFromString(dateStr: String) -> String {
-    // Convert string to date
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    if let date = dateFormatter.dateFromString(dateStr) {
-      let nextDate = getNextWeekday(date)
-      
-      return nextDate.apiDateStringFromDate(nextDate)
-    }
-    return dateStr
-  }
-
   func showNetworkError() {
     let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)

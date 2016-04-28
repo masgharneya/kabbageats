@@ -37,12 +37,6 @@ struct Lunch {
     return "with \(dishes[1]) and \(dishes[2])"
   }
   
-
-  /*
-  var jsonDateString: String {
-    return jsonFormatter.stringFromDate(date_)
-  }
- */
 }
 
 

@@ -15,10 +15,28 @@ extension NSDate {
     return comp.weekday
   }
   
-  func apiDateStringFromDate(date: NSDate) -> String {
+  func apiDateStringFromDate() -> String {
     let formatter = NSDateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.stringFromDate(date)
+    return formatter.stringFromDate(self)
   }
   
+  func getNextWeekday() -> NSDate {
+    if self.dayOfWeek() == 6 {
+      return self.updateByNumOfDays(3)
+    } else {
+      return self.updateByNumOfDays(1)
+    }
+  }
+  
+  func updateByNumOfDays(numOfDays: Int) -> NSDate {
+    let daysToAdd = NSDateComponents()
+    daysToAdd.day = numOfDays
+    guard let newDate = NSCalendar.currentCalendar().dateByAddingComponents(daysToAdd, toDate: self, options: .MatchNextTime) else {
+      print("Invalid new date")
+      return self
+    }
+    
+    return newDate
+  }
 }

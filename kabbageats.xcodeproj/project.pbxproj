@@ -24,6 +24,7 @@
 		76F5D6851CCC91EE00517E9D /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6841CCC91EE00517E9D /* RateViewController.swift */; };
 		76F5D6871CCD12C600517E9D /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6861CCD12C600517E9D /* DimmingPresentationController.swift */; };
 		76F5D6891CCEB80000517E9D /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6881CCEB80000517E9D /* CommentViewController.swift */; };
+		76F5D68F1CD19B9600517E9D /* String+GetDateString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D68E1CD19B9600517E9D /* String+GetDateString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		76F5D6841CCC91EE00517E9D /* RateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
 		76F5D6861CCD12C600517E9D /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
 		76F5D6881CCEB80000517E9D /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		76F5D68E1CD19B9600517E9D /* String+GetDateString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+GetDateString.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */,
 				76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */,
+				76F5D68E1CD19B9600517E9D /* String+GetDateString.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				76B5DEFC1CC5312E00166200 /* kabbageats.xcdatamodeld in Sources */,
 				76B5DEF61CC5312E00166200 /* LunchViewController.swift in Sources */,
 				76B5DEF41CC5312E00166200 /* AppDelegate.swift in Sources */,
+				76F5D68F1CD19B9600517E9D /* String+GetDateString.swift in Sources */,
 				76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */,
 				76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */,
 				76F5D6891CCEB80000517E9D /* CommentViewController.swift in Sources */,

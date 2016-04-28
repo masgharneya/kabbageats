@@ -37,9 +37,6 @@ class LunchViewController: UIViewController {
       sideDishLabel.text = sideDish
       lunchImage.image = image
     }
-    //TODO: Hook up activity indicator
-
-
     
     /*
     // Hide bottom border on navigation bar
