@@ -608,9 +608,12 @@
                                             <constraint firstAttribute="height" constant="30" id="ezd-x7-kta"/>
                                             <constraint firstAttribute="width" constant="46" id="ksy-Eu-OvT"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="Send">
                                             <color key="titleColor" red="0.6588235294" green="0.81176470590000005" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="sendComment:" destination="5KF-dA-pLT" eventType="touchUpInside" id="Qhf-Vh-64e"/>

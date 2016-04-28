@@ -58,6 +58,8 @@ class CommentViewController: UIViewController {
         request, response, data, error in
         if response?.statusCode == 204 {
           print("Comment successful")
+          self.nameField.resignFirstResponder()
+          self.textView.resignFirstResponder()
           self.close()
         }
       }
@@ -111,20 +113,29 @@ extension CommentViewController: UITextViewDelegate {
     }
   }
   
+  // Enable send button if text view is not empty
   func textViewDidChange(textView: UITextView) {
-    if textView.text != "" {
-      sendButton.enabled = true
-    } else {
-      sendButton.enabled = false
-    }
+    sendButton.enabled = textView.text != "" ? true : false
   }
   
+  // Show placeholder text if text view is empty and disable Send button
   func textViewDidEndEditing(textView: UITextView) {
     if textView.text == "" {
       textView.text = "Enter a comment (be nice!)"
       textView.textColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.30)
       sendButton.enabled = false
     }
+  }
+  
+  // Limit comments to 500 characters
+  func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    let currentCharacterCount = textView.text?.characters.count ?? 0
+    if (range.length + range.location > currentCharacterCount){
+      return false
+    }
+    
+    let newLength = currentCharacterCount + text.characters.count - range.length
+    return newLength <= 500
   }
 }
 
