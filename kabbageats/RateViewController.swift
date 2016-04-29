@@ -83,7 +83,8 @@ class RateViewController: UIViewController {
     if let id = sender.accessibilityIdentifier {
       switch id {
       case "ThumbsUpMain":
-        upVoteDish(dishes[0], button: sender)
+        LunchKit.sharedInstance.upVoteDish(dishes[0], date: "2016-04-28", button: sender)
+      //upVoteDish(dishes[0], button: sender)
       case "ThumbsUpSide1":
         upVoteDish(dishes[1], button: sender)
       default:

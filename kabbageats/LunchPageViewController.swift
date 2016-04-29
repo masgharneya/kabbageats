@@ -20,7 +20,7 @@ class LunchPageViewController: UIPageViewController {
     setStartDate()
     isLoading = true
     showLoading()
-    getLunches()
+    loadLunches()
     
     dataSource = self
   }
@@ -40,59 +40,22 @@ class LunchPageViewController: UIPageViewController {
     return nil
   }
   
-  func getLunches() {
+  func loadLunches() {
     // Make Get Request
-    let dateStr = lunchDate.apiDateStringFromDate()
+    //let dateStr = lunchDate.apiDateStringFromDate()
     isLoading = true
-    Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
-      response in
-      print(response)
-      guard response.result.isSuccess else {
-        self.showNetworkError()
-        print("Error while retrieving lunch: \(response.result.error)")
-        //self.hideActivityIndicator()
-        return
+    LunchKit.sharedInstance.getLunches(lunchDate, completion: {
+      self.lunches = LunchKit.sharedInstance.lunches
+      self.currentIndex = 0
+      if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
+        let viewControllers = [viewController]
+        self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
       }
-      
-      // Parse JSON
-      guard let lunchDict = response.result.value as? [String: AnyObject],
-        date = lunchDict["date"] as? String,
-        menu = lunchDict["menu"] as? String,
-        imageURL = lunchDict["image"] as? String else {
-          self.showNetworkError()
-          print("Received data not in the correct format")
-          return
-      }
-      
-      // Set lunch properties
-      var lunch = Lunch()
-      lunch.dateWithYear = date
-      lunch.date = date.getTodayString()
-      lunch.fullMenu = menu
-      lunch.imageURL = imageURL
-      // Download Image
-      if let url = NSURL(string: imageURL), data = NSData(contentsOfURL: url) {
-        lunch.image = UIImage(data: data)!
-      }
-      lunch.getDishes()
-      self.lunches.append(lunch)
-      
-      if self.lunches.count < 3 {
-        print("Lunches: \(self.lunches.count)")
-        self.lunchDate = self.lunchDate.getNextWeekday()
-        self.getLunches()
-      } else {
-        self.currentIndex = 1
-        if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
-          let viewControllers = [viewController]
-          self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
-        }
-        self.isLoading = false
-        self.showLoading()
-      }
-    }
+      self.isLoading = false
+      self.showLoading()
+    })
   }
-  
+      
   func getNextLunch(index: Int) {
     // Make Get Request
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear
@@ -158,7 +121,7 @@ class LunchPageViewController: UIPageViewController {
       lunchDate.updateByNumOfDays(-1)
     }
   }
-  
+
   func showNetworkError() {
     let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
