@@ -71,16 +71,15 @@ class LunchKit {
   }
   
   //TODO: Load lunch image
-  /*
+  
   func getImage(imageURL: String) {
     Manager.request(.GET, imageURL).response {
       result, response, data, error in
       if let data = data {
-        lunch.image = UIImage(data: data)!
+        self.image = UIImage(data: data)!
       }
     }
   }
- */
   
   
   func upVoteDish(dish: String, date: String, button: UIButton) {

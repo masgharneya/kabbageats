@@ -55,7 +55,7 @@ class LunchPageViewController: UIPageViewController {
       self.showLoading()
     })
   }
-      
+  
   func getNextLunch(index: Int) {
     // Make Get Request
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear

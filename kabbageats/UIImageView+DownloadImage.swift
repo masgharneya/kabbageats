@@ -11,7 +11,12 @@
 import UIKit
 
 extension UIImageView {
-  func loadImageWithURL(url: NSURL) -> NSURLSessionDownloadTask {
+  
+  func loadImageWithURL(url: NSURL) {
+    
+  }
+  
+  func _loadImageWithURL(url: NSURL) -> NSURLSessionDownloadTask {
     let session = NSURLSession.sharedSession()
     let downloadTask = session.downloadTaskWithURL(url, completionHandler: {
       [weak self] url, response, error in // [weak self] used in case of UIImageView's removal before image arrives from server
