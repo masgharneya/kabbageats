@@ -30,7 +30,7 @@ class LunchKit {
     }
   }
   
-  func getLunch(date: NSDate, completion: ((date: NSDate) -> Void)?) {
+  func getLunch(date: NSDate, completion: (date: NSDate) -> Void) {
     let lunchDate = date
     let dateStr = lunchDate.apiDateStringFromDate()
     // Make Get Request
@@ -54,16 +54,15 @@ class LunchKit {
       lunch.imageURL = imageURL
       lunch.getDishes()
       self.lunches.append(lunch)
-      completion!(date: lunchDate)
+      completion(date: lunchDate)
     })
   }
   
   func getLunches(date: NSDate, completion: () -> Void) {
     getLunch(date, completion: { date in
-      if self.lunches.count < 1 {
-        print("Lunches: \(self.lunches.count)")
+      if self.lunches.count < 2 {
         let lunchDate = date.getNextWeekday()
-        self.getLunch(lunchDate, completion: nil)
+        self.getLunches(lunchDate, completion: completion)
       } else {
         completion()
       }
@@ -71,16 +70,14 @@ class LunchKit {
   }
   
   //TODO: Load lunch image
-  
-  func getImage(imageURL: String) {
+  func getImage(imageURL: String, completion: (data: NSData) -> Void) {
     Manager.request(.GET, imageURL).response {
       result, response, data, error in
       if let data = data {
-        self.image = UIImage(data: data)!
+        completion(data: data)
       }
     }
   }
-  
   
   func upVoteDish(dish: String, date: String, button: UIButton) {
     let params: [String : AnyObject] = [

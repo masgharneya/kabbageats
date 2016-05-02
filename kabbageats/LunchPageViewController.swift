@@ -10,14 +10,15 @@ import UIKit
 import Alamofire
 
 class LunchPageViewController: UIPageViewController {
-  var lunches = [Lunch]()
+  var lunches: [Lunch]!
   var currentIndex: Int!
   var lunchDate = NSDate()
   var isLoading = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setStartDate()
+    //setStartDate()
+    lunchDate = setSpecificDate()
     isLoading = true
     showLoading()
     loadLunches()
@@ -33,8 +34,10 @@ class LunchPageViewController: UIPageViewController {
       lunch.mainDish = lunches[index].dishes[0]
       lunch.sideDish = lunches[index].sideDishes
       lunch.imageURL = lunches[index].imageURL
-      lunch.image = lunches[index].image
       lunch.lunchIndex = index
+      if let img = lunches[index].image {
+        lunch.image = img
+      } 
       return lunch
     }
     return nil
@@ -120,6 +123,15 @@ class LunchPageViewController: UIPageViewController {
     } else {
       lunchDate.updateByNumOfDays(-1)
     }
+  }
+  
+  // Sets a specific date for testing when there is no future data
+  func setSpecificDate() -> NSDate {
+    let comps = NSDateComponents()
+    comps.day = 13
+    comps.month = 4
+    comps.year = 2016
+    return NSCalendar.currentCalendar().dateFromComponents(comps)!
   }
 
   func showNetworkError() {

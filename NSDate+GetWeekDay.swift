@@ -36,7 +36,6 @@ extension NSDate {
       print("Invalid new date")
       return self
     }
-    
     return newDate
   }
 }

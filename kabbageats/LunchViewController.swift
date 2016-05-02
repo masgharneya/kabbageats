@@ -23,7 +23,7 @@ class LunchViewController: UIViewController {
   var date = ""
   var dateWithYear = ""
   var imageURL = ""
-  var image = UIImage()
+  var image: UIImage?
   var lunchIndex = 0
   
   var downloadTask: NSURLSessionDownloadTask?
@@ -35,7 +35,17 @@ class LunchViewController: UIViewController {
     if !mainDish.isEmpty {
       mainDishLabel.text = mainDish
       sideDishLabel.text = sideDish
-      lunchImage.image = image
+      if image == nil {
+        LunchKit.sharedInstance.getImage(imageURL, completion: {
+          data in
+          guard let img = UIImage(data: data) else { return }
+          self.lunchImage.image = img
+          self.image = img
+          LunchKit.sharedInstance.lunches[self.lunchIndex].image = img
+        })
+      } else {
+        lunchImage.image = image
+      }
     }
     
     /*
