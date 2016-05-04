@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class LunchViewController: UIViewController {
 
@@ -25,8 +24,6 @@ class LunchViewController: UIViewController {
   var imageURL = ""
   var image: UIImage?
   var lunchIndex = 0
-  
-  var downloadTask: NSURLSessionDownloadTask?
   var lunchDate = NSDate()
   
   // MARK: - View Controller Lifecycle

@@ -30,6 +30,7 @@ class LunchKit {
     }
   }
   
+  // MARK: Get Lunch Methods
   func getLunch(date: NSDate, completion: (date: NSDate) -> Void) {
     let lunchDate = date
     let dateStr = lunchDate.apiDateStringFromDate()
@@ -60,7 +61,7 @@ class LunchKit {
   
   func getLunches(date: NSDate, completion: () -> Void) {
     getLunch(date, completion: { date in
-      if self.lunches.count < 2 {
+      if self.lunches.count < 3 {
         let lunchDate = date.getNextWeekday()
         self.getLunches(lunchDate, completion: completion)
       } else {
@@ -69,17 +70,24 @@ class LunchKit {
     })
   }
   
-  //TODO: Load lunch image
+  // Load lunch image
   func getImage(imageURL: String, completion: (data: NSData) -> Void) {
     Manager.request(.GET, imageURL).response {
       result, response, data, error in
       if let data = data {
         completion(data: data)
       }
+      /*
+       // Download Image
+       if let url = NSURL(string: imageURL), data = NSData(contentsOfURL: url) {
+       lunch.image = UIImage(data: data)!
+       }
+       */
     }
   }
   
-  func upVoteDish(dish: String, date: String, button: UIButton) {
+  // MARK: Rate Lunch Methods
+  func upVoteDish(dish: String, date: String, completion: () -> Void) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
       "rating": 1,
@@ -88,11 +96,46 @@ class LunchKit {
     
     requestWrapper(.POST, url: "\(baseURL)\(date)/ratings", params: params, completion: {
       data in
+      guard data.response?.statusCode == 204 else {
+        // TODO: show error if rate fails
+        return }
+        completion()
+    })
+  }
+  
+  func downVoteDish(dish: String, date: String, completion: () -> Void) {
+    let params: [String : AnyObject] = [
+      "dish": "\(dish)",
+      "rating": -1,
+      "source": "iOS App"
+    ]
+    
+    requestWrapper(.POST, url: "\(baseURL)\(date)/ratings", params: params, completion: {
+      data in
+      guard data.response?.statusCode == 204 else {
+        // TODO: show error if rate fails
+        return }
+      
+        completion()
+    })
+  }
+  
+  // MARK: Comment on Lunch Methods
+  func sendComment(message: String, name: String?, date: String, completion: () -> Void) {
+    //sendButton.enabled = false
+    var params = ["message": message]
+    if let name = name {
+      params.updateValue(name, forKey: "name")
+    }
+    
+    requestWrapper(.POST, url: "\(baseURL)\(date)/comments", params: params, completion: {
+      data in
       guard data.response?.statusCode == 204 else { return }
-        button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
+        completion()
     })
   }
 
+  // TODO: Fix show network error
   func showNetworkError() {
     let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)

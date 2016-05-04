@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class CommentViewController: UIViewController {
 
@@ -42,27 +41,14 @@ class CommentViewController: UIViewController {
   
   @IBAction func sendComment(sender: UIButton) {
     sendButton.enabled = false
-    var params = [String : AnyObject]()
     if let message = textView.text {
-      if let name = nameField.text {
-        params = [
-          "name": name,
-          "message": message
-        ]
-      } else {
-      params = [
-        "message": message
-        ]
-      }
-      Manager.request(.POST, "https://lunch.kabbage.com/api/v2/lunches/\(date)/comments", parameters: params).response {
-        request, response, data, error in
-        if response?.statusCode == 204 {
-          print("Comment successful")
-          self.nameField.resignFirstResponder()
-          self.textView.resignFirstResponder()
-          self.close()
-        }
-      }
+      LunchKit.sharedInstance.sendComment(message, name: nameField.text, date: date, completion: {
+        self.nameField.resignFirstResponder()
+        self.textView.resignFirstResponder()
+        self.close()
+      })
+    } else {
+      // TODO: Show error if text field is empty
     }
   }
   
@@ -138,20 +124,3 @@ extension CommentViewController: UITextViewDelegate {
     return newLength <= 500
   }
 }
-
-// Server Trust Policy Manager for Alamofire (to accept self-signed certificate, from http://stackoverflow.com/questions/31945078/how-to-connect-to-self-signed-servers-using-alamofire-1-3 )
-private var Manager : Alamofire.Manager = {
-  // Create the server trust policies
-  let serverTrustPolicies: [String: ServerTrustPolicy] = [
-    "lunch.kabbage.com": .DisableEvaluation
-  ]
-  
-  // Create custom manager
-  let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-  configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-  let man = Alamofire.Manager(
-    configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-    serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-  )
-  return man
-}()

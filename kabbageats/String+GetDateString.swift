@@ -9,6 +9,16 @@
 import Foundation
 
 extension String {
+  func getDateFromString() -> NSDate? {
+    // Convert string to a date
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    if let date = dateFormatter.dateFromString(self) {
+      return date.getNextWeekday()
+    }
+    return nil
+  }
+  
   func getTodayString() -> String {
     // Convert string to a date
     let dateFormatter = NSDateFormatter()
@@ -21,7 +31,6 @@ extension String {
       strFormatter.dateFormat = "EEEE, MMMM d"
       return strFormatter.stringFromDate(date)
     }
-    
     return self
   }
   

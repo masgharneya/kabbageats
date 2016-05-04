@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class RateViewController: UIViewController {
   
@@ -46,49 +45,32 @@ class RateViewController: UIViewController {
     sideDish2Labael.text = dishes[2]
   }
   
-
-  func upVoteDish(dish: String, button: UIButton) {
-    let params: [String : AnyObject] = [
-      "dish": "\(dish)",
-      "rating": 1,
-      "source": "iOS App"
-    ]
-    
-    Manager.request(.POST, "https://lunch.kabbage.com/api/v2/lunches/\(date)/ratings", parameters: params).response {
-      request, response, data, error in
-      if response?.statusCode == 204 {
-        button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
-      }
-    }
-  }
-  
-  func downVoteDish(dish: String, button: UIButton) {
-    let params: [String : AnyObject] = [
-      "dish": "\(dish)",
-      "rating": -1,
-      "source": "iOS App"
-    ]
-    
-    Manager.request(.POST, "https://lunch.kabbage.com/api/v2/lunches/\(date)/ratings", parameters: params).response {
-      request, response, data, error in
-      if response?.statusCode == 204 {
-         button.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
-      }
+  // Highlight button if rating is successful
+  func updateRateButton(id: String, button: UIButton) {
+    if id.rangeOfString("Up") != nil {
+      button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
+    } else {
+      button.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
     }
   }
   
   // MARK: - Actions
-  
+
   @IBAction func upVote(sender: UIButton) {
     if let id = sender.accessibilityIdentifier {
       switch id {
       case "ThumbsUpMain":
-        LunchKit.sharedInstance.upVoteDish(dishes[0], date: "2016-04-28", button: sender)
-      //upVoteDish(dishes[0], button: sender)
+        LunchKit.sharedInstance.upVoteDish(dishes[0], date: date, completion:  {
+          self.updateRateButton(id, button: sender)
+        })
       case "ThumbsUpSide1":
-        upVoteDish(dishes[1], button: sender)
+        LunchKit.sharedInstance.upVoteDish(dishes[1], date: date, completion:  {
+          self.updateRateButton(id, button: sender)
+        })
       default:
-        upVoteDish(dishes[2], button: sender)
+        LunchKit.sharedInstance.upVoteDish(dishes[2], date: date, completion:  {
+          self.updateRateButton(id, button: sender)
+        })
       }
     }
   }
@@ -97,11 +79,17 @@ class RateViewController: UIViewController {
     if let id = sender.accessibilityIdentifier {
       switch id {
       case "ThumbsDownMain":
-        downVoteDish(dishes[0], button: sender)
+        LunchKit.sharedInstance.downVoteDish(dishes[0], date: date, completion: {
+          self.updateRateButton(id, button: sender)
+        })
       case "ThumbsDownSide1":
-        downVoteDish(dishes[1], button: sender)
+        LunchKit.sharedInstance.downVoteDish(dishes[1], date: date, completion: {
+          self.updateRateButton(id, button: sender)
+        })
       default:
-        downVoteDish(dishes[2], button: sender)
+        LunchKit.sharedInstance.downVoteDish(dishes[2], date: date, completion: {
+          self.updateRateButton(id, button: sender)
+        })
       }
     }
   }
@@ -129,20 +117,3 @@ extension RateViewController: UIGestureRecognizerDelegate {
     return (touch.view === self.view)
   }
 }
-
-// Server Trust Policy Manager for Alamofire (to accept self-signed certificate, from http://stackoverflow.com/questions/31945078/how-to-connect-to-self-signed-servers-using-alamofire-1-3 )
-private var Manager : Alamofire.Manager = {
-  // Create the server trust policies
-  let serverTrustPolicies: [String: ServerTrustPolicy] = [
-    "lunch.kabbage.com": .DisableEvaluation
-  ]
-  
-  // Create custom manager
-  let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-  configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-  let man = Alamofire.Manager(
-    configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-    serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-  )
-  return man
-}()

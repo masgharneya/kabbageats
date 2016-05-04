@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class LunchPageViewController: UIPageViewController {
   var lunches: [Lunch]!
@@ -45,11 +44,10 @@ class LunchPageViewController: UIPageViewController {
   
   func loadLunches() {
     // Make Get Request
-    //let dateStr = lunchDate.apiDateStringFromDate()
     isLoading = true
     LunchKit.sharedInstance.getLunches(lunchDate, completion: {
       self.lunches = LunchKit.sharedInstance.lunches
-      self.currentIndex = 0
+      self.currentIndex = 1
       if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
         let viewControllers = [viewController]
         self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
@@ -62,50 +60,20 @@ class LunchPageViewController: UIPageViewController {
   func getNextLunch(index: Int) {
     // Make Get Request
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear
-    let dateStr = lastDayInArray.getJSONStringFromString()
-    isLoading = true
-    
-    // TODO: Extract Get Request to separate method for use here and in getLunches method
-    Manager.request(.GET, "http://lunch.kabbage.com/api/v2/lunches/\(dateStr)/").validate().responseJSON {
-      response in
-      print(response)
-      guard response.result.isSuccess else {
-        if let lunch = self.viewControllers![self.viewControllers!.count - 1] as? LunchViewController {
-          lunch.activityIndicator.stopAnimating()
-          lunch.indicatorView.hidden = true
+    if let date = lastDayInArray.getDateFromString() {
+      isLoading = true
+      
+      LunchKit.sharedInstance.getLunch(date, completion: {
+        _ in
+        self.isLoading = false
+        self.lunches = LunchKit.sharedInstance.lunches
+        if let viewController = self.lunchViewController(index - 1) {
+          let viewControllers = [viewController]
+          self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
         }
-        print("Error while retrieving lunch: \(response.result.error)")
-        return
-      }
-      
-      // Parse JSON
-      guard let lunchDict = response.result.value as? [String: AnyObject],
-        date = lunchDict["date"] as? String,
-        menu = lunchDict["menu"] as? String,
-        imageURL = lunchDict["image"] as? String else {
-          self.showNetworkError()
-          print("Received data not in the correct format")
-          return
-      }
-      
-      // Set lunch properties
-      var lunch = Lunch()
-      lunch.dateWithYear = date
-      lunch.date = date.getTodayString()
-      lunch.fullMenu = menu
-      lunch.imageURL = imageURL
-      // Download Image
-      if let url = NSURL(string: imageURL), data = NSData(contentsOfURL: url) {
-        lunch.image = UIImage(data: data)!
-      }
-      lunch.getDishes()
-      self.lunches.append(lunch)
-      
-      self.isLoading = false
-      if let viewController = self.lunchViewController(index - 1) {
-        let viewControllers = [viewController]
-        self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
-      }
+      })
+    } else {
+      showNetworkError()
     }
   }
   
@@ -182,20 +150,3 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
     return nil
   }
 }
-
-// Server Trust Policy Manager for Alamofire (to accept self-signed certificate, from http://stackoverflow.com/questions/31945078/how-to-connect-to-self-signed-servers-using-alamofire-1-3 )
-private var Manager : Alamofire.Manager = {
-  // Create the server trust policies
-  let serverTrustPolicies: [String: ServerTrustPolicy] = [
-    "lunch.kabbage.com": .DisableEvaluation
-  ]
-  
-  // Create custom manager
-  let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-  configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-  let man = Alamofire.Manager(
-    configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-    serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-  )
-  return man
-}()
