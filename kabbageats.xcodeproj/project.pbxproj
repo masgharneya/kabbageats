@@ -124,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				76B5DEF31CC5312E00166200 /* AppDelegate.swift */,
+				76F5D6921CD26BCF00517E9D /* LunchKit.swift */,
 				76F5D6811CC9AA9E00517E9D /* ViewControllers */,
 				76B5DF291CC5DB9900166200 /* Lunch.swift */,
 				76B5DEF71CC5312E00166200 /* Main.storyboard */,
@@ -133,7 +134,6 @@
 				76B5DEFF1CC5312E00166200 /* LaunchScreen.storyboard */,
 				76B5DF021CC5312E00166200 /* Info.plist */,
 				76B5DEFA1CC5312E00166200 /* kabbageats.xcdatamodeld */,
-				76F5D6921CD26BCF00517E9D /* LunchKit.swift */,
 			);
 			path = kabbageats;
 			sourceTree = "<group>";

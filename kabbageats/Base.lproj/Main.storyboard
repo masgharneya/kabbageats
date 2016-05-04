@@ -369,33 +369,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UZT-kP-Vaq" userLabel="Rate Pop-up View">
-                                <rect key="frame" x="40" y="149" width="320" height="195"/>
+                                <rect key="frame" x="20" y="130" width="360" height="232"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate this Lunch " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCG-eY-QUp">
-                                        <rect key="frame" x="88" y="8" width="143" height="23"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How was lunch?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCG-eY-QUp">
+                                        <rect key="frame" x="112" y="8" width="136" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please only select 1 option for each dish" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cg2-Z9-Cbe" userLabel="Disclaimer">
+                                        <rect key="frame" x="75" y="31" width="211" height="14"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKf-1B-51E" userLabel="Main Dish View">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="58" width="360" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken and Beef Tacos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fIR-Oj-xnY">
-                                                <rect key="frame" x="8" y="5" width="222" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIb-57-f6P" userLabel="Thumbs Down 1">
+                                                <rect key="frame" x="312" y="5" width="40" height="40"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ThumbsDownMain"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="222" id="1bZ-vt-r53"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="OYY-f0-KOo"/>
+                                                    <constraint firstAttribute="width" constant="40" id="6v8-w8-cEy"/>
+                                                    <constraint firstAttribute="height" constant="40" id="8fi-eh-LTY"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <state key="normal" title="Button" image="ThumbsDown"/>
+                                                <connections>
+                                                    <action selector="downVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="nAj-6B-7dX"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYt-34-v4Q" userLabel="Thumbs Up 1">
-                                                <rect key="frame" x="244" y="5" width="30" height="30"/>
+                                                <rect key="frame" x="253" y="5" width="40" height="40"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="ThumbsUpMain"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="enl-E5-FuF"/>
-                                                    <constraint firstAttribute="height" constant="30" id="rvd-9t-8zT"/>
+                                                    <constraint firstAttribute="width" constant="40" id="enl-E5-FuF"/>
+                                                    <constraint firstAttribute="height" constant="40" id="rvd-9t-8zT"/>
                                                 </constraints>
                                                 <state key="normal" image="ThumbsUp"/>
                                                 <state key="selected" image="ThumbsUpHighlighted"/>
@@ -403,139 +411,132 @@
                                                     <action selector="upVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="2lk-rb-O35"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIb-57-f6P" userLabel="Thumbs Down 1">
-                                                <rect key="frame" x="282" y="5" width="30" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="ThumbsDownMain"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken and Beef Tacos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIR-Oj-xnY">
+                                                <rect key="frame" x="8" y="5" width="237" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="6v8-w8-cEy"/>
-                                                    <constraint firstAttribute="height" constant="30" id="8fi-eh-LTY"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="ThumbsDown"/>
-                                                <connections>
-                                                    <action selector="downVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="nAj-6B-7dX"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.69444224649999997" green="0.13223189269999999" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="fIR-Oj-xnY" firstAttribute="top" secondItem="jKf-1B-51E" secondAttribute="top" constant="5" id="4UE-Dc-FCN"/>
-                                            <constraint firstItem="JYt-34-v4Q" firstAttribute="leading" secondItem="fIR-Oj-xnY" secondAttribute="trailing" constant="14" id="58C-yl-HWn"/>
-                                            <constraint firstItem="pIb-57-f6P" firstAttribute="leading" secondItem="JYt-34-v4Q" secondAttribute="trailing" constant="8" id="8bN-Qb-nlQ"/>
-                                            <constraint firstItem="pIb-57-f6P" firstAttribute="centerY" secondItem="JYt-34-v4Q" secondAttribute="centerY" id="CuZ-ey-Wtm"/>
-                                            <constraint firstAttribute="bottom" secondItem="fIR-Oj-xnY" secondAttribute="bottom" constant="5" id="Z3L-oN-5gc"/>
-                                            <constraint firstItem="fIR-Oj-xnY" firstAttribute="leading" secondItem="jKf-1B-51E" secondAttribute="leading" constant="8" id="g01-Yo-aDx"/>
-                                            <constraint firstItem="JYt-34-v4Q" firstAttribute="centerY" secondItem="fIR-Oj-xnY" secondAttribute="centerY" id="qt6-XY-mjo"/>
-                                            <constraint firstAttribute="trailing" secondItem="pIb-57-f6P" secondAttribute="trailing" constant="8" id="zev-bM-oox"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qo7-rh-4LZ" userLabel="Side Dish 1 View">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="40"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Beans" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-zu-I63">
-                                                <rect key="frame" x="8" y="5" width="222" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="8Er-P9-UMV"/>
-                                                    <constraint firstAttribute="width" constant="222" id="vji-80-d1l"/>
+                                                    <constraint firstAttribute="height" constant="40" id="CAg-Gu-bTK"/>
+                                                    <constraint firstAttribute="width" constant="237" id="RFu-yw-NYX"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nu0-lp-JkU" userLabel="Thumbs Down 2">
-                                                <rect key="frame" x="282" y="5" width="30" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="ThumbsDownSide1"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="7rX-om-4uQ"/>
-                                                    <constraint firstAttribute="height" constant="30" id="BEY-TH-ZFN"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="ThumbsDown"/>
-                                                <connections>
-                                                    <action selector="downVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="AAl-tE-PpM"/>
-                                                </connections>
-                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.69444224649999997" green="0.13223189269999999" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="JYt-34-v4Q" firstAttribute="centerY" secondItem="jKf-1B-51E" secondAttribute="centerY" id="ECV-CP-5C5"/>
+                                            <constraint firstItem="fIR-Oj-xnY" firstAttribute="centerY" secondItem="jKf-1B-51E" secondAttribute="centerY" id="PUH-oH-Aam"/>
+                                            <constraint firstItem="pIb-57-f6P" firstAttribute="centerY" secondItem="jKf-1B-51E" secondAttribute="centerY" id="UHy-tr-aO8"/>
+                                            <constraint firstItem="fIR-Oj-xnY" firstAttribute="leading" secondItem="jKf-1B-51E" secondAttribute="leading" constant="8" id="lf5-2y-XTI"/>
+                                            <constraint firstItem="pIb-57-f6P" firstAttribute="leading" secondItem="JYt-34-v4Q" secondAttribute="trailing" constant="19" id="piz-Gt-XR2"/>
+                                            <constraint firstAttribute="trailing" secondItem="pIb-57-f6P" secondAttribute="trailing" constant="8" id="vu4-WX-TSG"/>
+                                            <constraint firstAttribute="height" constant="50" id="za4-Gn-LSM"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qo7-rh-4LZ" userLabel="Side Dish 1 View">
+                                        <rect key="frame" x="0.0" y="116" width="360" height="50"/>
+                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sov-kg-LGe" userLabel="Thumbs Up 2">
-                                                <rect key="frame" x="244" y="5" width="30" height="30"/>
+                                                <rect key="frame" x="253" y="5" width="40" height="40"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="ThumbsUpSide1"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="nMN-xN-clq"/>
-                                                    <constraint firstAttribute="height" constant="30" id="vGH-OW-gdX"/>
+                                                    <constraint firstAttribute="width" constant="40" id="nMN-xN-clq"/>
+                                                    <constraint firstAttribute="height" constant="40" id="vGH-OW-gdX"/>
                                                 </constraints>
                                                 <state key="normal" image="ThumbsUp"/>
                                                 <connections>
                                                     <action selector="upVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="cGP-AR-cSQ"/>
                                                 </connections>
                                             </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.69444224649999997" green="0.13223189269999999" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="sov-kg-LGe" firstAttribute="leading" secondItem="uDP-zu-I63" secondAttribute="trailing" constant="14" id="2ni-RF-InA"/>
-                                            <constraint firstItem="sov-kg-LGe" firstAttribute="centerY" secondItem="uDP-zu-I63" secondAttribute="centerY" id="68y-vK-THn"/>
-                                            <constraint firstItem="uDP-zu-I63" firstAttribute="leading" secondItem="qo7-rh-4LZ" secondAttribute="leading" constant="8" id="Hgt-Gc-vVn"/>
-                                            <constraint firstItem="nu0-lp-JkU" firstAttribute="leading" secondItem="sov-kg-LGe" secondAttribute="trailing" constant="8" id="UXV-wF-TF1"/>
-                                            <constraint firstItem="uDP-zu-I63" firstAttribute="top" secondItem="qo7-rh-4LZ" secondAttribute="top" constant="5" id="bST-Te-qs3"/>
-                                            <constraint firstAttribute="trailing" secondItem="nu0-lp-JkU" secondAttribute="trailing" constant="8" id="cFE-X2-9my"/>
-                                            <constraint firstAttribute="bottom" secondItem="uDP-zu-I63" secondAttribute="bottom" constant="5" id="plQ-aR-HHQ"/>
-                                            <constraint firstItem="nu0-lp-JkU" firstAttribute="centerY" secondItem="sov-kg-LGe" secondAttribute="centerY" id="xSX-np-NkM"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vs9-Zs-fSx" userLabel="Side Dish 2 View">
-                                        <rect key="frame" x="0.0" y="140" width="320" height="40"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rice" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zg4-w2-67w">
-                                                <rect key="frame" x="8" y="5" width="222" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nu0-lp-JkU" userLabel="Thumbs Down 2">
+                                                <rect key="frame" x="312" y="5" width="40" height="40"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ThumbsDownSide1"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="222" id="ZTR-P7-EeU"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="rWe-lg-GII"/>
+                                                    <constraint firstAttribute="width" constant="40" id="7rX-om-4uQ"/>
+                                                    <constraint firstAttribute="height" constant="40" id="BEY-TH-ZFN"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="ThumbsDown"/>
+                                                <connections>
+                                                    <action selector="downVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="AAl-tE-PpM"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Beans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-zu-I63">
+                                                <rect key="frame" x="8" y="5" width="237" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="237" id="2iF-a5-kUM"/>
+                                                    <constraint firstAttribute="height" constant="40" id="F8w-88-ON7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWf-LZ-1l8" userLabel="Thumbs Up 3">
-                                                <rect key="frame" x="244" y="5" width="30" height="30"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="ThumbsUpSide2"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="JZc-ET-M9Q"/>
-                                                    <constraint firstAttribute="height" constant="30" id="jSZ-DG-7vQ"/>
-                                                </constraints>
-                                                <state key="normal" image="ThumbsUp"/>
-                                                <connections>
-                                                    <action selector="upVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="x3Q-DI-ebH"/>
-                                                </connections>
-                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.69444224649999997" green="0.13223189269999999" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="uDP-zu-I63" firstAttribute="leading" secondItem="qo7-rh-4LZ" secondAttribute="leading" constant="8" id="6eJ-eG-n4j"/>
+                                            <constraint firstItem="sov-kg-LGe" firstAttribute="centerY" secondItem="qo7-rh-4LZ" secondAttribute="centerY" id="Gli-Qd-0Wq"/>
+                                            <constraint firstAttribute="height" constant="50" id="cXi-ml-fIB"/>
+                                            <constraint firstItem="nu0-lp-JkU" firstAttribute="leading" secondItem="sov-kg-LGe" secondAttribute="trailing" constant="19" id="pgx-uE-gLC"/>
+                                            <constraint firstItem="nu0-lp-JkU" firstAttribute="centerY" secondItem="qo7-rh-4LZ" secondAttribute="centerY" id="rbQ-Xh-W5L"/>
+                                            <constraint firstItem="uDP-zu-I63" firstAttribute="centerY" secondItem="qo7-rh-4LZ" secondAttribute="centerY" id="wVh-td-w5g"/>
+                                            <constraint firstAttribute="trailing" secondItem="nu0-lp-JkU" secondAttribute="trailing" constant="8" id="xCO-o6-riV"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vs9-Zs-fSx" userLabel="Side Dish 2 View">
+                                        <rect key="frame" x="0.0" y="174" width="360" height="50"/>
+                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IwT-Su-DJD" userLabel="Thumbs Down 3">
-                                                <rect key="frame" x="282" y="5" width="30" height="30"/>
+                                                <rect key="frame" x="312" y="5" width="40" height="40"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="ThumbsDownSide2"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="Caz-G8-DCP"/>
-                                                    <constraint firstAttribute="width" constant="30" id="muz-9U-RX4"/>
+                                                    <constraint firstAttribute="height" constant="40" id="Caz-G8-DCP"/>
+                                                    <constraint firstAttribute="width" constant="40" id="muz-9U-RX4"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="ThumbsDown"/>
                                                 <connections>
                                                     <action selector="downVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="0ya-zg-tze"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zg4-w2-67w" userLabel="Side Dish2 Label">
+                                                <rect key="frame" x="8" y="5" width="237" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="237" id="Fxo-vE-2FC"/>
+                                                    <constraint firstAttribute="height" constant="40" id="e8I-tU-rhg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWf-LZ-1l8" userLabel="Thumbs Up 3">
+                                                <rect key="frame" x="253" y="5" width="40" height="40"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ThumbsUpSide2"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="JZc-ET-M9Q"/>
+                                                    <constraint firstAttribute="height" constant="40" id="jSZ-DG-7vQ"/>
+                                                </constraints>
+                                                <state key="normal" image="ThumbsUp"/>
+                                                <connections>
+                                                    <action selector="upVote:" destination="qQe-pu-78k" eventType="touchUpInside" id="x3Q-DI-ebH"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.69444224649999997" green="0.13223189269999999" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="IwT-Su-DJD" firstAttribute="leading" secondItem="RWf-LZ-1l8" secondAttribute="trailing" constant="8" id="1OE-kK-QQB"/>
-                                            <constraint firstItem="RWf-LZ-1l8" firstAttribute="leading" secondItem="zg4-w2-67w" secondAttribute="trailing" constant="14" id="5ed-O6-kCX"/>
-                                            <constraint firstItem="IwT-Su-DJD" firstAttribute="centerY" secondItem="RWf-LZ-1l8" secondAttribute="centerY" id="HdQ-9f-qJw"/>
-                                            <constraint firstItem="zg4-w2-67w" firstAttribute="leading" secondItem="vs9-Zs-fSx" secondAttribute="leading" constant="8" id="R4H-Xs-sVx"/>
-                                            <constraint firstAttribute="bottom" secondItem="zg4-w2-67w" secondAttribute="bottom" constant="5" id="aj6-sc-15a"/>
-                                            <constraint firstItem="RWf-LZ-1l8" firstAttribute="centerY" secondItem="zg4-w2-67w" secondAttribute="centerY" id="cdq-xl-Ic6"/>
-                                            <constraint firstItem="zg4-w2-67w" firstAttribute="top" secondItem="vs9-Zs-fSx" secondAttribute="top" constant="5" id="dxP-Jy-rKb"/>
-                                            <constraint firstAttribute="trailing" secondItem="IwT-Su-DJD" secondAttribute="trailing" constant="8" id="f09-h0-1AZ"/>
-                                            <constraint firstItem="IwT-Su-DJD" firstAttribute="centerY" secondItem="zg4-w2-67w" secondAttribute="centerY" id="w8W-7P-LKc"/>
+                                            <constraint firstItem="IwT-Su-DJD" firstAttribute="leading" secondItem="RWf-LZ-1l8" secondAttribute="trailing" constant="19" id="GWO-V8-UlB"/>
+                                            <constraint firstItem="IwT-Su-DJD" firstAttribute="centerY" secondItem="vs9-Zs-fSx" secondAttribute="centerY" id="W1E-nF-362"/>
+                                            <constraint firstItem="zg4-w2-67w" firstAttribute="centerY" secondItem="vs9-Zs-fSx" secondAttribute="centerY" id="b1f-Wb-J7b"/>
+                                            <constraint firstItem="zg4-w2-67w" firstAttribute="leading" secondItem="vs9-Zs-fSx" secondAttribute="leading" constant="8" id="sSS-ae-GuA"/>
+                                            <constraint firstItem="RWf-LZ-1l8" firstAttribute="centerY" secondItem="vs9-Zs-fSx" secondAttribute="centerY" id="y3i-qB-dKv"/>
+                                            <constraint firstAttribute="trailing" secondItem="IwT-Su-DJD" secondAttribute="trailing" constant="8" id="zJm-Ue-XnV"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="HdQ-9f-qJw"/>
-                                            </mask>
-                                        </variation>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arE-3p-ttn" userLabel="Close Button">
-                                        <rect key="frame" x="8" y="8" width="20" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arE-3p-ttn" userLabel="Close Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="RNP-DD-rpi"/>
+                                            <constraint firstAttribute="height" constant="40" id="kdD-5v-mSB"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="Close"/>
                                         <connections>
                                             <action selector="close" destination="qQe-pu-78k" eventType="touchUpInside" id="2SY-85-oMk"/>
@@ -544,27 +545,37 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vs9-Zs-fSx" secondAttribute="trailing" id="1VG-Hj-vSS"/>
-                                    <constraint firstItem="qo7-rh-4LZ" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="6Z8-fL-0IV"/>
-                                    <constraint firstItem="jKf-1B-51E" firstAttribute="top" secondItem="SCG-eY-QUp" secondAttribute="bottom" constant="13" id="Hhj-qJ-Ubr"/>
-                                    <constraint firstItem="jKf-1B-51E" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="NKz-5r-Uhe"/>
-                                    <constraint firstAttribute="bottom" secondItem="vs9-Zs-fSx" secondAttribute="bottom" constant="15" id="OBx-d7-uuo"/>
-                                    <constraint firstAttribute="trailing" secondItem="qo7-rh-4LZ" secondAttribute="trailing" id="R5S-ww-f0A"/>
-                                    <constraint firstItem="SCG-eY-QUp" firstAttribute="top" secondItem="UZT-kP-Vaq" secondAttribute="top" constant="8" id="d7b-3h-z8R"/>
-                                    <constraint firstAttribute="trailing" secondItem="jKf-1B-51E" secondAttribute="trailing" id="dny-eY-YgC"/>
-                                    <constraint firstItem="qo7-rh-4LZ" firstAttribute="top" secondItem="jKf-1B-51E" secondAttribute="bottom" constant="8" id="jmZ-y9-o95"/>
-                                    <constraint firstItem="vs9-Zs-fSx" firstAttribute="top" secondItem="qo7-rh-4LZ" secondAttribute="bottom" constant="8" id="k5S-ce-Awq"/>
-                                    <constraint firstItem="vs9-Zs-fSx" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="kud-Cd-ERg"/>
-                                    <constraint firstItem="SCG-eY-QUp" firstAttribute="centerX" secondItem="UZT-kP-Vaq" secondAttribute="centerX" id="wVS-6A-RE0"/>
+                                    <constraint firstItem="Cg2-Z9-Cbe" firstAttribute="top" secondItem="SCG-eY-QUp" secondAttribute="bottom" constant="1" id="0De-OM-EM3"/>
+                                    <constraint firstItem="vs9-Zs-fSx" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="96s-bG-XYK"/>
+                                    <constraint firstItem="Cg2-Z9-Cbe" firstAttribute="centerX" secondItem="UZT-kP-Vaq" secondAttribute="centerX" id="E2Q-p4-6Qa"/>
+                                    <constraint firstItem="jKf-1B-51E" firstAttribute="top" secondItem="Cg2-Z9-Cbe" secondAttribute="bottom" constant="13" id="ESD-PY-Ej8"/>
+                                    <constraint firstItem="jKf-1B-51E" firstAttribute="top" secondItem="SCG-eY-QUp" secondAttribute="bottom" constant="13" id="F5U-03-XN4"/>
+                                    <constraint firstItem="qo7-rh-4LZ" firstAttribute="top" secondItem="jKf-1B-51E" secondAttribute="bottom" constant="8" id="Kux-O5-b6v"/>
+                                    <constraint firstItem="SCG-eY-QUp" firstAttribute="centerX" secondItem="UZT-kP-Vaq" secondAttribute="centerX" id="MgZ-SD-ixc"/>
+                                    <constraint firstItem="vs9-Zs-fSx" firstAttribute="top" secondItem="qo7-rh-4LZ" secondAttribute="bottom" constant="8" id="TM1-ft-qqB"/>
+                                    <constraint firstItem="jKf-1B-51E" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="WXY-0X-PYc"/>
+                                    <constraint firstItem="arE-3p-ttn" firstAttribute="top" secondItem="UZT-kP-Vaq" secondAttribute="top" id="d8e-uP-P80"/>
+                                    <constraint firstItem="SCG-eY-QUp" firstAttribute="top" secondItem="UZT-kP-Vaq" secondAttribute="top" constant="8" id="fEy-HX-uJ2"/>
+                                    <constraint firstAttribute="height" constant="232" id="g7u-9P-eEF"/>
+                                    <constraint firstItem="qo7-rh-4LZ" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="ghr-lc-TZn"/>
+                                    <constraint firstAttribute="trailing" secondItem="jKf-1B-51E" secondAttribute="trailing" id="h1G-OD-1EW"/>
+                                    <constraint firstAttribute="width" constant="360" id="lET-Y2-E39"/>
+                                    <constraint firstAttribute="bottom" secondItem="vs9-Zs-fSx" secondAttribute="bottom" constant="8" id="qUh-Al-fUS"/>
+                                    <constraint firstAttribute="trailing" secondItem="qo7-rh-4LZ" secondAttribute="trailing" id="r1C-Ms-ucV"/>
+                                    <constraint firstAttribute="trailing" secondItem="vs9-Zs-fSx" secondAttribute="trailing" id="w3q-sg-JhD"/>
+                                    <constraint firstItem="arE-3p-ttn" firstAttribute="leading" secondItem="UZT-kP-Vaq" secondAttribute="leading" id="zWX-va-IjX"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="F5U-03-XN4"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="UZT-kP-Vaq" firstAttribute="leading" secondItem="HJf-sa-dcj" secondAttribute="leadingMargin" constant="20" id="4Ua-AW-91O"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UZT-kP-Vaq" secondAttribute="trailing" constant="20" id="QDh-PA-iwb"/>
-                            <constraint firstItem="UZT-kP-Vaq" firstAttribute="centerX" secondItem="HJf-sa-dcj" secondAttribute="centerX" id="fVt-bX-m1L"/>
-                            <constraint firstItem="UZT-kP-Vaq" firstAttribute="centerY" secondItem="HJf-sa-dcj" secondAttribute="centerY" id="nj9-wt-sre"/>
+                            <constraint firstItem="UZT-kP-Vaq" firstAttribute="centerY" secondItem="HJf-sa-dcj" secondAttribute="centerY" id="7FF-p5-hCl"/>
+                            <constraint firstItem="UZT-kP-Vaq" firstAttribute="centerX" secondItem="HJf-sa-dcj" secondAttribute="centerX" id="C7J-Ct-oQu"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
