@@ -31,6 +31,16 @@ class LunchViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Hide bottom border on navigation bar
+    for parent in self.navigationController!.navigationBar.subviews {
+      for childView in parent.subviews {
+        if(childView is UIImageView) {
+          childView.removeFromSuperview()
+        }
+      }
+    }
+    
+    // Load data
     if !mainDish.isEmpty {
       mainDishLabel.text = mainDish
       sideDishLabel.text = sideDish
@@ -45,27 +55,7 @@ class LunchViewController: UIViewController {
       } else {
         lunchImage.image = image
       }
-      /*
-      let gradient: CAGradientLayer = CAGradientLayer()
-      print("menu frame: \(menuView.frame)")
-      gradient.frame = menuView.bounds
-      print("grad frame: \(gradient.frame)")
-      gradient.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
-      menuView.layer.insertSublayer(gradient, atIndex: 0)
- */
     }
-    
-    /*
-    // Hide bottom border on navigation bar
-    for parent in self.navigationController!.navigationBar.subviews {
-      for childView in parent.subviews {
-        if(childView is UIImageView) {
-          childView.removeFromSuperview()
-        }
-      }
-    }
- */
-    
   }
   
   override func viewWillAppear(animated: Bool) {
