@@ -15,6 +15,7 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var lunchImage: UIImageView!
   @IBOutlet weak var indicatorView: UIView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var menuView: UIView!
   
   var dishes = [String]()
   var mainDish = ""
@@ -29,6 +30,7 @@ class LunchViewController: UIViewController {
   // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     if !mainDish.isEmpty {
       mainDishLabel.text = mainDish
       sideDishLabel.text = sideDish
@@ -43,6 +45,14 @@ class LunchViewController: UIViewController {
       } else {
         lunchImage.image = image
       }
+      /*
+      let gradient: CAGradientLayer = CAGradientLayer()
+      print("menu frame: \(menuView.frame)")
+      gradient.frame = menuView.bounds
+      print("grad frame: \(gradient.frame)")
+      gradient.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
+      menuView.layer.insertSublayer(gradient, atIndex: 0)
+ */
     }
     
     /*

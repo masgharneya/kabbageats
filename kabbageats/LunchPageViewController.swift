@@ -16,8 +16,8 @@ class LunchPageViewController: UIPageViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    //setStartDate()
-    lunchDate = setSpecificDate()
+    setStartDate()
+    //lunchDate = setSpecificDate()
     isLoading = true
     showLoading()
     loadLunches()
@@ -81,15 +81,15 @@ class LunchPageViewController: UIPageViewController {
   func setStartDate() {
     // if Sunday, set start day at Friday
     if lunchDate.dayOfWeek() == 1 {
-      lunchDate.updateByNumOfDays(-2)
+     lunchDate = lunchDate.updateByNumOfDays(-2)
       
       // if Monday, set start day at Friday
     } else if lunchDate.dayOfWeek() == 2 {
-      lunchDate.updateByNumOfDays(-3)
+      lunchDate = lunchDate.updateByNumOfDays(-3)
       
       // Otherwise, set start day one day back
     } else {
-      lunchDate.updateByNumOfDays(-1)
+      lunchDate = lunchDate.updateByNumOfDays(-1)
     }
   }
   
