@@ -30,6 +30,20 @@ class LunchKit {
     }
   }
   
+  func requestWrapper2(method: Alamofire.Method, url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
+    Manager.request(method, url, parameters: params).responseJSON {
+      response in
+      print(response)
+      if let result = response.result.value {
+        completion(Result.Success(Box(value: result)))
+      } else if let error = response.result.error {
+        completion(Result.Failure(error))
+        print("Error while retrieving lunch: \(error)")
+        return
+      }
+    }
+  }
+  
   // MARK: Get Lunch Methods
   func getLunch(date: NSDate, completion: (date: NSDate) -> Void) {
     let lunchDate = date
@@ -59,6 +73,39 @@ class LunchKit {
     })
   }
   
+  func getLunch2(date: NSDate, completion: Result<NSDate> -> Void) {
+    let lunchDate = date
+    let dateStr = lunchDate.apiDateStringFromDate()
+    // Make Get Request
+    requestWrapper2(.GET, url: "\(baseURL)\(dateStr)/", params: nil) {
+      result in
+      switch result {
+      case .Success(let box):
+      guard
+        let lunchDict = box.value as? [String: AnyObject],
+        date = lunchDict["date"] as? String,
+        menu = lunchDict["menu"] as? String,
+        imageURL = lunchDict["image"] as? String else {
+          print("Received data not in the correct format")
+          return
+        }
+      
+        // Set lunch properties
+        var lunch = Lunch()
+        lunch.dateWithYear = date
+        lunch.date = date.getTodayString()
+        lunch.fullMenu = menu
+        lunch.imageURL = imageURL
+        lunch.getDishes()
+        self.lunches.append(lunch)
+        completion(Result.Success(Box(value: lunchDate)))
+      case .Failure(let error):
+        completion(Result.Failure(error))
+      }
+    }
+  }
+
+  
   func getLunches(date: NSDate, completion: () -> Void) {
     getLunch(date, completion: { date in
       if self.lunches.count < 3 {
@@ -66,6 +113,23 @@ class LunchKit {
         self.getLunches(lunchDate, completion: completion)
       } else {
         completion()
+      }
+    })
+  }
+  
+  func getLunches2(date: NSDate, completion: Result<[Lunch]> -> Void) {
+    getLunch2(date, completion: {
+      result in
+      switch result {
+      case .Success(let box):
+        if self.lunches.count < 3 {
+          let lunchDate = box.value.getNextWeekday()
+          self.getLunches2(lunchDate, completion: completion)
+        } else {
+          completion(Result.Success(Box(value: self.lunches)))
+        }
+      case .Failure(let error):
+        completion(Result.Failure(error))
       }
     })
   }

@@ -20,6 +20,7 @@
 		76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */; };
 		76B5DF301CC6C86800166200 /* NSDate+GetWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */; };
 		76B5DF571CC824F900166200 /* LunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF561CC824F900166200 /* LunchPageViewController.swift */; };
+		76BAC9C21CDE8EE400238813 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BAC9C11CDE8EE400238813 /* Box.swift */; };
 		76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D67F1CC9A9B600517E9D /* MainViewController.swift */; };
 		76F5D6851CCC91EE00517E9D /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6841CCC91EE00517E9D /* RateViewController.swift */; };
 		76F5D6871CCD12C600517E9D /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5D6861CCD12C600517E9D /* DimmingPresentationController.swift */; };
@@ -65,6 +66,7 @@
 		76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+GetWeekDay.swift"; path = "../NSDate+GetWeekDay.swift"; sourceTree = "<group>"; };
 		76B5DF561CC824F900166200 /* LunchPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunchPageViewController.swift; sourceTree = "<group>"; };
+		76BAC9C11CDE8EE400238813 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		76F5D67F1CC9A9B600517E9D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		76F5D6841CCC91EE00517E9D /* RateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
 		76F5D6861CCD12C600517E9D /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				76B5DEF31CC5312E00166200 /* AppDelegate.swift */,
 				76F5D6921CD26BCF00517E9D /* LunchKit.swift */,
+				76BAC9C11CDE8EE400238813 /* Box.swift */,
 				76F5D6811CC9AA9E00517E9D /* ViewControllers */,
 				76B5DF291CC5DB9900166200 /* Lunch.swift */,
 				76B5DEF71CC5312E00166200 /* Main.storyboard */,
@@ -329,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F5D6851CCC91EE00517E9D /* RateViewController.swift in Sources */,
+				76BAC9C21CDE8EE400238813 /* Box.swift in Sources */,
 				76F5D6871CCD12C600517E9D /* DimmingPresentationController.swift in Sources */,
 				76B5DF301CC6C86800166200 /* NSDate+GetWeekDay.swift in Sources */,
 				76B5DF2A1CC5DB9900166200 /* Lunch.swift in Sources */,

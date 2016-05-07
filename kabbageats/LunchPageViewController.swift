@@ -20,7 +20,7 @@ class LunchPageViewController: UIPageViewController {
     //lunchDate = setSpecificDate()
     isLoading = true
     showLoading()
-    loadLunches()
+    loadLunches2()
     
     dataSource = self
   }
@@ -57,6 +57,27 @@ class LunchPageViewController: UIPageViewController {
     })
   }
   
+  func loadLunches2() {
+    // Make Get Request
+    isLoading = true
+    LunchKit.sharedInstance.getLunches2(lunchDate, completion: {
+      result in
+      switch result {
+      case .Success(let box):
+        self.lunches = box.value
+        self.currentIndex = 1
+        if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
+          let viewControllers = [viewController]
+          self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+        }
+        self.isLoading = false
+        self.showLoading()
+      case .Failure(let error):
+        self.showNetworkError(error.localizedDescription)
+      }
+    })
+  }
+  
   func getNextLunch(index: Int) {
     // Make Get Request
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear
@@ -73,7 +94,7 @@ class LunchPageViewController: UIPageViewController {
         }
       })
     } else {
-      showNetworkError()
+      showNetworkError("There was an error retreiving lunch")
     }
   }
   
@@ -102,8 +123,8 @@ class LunchPageViewController: UIPageViewController {
     return NSCalendar.currentCalendar().dateFromComponents(comps)!
   }
 
-  func showNetworkError() {
-    let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
+  func showNetworkError(message: String) {
+    let alert = UIAlertController(title: "Whoops...", message: message, preferredStyle: .Alert)
     let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
     alert.addAction(action)
     
