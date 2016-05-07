@@ -122,7 +122,6 @@ class LunchKit {
   
   // MARK: Comment on Lunch Methods
   func sendComment(message: String, name: String?, date: String, completion: () -> Void) {
-    //sendButton.enabled = false
     var params = ["message": message]
     if let name = name {
       params.updateValue(name, forKey: "name")
