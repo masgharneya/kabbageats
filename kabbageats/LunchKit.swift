@@ -17,19 +17,6 @@ class LunchKit {
   let baseURL = "https://lunch.kabbage.com/api/v2/lunches/"
   var lunches = [Lunch]()
   
-  func requestWrapper(method: Alamofire.Method, url: String, params: [String:AnyObject]?, completion: (data: Response<AnyObject, NSError>) -> Void) {
-    Manager.request(method, url, parameters: params).responseJSON {
-      response in
-      print(response)
-      guard response.result.isSuccess else {
-        //self.showNetworkError()
-        print("Error while retrieving lunch: \(response.result.error)")
-        return
-      }
-      completion(data: response)
-    }
-  }
-  
   func GET(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
     Manager.request(.GET, url, parameters: params).responseJSON {
       response in
@@ -59,36 +46,7 @@ class LunchKit {
     }
   }
   
-  // MARK: Get Lunch Methods
-  func getLunch(date: NSDate, completion: (date: NSDate) -> Void) {
-    let lunchDate = date
-    let dateStr = lunchDate.apiDateStringFromDate()
-    // Make Get Request
-    requestWrapper(.GET, url: "\(baseURL)\(dateStr)/", params: nil, completion: {
-      data in
-      // Parse JSON
-      guard let lunchDict = data.result.value as? [String: AnyObject],
-        date = lunchDict["date"] as? String,
-        menu = lunchDict["menu"] as? String,
-        imageURL = lunchDict["image"] as? String else {
-          //self.showNetworkError()
-          print("Received data not in the correct format")
-          return
-      }
-      
-      // Set lunch properties
-      var lunch = Lunch()
-      lunch.dateWithYear = date
-      lunch.date = date.getTodayString()
-      lunch.fullMenu = menu
-      lunch.imageURL = imageURL
-      lunch.getDishes()
-      self.lunches.append(lunch)
-      completion(date: lunchDate)
-    })
-  }
-  
-  func getLunch2(date: NSDate, completion: Result<NSDate> -> Void) {
+  func getLunch(date: NSDate, completion: Result<NSDate> -> Void) {
     let lunchDate = date
     let dateStr = lunchDate.apiDateStringFromDate()
     // Make Get Request
@@ -120,27 +78,15 @@ class LunchKit {
       }
     }
   }
-
   
-  func getLunches(date: NSDate, completion: () -> Void) {
-    getLunch(date, completion: { date in
-      if self.lunches.count < 3 {
-        let lunchDate = date.getNextWeekday()
-        self.getLunches(lunchDate, completion: completion)
-      } else {
-        completion()
-      }
-    })
-  }
-  
-  func getLunches2(date: NSDate, completion: Result<[Lunch]> -> Void) {
-    getLunch2(date, completion: {
+  func getLunches(date: NSDate, completion: Result<[Lunch]> -> Void) {
+    getLunch(date, completion: {
       result in
       switch result {
       case .Success(let box):
         if self.lunches.count < 3 {
           let lunchDate = box.value.getNextWeekday()
-          self.getLunches2(lunchDate, completion: completion)
+          self.getLunches(lunchDate, completion: completion)
         } else {
           completion(Result.Success(Box(value: self.lunches)))
         }

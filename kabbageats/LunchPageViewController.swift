@@ -20,7 +20,7 @@ class LunchPageViewController: UIPageViewController {
     //lunchDate = setSpecificDate()
     isLoading = true
     showLoading()
-    loadLunches2()
+    loadLunches()
     
     dataSource = self
   }
@@ -46,21 +46,6 @@ class LunchPageViewController: UIPageViewController {
     // Make Get Request
     isLoading = true
     LunchKit.sharedInstance.getLunches(lunchDate, completion: {
-      self.lunches = LunchKit.sharedInstance.lunches
-      self.currentIndex = 1
-      if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
-        let viewControllers = [viewController]
-        self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
-      }
-      self.isLoading = false
-      self.showLoading()
-    })
-  }
-  
-  func loadLunches2() {
-    // Make Get Request
-    isLoading = true
-    LunchKit.sharedInstance.getLunches2(lunchDate, completion: {
       result in
       switch result {
       case .Success(let box):
@@ -84,7 +69,7 @@ class LunchPageViewController: UIPageViewController {
     if let date = lastDayInArray.getDateFromString() {
       isLoading = true
       
-      LunchKit.sharedInstance.getLunch2(date, completion: {
+      LunchKit.sharedInstance.getLunch(date, completion: {
         result in
         switch result {
         case .Success(_):
