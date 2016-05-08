@@ -46,7 +46,7 @@ class RateViewController: UIViewController {
   }
   
   // Highlight button if rating is successful
-  func updateRateButton(id: String, button: UIButton) {
+  func updateVoteButton(id: String, button: UIButton) {
     if id.rangeOfString("Up") != nil {
       button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
     } else {
@@ -61,16 +61,36 @@ class RateViewController: UIViewController {
       switch id {
       case "ThumbsUpMain":
         LunchKit.sharedInstance.upVoteDish(dishes[0], date: date, completion:  {
-          self.updateRateButton(id, button: sender)
+          result in
+          switch result {
+          case .Success(_):
+            self.updateVoteButton(id, button: sender)
+          case .Failure(_):
+            break
+          }
         })
       case "ThumbsUpSide1":
         LunchKit.sharedInstance.upVoteDish(dishes[1], date: date, completion:  {
-          self.updateRateButton(id, button: sender)
+          result in
+          switch result {
+          case .Success(_):
+            self.updateVoteButton(id, button: sender)
+          case .Failure(_):
+            break
+          }
+        })
+      case "ThumbsUpSide2":
+        LunchKit.sharedInstance.upVoteDish(dishes[2], date: date, completion:  {
+          result in
+          switch result {
+          case .Success(_):
+            self.updateVoteButton(id, button: sender)
+          case .Failure(_):
+            break
+          }
         })
       default:
-        LunchKit.sharedInstance.upVoteDish(dishes[2], date: date, completion:  {
-          self.updateRateButton(id, button: sender)
-        })
+        break
       }
     }
   }
@@ -80,16 +100,36 @@ class RateViewController: UIViewController {
       switch id {
       case "ThumbsDownMain":
         LunchKit.sharedInstance.downVoteDish(dishes[0], date: date, completion: {
-          self.updateRateButton(id, button: sender)
+          result in
+          switch result {
+          case .Success(_):
+            self.updateVoteButton(id, button: sender)
+          case .Failure(_):
+            break
+          }
         })
       case "ThumbsDownSide1":
         LunchKit.sharedInstance.downVoteDish(dishes[1], date: date, completion: {
-          self.updateRateButton(id, button: sender)
+          result in
+          switch result {
+          case .Success(_):
+            self.updateVoteButton(id, button: sender)
+          case .Failure(_):
+            break
+          }
+        })
+      case "ThumbsDownSide2":
+        LunchKit.sharedInstance.downVoteDish(dishes[2], date: date, completion: {
+          result in
+          switch result {
+          case .Success(_):
+            self.updateVoteButton(id, button: sender)
+          case .Failure(_):
+            break
+          }
         })
       default:
-        LunchKit.sharedInstance.downVoteDish(dishes[2], date: date, completion: {
-          self.updateRateButton(id, button: sender)
-        })
+        break
       }
     }
   }

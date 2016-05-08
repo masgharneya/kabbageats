@@ -45,15 +45,21 @@ class LunchViewController: UIViewController {
       mainDishLabel.text = mainDish
       sideDishLabel.text = sideDish
       if image == nil {
+        activityIndicator.startAnimating()
+        indicatorView.hidden = false
         LunchKit.sharedInstance.getImage(imageURL, completion: {
           data in
           guard let img = UIImage(data: data) else { return }
           self.lunchImage.image = img
           self.image = img
           LunchKit.sharedInstance.lunches[self.lunchIndex].image = img
+          self.activityIndicator.stopAnimating()
+          self.indicatorView.hidden = true
         })
       } else {
         lunchImage.image = image
+        self.activityIndicator.stopAnimating()
+        self.indicatorView.hidden = true
       }
     }
   }
@@ -64,8 +70,8 @@ class LunchViewController: UIViewController {
       mainVC.dateNav.title = date
     }
     indicatorView.layer.cornerRadius = 5
-    activityIndicator.stopAnimating()
-    indicatorView.hidden = true
+    //activityIndicator.stopAnimating()
+    //indicatorView.hidden = true
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

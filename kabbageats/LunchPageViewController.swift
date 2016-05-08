@@ -72,8 +72,8 @@ class LunchPageViewController: UIPageViewController {
         }
         self.isLoading = false
         self.showLoading()
-      case .Failure(let error):
-        self.showNetworkError(error.localizedDescription)
+      case .Failure(_):
+        self.showNetworkError("Error loading lunches")
       }
     })
   }
@@ -84,17 +84,22 @@ class LunchPageViewController: UIPageViewController {
     if let date = lastDayInArray.getDateFromString() {
       isLoading = true
       
-      LunchKit.sharedInstance.getLunch(date, completion: {
-        _ in
-        self.isLoading = false
-        self.lunches = LunchKit.sharedInstance.lunches
-        if let viewController = self.lunchViewController(index - 1) {
-          let viewControllers = [viewController]
-          self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+      LunchKit.sharedInstance.getLunch2(date, completion: {
+        result in
+        switch result {
+        case .Success(_):
+          self.isLoading = false
+          self.lunches = LunchKit.sharedInstance.lunches
+          if let viewController = self.lunchViewController(index - 1) {
+            let viewControllers = [viewController]
+            self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+          }
+        case .Failure(let error):
+          self.showNetworkError("Error loading next lunch")
         }
       })
     } else {
-      showNetworkError("There was an error retreiving lunch")
+      showNetworkError("Unable to get next day")
     }
   }
   

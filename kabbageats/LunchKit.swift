@@ -22,7 +22,7 @@ class LunchKit {
       response in
       print(response)
       guard response.result.isSuccess else {
-        self.showNetworkError()
+        //self.showNetworkError()
         print("Error while retrieving lunch: \(response.result.error)")
         return
       }
@@ -30,15 +30,30 @@ class LunchKit {
     }
   }
   
-  func requestWrapper2(method: Alamofire.Method, url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
-    Manager.request(method, url, parameters: params).responseJSON {
+  func GET(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
+    Manager.request(.GET, url, parameters: params).responseJSON {
       response in
       print(response)
       if let result = response.result.value {
         completion(Result.Success(Box(value: result)))
       } else if let error = response.result.error {
-        completion(Result.Failure(error))
-        print("Error while retrieving lunch: \(error)")
+        completion(Result.Failure(Errors.NetworkFailure))
+        print("Error during GET: \(error)")
+        return
+      }
+    }
+  }
+  
+  func POST(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
+    Manager.request(.POST, url, parameters: params).responseJSON {
+      response in
+      print(response)
+      if response.result.isSuccess {
+        guard let statusCode = response.response?.statusCode else { return }
+        completion(Result.Success(Box(value: statusCode)))
+      } else if let error = response.result.error {
+        completion(Result.Failure(Errors.NetworkFailure))
+        print("Error during POST: \(error)")
         return
       }
     }
@@ -56,7 +71,7 @@ class LunchKit {
         date = lunchDict["date"] as? String,
         menu = lunchDict["menu"] as? String,
         imageURL = lunchDict["image"] as? String else {
-          self.showNetworkError()
+          //self.showNetworkError()
           print("Received data not in the correct format")
           return
       }
@@ -77,7 +92,7 @@ class LunchKit {
     let lunchDate = date
     let dateStr = lunchDate.apiDateStringFromDate()
     // Make Get Request
-    requestWrapper2(.GET, url: "\(baseURL)\(dateStr)/", params: nil) {
+    GET("\(baseURL)\(dateStr)/", params: nil) {
       result in
       switch result {
       case .Success(let box):
@@ -100,7 +115,8 @@ class LunchKit {
         self.lunches.append(lunch)
         completion(Result.Success(Box(value: lunchDate)))
       case .Failure(let error):
-        completion(Result.Failure(error))
+        completion(Result.Failure(Errors.NetworkFailure))
+        print("Error during GET lunch: \(error)")
       }
     }
   }
@@ -151,36 +167,59 @@ class LunchKit {
   }
   
   // MARK: Rate Lunch Methods
-  func upVoteDish(dish: String, date: String, completion: () -> Void) {
+  func upVoteDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
       "rating": 1,
       "source": "iOS App"
     ]
     
-    requestWrapper(.POST, url: "\(baseURL)\(date)/ratings", params: params, completion: {
-      data in
-      guard data.response?.statusCode == 204 else {
-        // TODO: show error if rate fails
-        return }
-        completion()
+    POST("\(baseURL)\(date)/ratings", params: params, completion: {
+      result in
+      switch result {
+      case .Success(let box):
+        if let code = box.value as? Int {
+          switch code {
+          case 200...204:
+            completion(Result.Success(Box(value: true)))
+          default:
+            completion(Result.Failure(Errors.RatingFailure))
+          }
+        } else {
+          completion(Result.Failure(Errors.BadData))
+        }
+      case .Failure(let error):
+        completion(Result.Failure(Errors.RatingFailure))
+        print("Error rating dish: \(error)")
+      }
     })
   }
   
-  func downVoteDish(dish: String, date: String, completion: () -> Void) {
+  func downVoteDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
       "rating": -1,
       "source": "iOS App"
     ]
     
-    requestWrapper(.POST, url: "\(baseURL)\(date)/ratings", params: params, completion: {
-      data in
-      guard data.response?.statusCode == 204 else {
-        // TODO: show error if rate fails
-        return }
-      
-        completion()
+    POST("\(baseURL)\(date)/ratings", params: params, completion: {
+      result in
+      switch result {
+      case .Success(let box):
+        if let code = box.value as? Int {
+          switch code {
+          case 200...204:
+            completion(Result.Success(Box(value: true)))
+          default:
+            completion(Result.Failure(Errors.RatingFailure))
+          }
+        } else {
+          completion(Result.Failure(Errors.BadData))
+        }
+      case .Failure(let error):
+        completion(Result.Failure(Errors.RatingFailure))
+        print("Error rating dish: \(error)")
+      }
     })
   }
   
@@ -206,6 +245,15 @@ class LunchKit {
     
     //presentViewController(alert, animated: true, completion: nil)
   }
+}
+
+enum Errors: ErrorType {
+  
+  case NetworkFailure
+  case RatingFailure
+  case CommentFailure
+  case BadData
+  case Unknown
 }
 
 // Server Trust Policy Manager for Alamofire (to accept self-signed certificate, from http://stackoverflow.com/questions/31945078/how-to-connect-to-self-signed-servers-using-alamofire-1-3 )
