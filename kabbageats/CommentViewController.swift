@@ -43,12 +43,20 @@ class CommentViewController: UIViewController {
     sendButton.enabled = false
     if let message = textView.text {
       LunchKit.sharedInstance.sendComment(message, name: nameField.text, date: date, completion: {
-        self.nameField.resignFirstResponder()
-        self.textView.resignFirstResponder()
-        self.close()
+        result in
+        switch result {
+        case .Success(_):
+          self.nameField.resignFirstResponder()
+          self.textView.resignFirstResponder()
+          self.close()
+        case .Failure(_):
+          // TODO: Show error if unable to send comment
+          break
+        }
       })
     } else {
       // TODO: Show error if text field is empty
+      // is this even possible?
     }
   }
   

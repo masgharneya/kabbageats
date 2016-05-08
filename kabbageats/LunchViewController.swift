@@ -47,6 +47,7 @@ class LunchViewController: UIViewController {
       if image == nil {
         activityIndicator.startAnimating()
         indicatorView.hidden = false
+        // TODO: Hide spinner if there is no image
         LunchKit.sharedInstance.getImage(imageURL, completion: {
           data in
           guard let img = UIImage(data: data) else { return }

@@ -224,16 +224,30 @@ class LunchKit {
   }
   
   // MARK: Comment on Lunch Methods
-  func sendComment(message: String, name: String?, date: String, completion: () -> Void) {
+  func sendComment(message: String, name: String?, date: String, completion: (Result<Bool>) -> Void) {
     var params = ["message": message]
     if let name = name {
       params.updateValue(name, forKey: "name")
     }
     
-    requestWrapper(.POST, url: "\(baseURL)\(date)/comments", params: params, completion: {
-      data in
-      guard data.response?.statusCode == 204 else { return }
-        completion()
+    POST("\(baseURL)\(date)/comments", params: params, completion: {
+      result in
+      switch result {
+      case .Success(let box):
+        if let code = box.value as? Int {
+          switch code {
+          case 200...204:
+            completion(Result.Success(Box(value: true)))
+          default:
+          completion(Result.Failure(Errors.RatingFailure))
+          }
+        } else {
+          completion(Result.Failure(Errors.BadData))
+        }
+      case .Failure(let error):
+          completion(Result.Failure(Errors.RatingFailure))
+          print("Error sending comment: \(error)")
+      }
     })
   }
 
