@@ -44,23 +44,28 @@ class LunchViewController: UIViewController {
     if !mainDish.isEmpty {
       mainDishLabel.text = mainDish
       sideDishLabel.text = sideDish
-      if image == nil {
-        activityIndicator.startAnimating()
-        indicatorView.hidden = false
-        // TODO: Hide spinner if there is no image
-        LunchKit.sharedInstance.getImage(imageURL, completion: {
-          data in
-          guard let img = UIImage(data: data) else { return }
-          self.lunchImage.image = img
-          self.image = img
-          LunchKit.sharedInstance.lunches[self.lunchIndex].image = img
+      // If there is no image, show no image placeholder
+      if imageURL == "404" {
+        lunchImage.image = UIImage(named: "NoImage")
+      } else {
+        // If there is an image, load image
+        if image == nil {
+          activityIndicator.startAnimating()
+          indicatorView.hidden = false
+          LunchKit.sharedInstance.getImage(imageURL, completion: {
+            data in
+            guard let img = UIImage(data: data) else { return }
+            self.lunchImage.image = img
+            self.image = img
+            LunchKit.sharedInstance.lunches[self.lunchIndex].image = img
+            self.activityIndicator.stopAnimating()
+            self.indicatorView.hidden = true
+          })
+        } else {
+          lunchImage.image = image
           self.activityIndicator.stopAnimating()
           self.indicatorView.hidden = true
-        })
-      } else {
-        lunchImage.image = image
-        self.activityIndicator.stopAnimating()
-        self.indicatorView.hidden = true
+        }
       }
     }
   }
