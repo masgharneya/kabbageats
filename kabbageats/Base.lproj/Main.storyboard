@@ -368,7 +368,7 @@
                                                 </constraints>
                                                 <state key="normal" title="Button" image="ThumbsDown"/>
                                                 <connections>
-                                                    <action selector="downRate:" destination="qQe-pu-78k" eventType="touchUpInside" id="DUf-Rt-SBn"/>
+                                                    <action selector="rateDish:" destination="qQe-pu-78k" eventType="touchUpInside" id="8bl-nv-PJ2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYt-34-v4Q" userLabel="Thumbs Up 1">
@@ -381,7 +381,7 @@
                                                 <state key="normal" image="ThumbsUp"/>
                                                 <state key="selected" image="ThumbsUpHighlighted"/>
                                                 <connections>
-                                                    <action selector="upRate:" destination="qQe-pu-78k" eventType="touchUpInside" id="oEg-LM-NYr"/>
+                                                    <action selector="rateDish:" destination="qQe-pu-78k" eventType="touchUpInside" id="ikC-Rc-9NV"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicken and Beef Tacos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIR-Oj-xnY">
@@ -418,7 +418,7 @@
                                                 </constraints>
                                                 <state key="normal" image="ThumbsUp"/>
                                                 <connections>
-                                                    <action selector="upRate:" destination="qQe-pu-78k" eventType="touchUpInside" id="y4w-Pz-MnV"/>
+                                                    <action selector="rateDish:" destination="qQe-pu-78k" eventType="touchUpInside" id="jbl-eS-y9Q"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nu0-lp-JkU" userLabel="Thumbs Down 2">
@@ -430,7 +430,7 @@
                                                 </constraints>
                                                 <state key="normal" title="Button" image="ThumbsDown"/>
                                                 <connections>
-                                                    <action selector="downRate:" destination="qQe-pu-78k" eventType="touchUpInside" id="g1n-Yt-mTc"/>
+                                                    <action selector="rateDish:" destination="qQe-pu-78k" eventType="touchUpInside" id="1RL-Z7-nEV"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Beans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-zu-I63">
@@ -467,7 +467,7 @@
                                                 </constraints>
                                                 <state key="normal" title="Button" image="ThumbsDown"/>
                                                 <connections>
-                                                    <action selector="downRate:" destination="qQe-pu-78k" eventType="touchUpInside" id="MoN-tQ-4Jk"/>
+                                                    <action selector="rateDish:" destination="qQe-pu-78k" eventType="touchUpInside" id="frv-Nl-Yn7"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zg4-w2-67w" userLabel="Side Dish2 Label">
@@ -489,7 +489,7 @@
                                                 </constraints>
                                                 <state key="normal" image="ThumbsUp"/>
                                                 <connections>
-                                                    <action selector="upRate:" destination="qQe-pu-78k" eventType="touchUpInside" id="tP0-7U-6jg"/>
+                                                    <action selector="rateDish:" destination="qQe-pu-78k" eventType="touchUpInside" id="klf-ua-1JT"/>
                                                 </connections>
                                             </button>
                                         </subviews>

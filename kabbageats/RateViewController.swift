@@ -45,70 +45,49 @@ class RateViewController: UIViewController {
     sideDish2Labael.text = dishes[2]
   }
   
-  func displayRateResult(result: Result<Bool>, id: String, button: UIButton) {
-    switch result {
-    case .Success(_):
-      // Highlight button if rating is successful
-      if id.rangeOfString("Up") != nil {
-        button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
-      } else if id.rangeOfString("Down") != nil {
-        button.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
-      }
-      // TODO: Disable button if already voted
-    case .Failure(_):
-      break
-      // TODO: Show error if failure
-    }
-  }
-  
   // MARK: - Actions
 
-  @IBAction func upRate(sender: UIButton) {
+  @IBAction func rateDish(sender: UIButton) {
     // TODO: Show indicator and disable button while in progress
+    var rating: Int
+    var dish = ""
     if let id = sender.accessibilityIdentifier {
+      // If up vote, set rating to 1, else -1
+      if id.rangeOfString("Up") != nil {
+        rating = 1
+      } else {
+        rating = -1
+      }
+      
+      // Get dish string based on selection
       switch id {
-      case "ThumbsUpMain":
-        LunchKit.sharedInstance.upRateDish(dishes[0], date: date, completion:  {
-          result in
-          self.displayRateResult(result, id: id, button: sender)
-        })
-      case "ThumbsUpSide1":
-        LunchKit.sharedInstance.upRateDish(dishes[1], date: date, completion:  {
-          result in
-          self.displayRateResult(result, id: id, button: sender)
-        })
-      case "ThumbsUpSide2":
-        LunchKit.sharedInstance.upRateDish(dishes[2], date: date, completion:  {
-          result in
-          self.displayRateResult(result, id: id, button: sender)
-        })
+      case "ThumbsUpMain", "ThumbsDownMain":
+        dish = dishes[0]
+      case "ThumbsUpSide1", "ThumbsDownSide1":
+        dish = dishes[1]
+      case "ThumbsUpSide2", "ThumbsDownSide2":
+        dish = dishes[2]
       default:
         break
       }
-    }
-  }
-  
-  @IBAction func downRate(sender: UIButton) {
-    if let id = sender.accessibilityIdentifier {
-      switch id {
-      case "ThumbsDownMain":
-        LunchKit.sharedInstance.downRateDish(dishes[0], date: date, completion: {
-          result in
-          self.displayRateResult(result, id: id, button: sender)
-        })
-      case "ThumbsDownSide1":
-        LunchKit.sharedInstance.downRateDish(dishes[1], date: date, completion: {
-          result in
-          self.displayRateResult(result, id: id, button: sender)
-        })
-      case "ThumbsDownSide2":
-        LunchKit.sharedInstance.downRateDish(dishes[2], date: date, completion: {
-          result in
-          self.displayRateResult(result, id: id, button: sender)
-        })
-      default:
-        break
-      }
+      
+      // Make post call with dish and rating
+      LunchKit.sharedInstance.postDishRating(dish, date: date, rating: rating, completion:  {
+        result in
+        switch result {
+        case .Success(_):
+          // Change button color based on post success/failure
+          if id.rangeOfString("Up") != nil {
+            sender.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
+          } else if id.rangeOfString("Down") != nil {
+            sender.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
+          }
+        // TODO: Disable button if already voted
+        case .Failure(_):
+          break
+          // TODO: Show error if failure
+        }
+      })
     }
   }
   

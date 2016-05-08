@@ -37,7 +37,11 @@ class LunchKit {
       print(response)
       if response.result.isSuccess {
         guard let statusCode = response.response?.statusCode else { return }
-        completion(Result.Success(Box(value: statusCode)))
+        if statusCode == 204 {
+          completion(Result.Success(Box(value: true)))
+        } else {
+          completion(Result.Failure(Errors.PostFailure))
+        }
       } else if let error = response.result.error {
         completion(Result.Failure(Errors.NetworkFailure))
         print("Error during POST: \(error)")
@@ -113,55 +117,19 @@ class LunchKit {
   }
   
   // MARK: Rate Lunch Methods
-  func upRateDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
-    let params: [String : AnyObject] = [
-      "dish": "\(dish)",
-      "rating": 1,
-      "source": "iOS App"
-    ]
-    
-    POST("\(baseURL)\(date)/ratings", params: params, completion: {
-      result in
-      switch result {
-      case .Success(let box):
-        if let code = box.value as? Int {
-          switch code {
-          case 200...204:
-            completion(Result.Success(Box(value: true)))
-          default:
-            completion(Result.Failure(Errors.RatingFailure))
-          }
-        } else {
-          completion(Result.Failure(Errors.BadData))
-        }
-      case .Failure(let error):
-        completion(Result.Failure(Errors.RatingFailure))
-        print("Error rating dish: \(error)")
-      }
-    })
-  }
   
-  func downRateDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
+  func postDishRating(dish: String, date: String, rating: Int, completion: (Result<Bool>) -> Void) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
-      "rating": -1,
+      "rating": rating,
       "source": "iOS App"
     ]
     
     POST("\(baseURL)\(date)/ratings", params: params, completion: {
       result in
       switch result {
-      case .Success(let box):
-        if let code = box.value as? Int {
-          switch code {
-          case 200...204:
-            completion(Result.Success(Box(value: true)))
-          default:
-            completion(Result.Failure(Errors.RatingFailure))
-          }
-        } else {
-          completion(Result.Failure(Errors.BadData))
-        }
+      case .Success(_):
+        completion(Result.Success(Box(value: true)))
       case .Failure(let error):
         completion(Result.Failure(Errors.RatingFailure))
         print("Error rating dish: \(error)")
@@ -179,37 +147,20 @@ class LunchKit {
     POST("\(baseURL)\(date)/comments", params: params, completion: {
       result in
       switch result {
-      case .Success(let box):
-        if let code = box.value as? Int {
-          switch code {
-          case 200...204:
-            completion(Result.Success(Box(value: true)))
-          default:
-          completion(Result.Failure(Errors.RatingFailure))
-          }
-        } else {
-          completion(Result.Failure(Errors.BadData))
-        }
+      case .Success(_):
+        completion(Result.Success(Box(value: true)))
       case .Failure(let error):
-          completion(Result.Failure(Errors.RatingFailure))
+          completion(Result.Failure(Errors.CommentFailure))
           print("Error sending comment: \(error)")
       }
     })
-  }
-
-  // TODO: Fix show network error
-  func showNetworkError() {
-    let alert = UIAlertController(title: "Whoops...", message: "There was an error retrieving lunch.", preferredStyle: .Alert)
-    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alert.addAction(action)
-    
-    //presentViewController(alert, animated: true, completion: nil)
   }
 }
 
 enum Errors: ErrorType {
   
   case NetworkFailure
+  case PostFailure
   case RatingFailure
   case CommentFailure
   case BadData
