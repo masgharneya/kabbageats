@@ -167,7 +167,7 @@ class LunchKit {
   }
   
   // MARK: Rate Lunch Methods
-  func upVoteDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
+  func upRateDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
       "rating": 1,
@@ -195,7 +195,7 @@ class LunchKit {
     })
   }
   
-  func downVoteDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
+  func downRateDish(dish: String, date: String, completion: (Result<Bool>) -> Void) {
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
       "rating": -1,

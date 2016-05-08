@@ -45,49 +45,42 @@ class RateViewController: UIViewController {
     sideDish2Labael.text = dishes[2]
   }
   
-  // Highlight button if rating is successful
-  func updateVoteButton(id: String, button: UIButton) {
-    if id.rangeOfString("Up") != nil {
-      button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
-    } else {
-      button.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
+  func displayRateResult(result: Result<Bool>, id: String, button: UIButton) {
+    switch result {
+    case .Success(_):
+      // Highlight button if rating is successful
+      if id.rangeOfString("Up") != nil {
+        button.setImage(UIImage(named: "ThumbsUpHighlighted"), forState: .Normal)
+      } else if id.rangeOfString("Down") != nil {
+        button.setImage(UIImage(named: "ThumbsDownHighlighted"), forState: .Normal)
+      }
+      // TODO: Disable button if already voted
+    case .Failure(_):
+      break
+      // TODO: Show error if failure
     }
   }
   
   // MARK: - Actions
 
-  @IBAction func upVote(sender: UIButton) {
+  @IBAction func upRate(sender: UIButton) {
+    // TODO: Show indicator and disable button while in progress
     if let id = sender.accessibilityIdentifier {
       switch id {
       case "ThumbsUpMain":
-        LunchKit.sharedInstance.upVoteDish(dishes[0], date: date, completion:  {
+        LunchKit.sharedInstance.upRateDish(dishes[0], date: date, completion:  {
           result in
-          switch result {
-          case .Success(_):
-            self.updateVoteButton(id, button: sender)
-          case .Failure(_):
-            break
-          }
+          self.displayRateResult(result, id: id, button: sender)
         })
       case "ThumbsUpSide1":
-        LunchKit.sharedInstance.upVoteDish(dishes[1], date: date, completion:  {
+        LunchKit.sharedInstance.upRateDish(dishes[1], date: date, completion:  {
           result in
-          switch result {
-          case .Success(_):
-            self.updateVoteButton(id, button: sender)
-          case .Failure(_):
-            break
-          }
+          self.displayRateResult(result, id: id, button: sender)
         })
       case "ThumbsUpSide2":
-        LunchKit.sharedInstance.upVoteDish(dishes[2], date: date, completion:  {
+        LunchKit.sharedInstance.upRateDish(dishes[2], date: date, completion:  {
           result in
-          switch result {
-          case .Success(_):
-            self.updateVoteButton(id, button: sender)
-          case .Failure(_):
-            break
-          }
+          self.displayRateResult(result, id: id, button: sender)
         })
       default:
         break
@@ -95,38 +88,23 @@ class RateViewController: UIViewController {
     }
   }
   
-  @IBAction func downVote(sender: UIButton) {
+  @IBAction func downRate(sender: UIButton) {
     if let id = sender.accessibilityIdentifier {
       switch id {
       case "ThumbsDownMain":
-        LunchKit.sharedInstance.downVoteDish(dishes[0], date: date, completion: {
+        LunchKit.sharedInstance.downRateDish(dishes[0], date: date, completion: {
           result in
-          switch result {
-          case .Success(_):
-            self.updateVoteButton(id, button: sender)
-          case .Failure(_):
-            break
-          }
+          self.displayRateResult(result, id: id, button: sender)
         })
       case "ThumbsDownSide1":
-        LunchKit.sharedInstance.downVoteDish(dishes[1], date: date, completion: {
+        LunchKit.sharedInstance.downRateDish(dishes[1], date: date, completion: {
           result in
-          switch result {
-          case .Success(_):
-            self.updateVoteButton(id, button: sender)
-          case .Failure(_):
-            break
-          }
+          self.displayRateResult(result, id: id, button: sender)
         })
       case "ThumbsDownSide2":
-        LunchKit.sharedInstance.downVoteDish(dishes[2], date: date, completion: {
+        LunchKit.sharedInstance.downRateDish(dishes[2], date: date, completion: {
           result in
-          switch result {
-          case .Success(_):
-            self.updateVoteButton(id, button: sender)
-          case .Failure(_):
-            break
-          }
+          self.displayRateResult(result, id: id, button: sender)
         })
       default:
         break
@@ -138,6 +116,8 @@ class RateViewController: UIViewController {
     dismissViewControllerAnimated(true, completion: nil)
   }
 }
+
+// MARK: - EXTENSIONS
 
 extension RateViewController: UIViewControllerTransitioningDelegate {
   func presentationControllerForPresentedViewController(
