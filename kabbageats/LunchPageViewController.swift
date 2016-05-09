@@ -16,8 +16,8 @@ class LunchPageViewController: UIPageViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setStartDate()
-    //lunchDate = setSpecificDate()
+    //setStartDate()
+    lunchDate = setSpecificDate()
     loadLunches()
     
     dataSource = self
@@ -59,15 +59,16 @@ class LunchPageViewController: UIPageViewController {
       case .Failure(let error):
         switch(error) {
         case Errors.WrongNetworkFailure:
-          self.showNetworkError("You are not on the Kabbage network. Please join network and try again.")
+          self.showWrongNetworkError("You are not on the Kabbage network. Please join network and try again.")
         default:
-          self.showNetworkError("Error loading lunches")
+          self.showAlert("Error loading lunches")
         }
       }
     })
   }
   
   func getNextLunch(index: Int) {
+    // TODO: Update to use box
     // Make Get Request
     let lastDayInArray = lunches[lunches.count - 1].dateWithYear
     if let date = lastDayInArray.getDateFromString() {
@@ -84,11 +85,17 @@ class LunchPageViewController: UIPageViewController {
             self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
           }
         case .Failure(let error):
-          self.showNetworkError("Error loading next lunch")
+          switch error {
+          case Errors.NotFound:
+            self.showAlert("No lunch tomorrow")
+            // TODO: Hide spinner
+          default:
+            self.showAlert("Error loading next lunch")
+          }
         }
       })
     } else {
-      showNetworkError("Unable to get next day")
+      showAlert("Unable to get next day")
     }
   }
   
@@ -111,13 +118,21 @@ class LunchPageViewController: UIPageViewController {
   // Sets a specific date for testing when there is no future data
   func setSpecificDate() -> NSDate {
     let comps = NSDateComponents()
-    comps.day = 13
-    comps.month = 4
+    comps.day = 24
+    comps.month = 5
     comps.year = 2016
     return NSCalendar.currentCalendar().dateFromComponents(comps)!
   }
-
-  func showNetworkError(message: String) {
+  
+  func showAlert(message: String) {
+    let alert = UIAlertController(title: "Whoops...", message: message, preferredStyle: .Alert)
+    let OKaction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alert.addAction(OKaction)
+    
+    presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  func showWrongNetworkError(message: String) {
     let alert = UIAlertController(title: "Whoops...", message: message, preferredStyle: .Alert)
     let OKaction = UIAlertAction(title: "OK", style: .Default, handler: nil)
     let tryAgain = UIAlertAction(title: "Try Again", style: .Default, handler: {
@@ -141,8 +156,6 @@ class LunchPageViewController: UIPageViewController {
         mainVC.activityIndicator.stopAnimating()
         mainVC.indicatorView.hidden = true
       }
-    } else {
-      print("Parent is: \(self.parentViewController)")
     }
   }
 }

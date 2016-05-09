@@ -18,19 +18,19 @@ class LunchKit {
   var lunches = [Lunch]()
   
   func GET(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
-    Manager.request(.GET, url, parameters: params).responseJSON {
+    Manager.request(.GET, url, parameters: params).validate().responseJSON {
       response in
       print(response)
       if let result = response.result.value {
         completion(Result.Success(Box(value: result)))
-      } else if let error = response.result.error {
-        if error.code == -1004 {
+      } else if let error = response.result.error where error.code == -1003 {
           completion(Result.Failure(Errors.WrongNetworkFailure))
-        } else {
-          completion(Result.Failure(Errors.NetworkFailure))
-        }
-        return
+      } else if let code = response.response?.statusCode where code == 404 {
+        completion(Result.Failure(Errors.NotFound))
+      } else {
+        completion(Result.Failure(Errors.NetworkFailure))
       }
+      return
     }
   }
   
@@ -163,6 +163,7 @@ enum Errors: ErrorType {
   
   case WrongNetworkFailure
   case NetworkFailure
+  case NotFound
   case PostFailure
   case RatingFailure
   case CommentFailure
