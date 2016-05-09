@@ -18,8 +18,6 @@ class LunchPageViewController: UIPageViewController {
     super.viewDidLoad()
     setStartDate()
     //lunchDate = setSpecificDate()
-    isLoading = true
-    showLoading()
     loadLunches()
     
     dataSource = self
@@ -45,8 +43,11 @@ class LunchPageViewController: UIPageViewController {
   func loadLunches() {
     // Make Get Request
     isLoading = true
+    showLoading()
     LunchKit.sharedInstance.getLunches(lunchDate, completion: {
       result in
+      self.isLoading = false
+      self.showLoading()
       switch result {
       case .Success(let box):
         self.lunches = box.value
@@ -55,10 +56,13 @@ class LunchPageViewController: UIPageViewController {
           let viewControllers = [viewController]
           self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
         }
-        self.isLoading = false
-        self.showLoading()
-      case .Failure(_):
-        self.showNetworkError("Error loading lunches")
+      case .Failure(let error):
+        switch(error) {
+        case Errors.WrongNetworkFailure:
+          self.showNetworkError("You are not on the Kabbage network. Please join network and try again.")
+        default:
+          self.showNetworkError("Error loading lunches")
+        }
       }
     })
   }
@@ -115,21 +119,30 @@ class LunchPageViewController: UIPageViewController {
 
   func showNetworkError(message: String) {
     let alert = UIAlertController(title: "Whoops...", message: message, preferredStyle: .Alert)
-    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alert.addAction(action)
+    let OKaction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    let tryAgain = UIAlertAction(title: "Try Again", style: .Default, handler: {
+      _ in
+      self.loadLunches()
+    })
+    alert.addAction(OKaction)
+    alert.addAction(tryAgain)
     
     presentViewController(alert, animated: true, completion: nil)
   }
   
   func showLoading() {
     if let mainVC = self.parentViewController as? MainViewController {
+      print("Loading: \(isLoading)")
       if isLoading {
-        mainVC.activityIndicator.startAnimating()
+        mainVC.indicatorView.hidden = false
         mainVC.activityIndicator.hidden = false
+        mainVC.activityIndicator.startAnimating()
       } else {
         mainVC.activityIndicator.stopAnimating()
         mainVC.indicatorView.hidden = true
       }
+    } else {
+      print("Parent is: \(self.parentViewController)")
     }
   }
 }

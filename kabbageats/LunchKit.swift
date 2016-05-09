@@ -24,8 +24,11 @@ class LunchKit {
       if let result = response.result.value {
         completion(Result.Success(Box(value: result)))
       } else if let error = response.result.error {
-        completion(Result.Failure(Errors.NetworkFailure))
-        print("Error during GET: \(error)")
+        if error.code == -1004 {
+          completion(Result.Failure(Errors.WrongNetworkFailure))
+        } else {
+          completion(Result.Failure(Errors.NetworkFailure))
+        }
         return
       }
     }
@@ -77,8 +80,7 @@ class LunchKit {
         self.lunches.append(lunch)
         completion(Result.Success(Box(value: lunchDate)))
       case .Failure(let error):
-        completion(Result.Failure(Errors.NetworkFailure))
-        print("Error during GET lunch: \(error)")
+        completion(Result.Failure(error))
       }
     }
   }
@@ -159,6 +161,7 @@ class LunchKit {
 
 enum Errors: ErrorType {
   
+  case WrongNetworkFailure
   case NetworkFailure
   case PostFailure
   case RatingFailure
