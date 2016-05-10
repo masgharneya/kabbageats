@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-  func getDateFromString() -> NSDate? {
+  func getNextDateFromString() -> NSDate? {
     // Convert string to a date
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"

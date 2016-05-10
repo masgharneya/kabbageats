@@ -67,38 +67,6 @@ class LunchPageViewController: UIPageViewController {
     })
   }
   
-  func getNextLunch(index: Int) {
-    // TODO: Update to use box
-    // Make Get Request
-    let lastDayInArray = lunches[lunches.count - 1].dateWithYear
-    if let date = lastDayInArray.getDateFromString() {
-      isLoading = true
-      
-      LunchKit.sharedInstance.getLunch(date, completion: {
-        result in
-        switch result {
-        case .Success(_):
-          self.isLoading = false
-          self.lunches = LunchKit.sharedInstance.lunches
-          if let viewController = self.lunchViewController(index - 1) {
-            let viewControllers = [viewController]
-            self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
-          }
-        case .Failure(let error):
-          switch error {
-          case Errors.NotFound:
-            self.showAlert("No lunch tomorrow")
-            // TODO: Hide spinner
-          default:
-            self.showAlert("Error loading next lunch")
-          }
-        }
-      })
-    } else {
-      showAlert("Unable to get next day")
-    }
-  }
-  
   // MARK: - Helper Methods
   func setStartDate() {
     // if Sunday, set start day at Friday
@@ -176,10 +144,43 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
       var index = viewController.lunchIndex
       guard index != NSNotFound else { return nil }
       index = index + 1
+      // Check if at the end of the array, if so load next lunch
       if index == lunches.count {
-        getNextLunch(index)
+        // Show activity indicator
         viewController.activityIndicator.startAnimating()
         viewController.indicatorView.hidden = false
+        
+        // Get next day in array
+        let lastDayInArray = lunches[lunches.count - 1].dateWithYear
+        if let date = lastDayInArray.getNextDateFromString() {
+          
+          LunchKit.sharedInstance.getLunch(date, completion: {
+            result in
+            switch result {
+            case .Success(_):
+              self.lunches = LunchKit.sharedInstance.lunches
+              if let viewController = self.lunchViewController(index - 1) {
+                let viewControllers = [viewController]
+                self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+              }
+            case .Failure(let error):
+              switch error {
+              case Errors.NotFound:
+                print("No lunch tomorrow \(date)")
+                viewController.activityIndicator.stopAnimating()
+                viewController.indicatorView.hidden = true
+              default:
+                print("Error loading next lunch: \(date)")
+                viewController.activityIndicator.stopAnimating()
+                viewController.indicatorView.hidden = true
+              }
+            }
+          })
+        } else {
+          print("Unable to get next day after \(lastDayInArray)")
+          viewController.activityIndicator.stopAnimating()
+          viewController.indicatorView.hidden = true
+        }
       } else {
         return lunchViewController(index)
       }
