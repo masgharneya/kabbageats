@@ -23,7 +23,7 @@ class LunchKit {
       print(response)
       if let result = response.result.value {
         completion(Result.Success(Box(value: result)))
-      } else if let error = response.result.error where error.code == -1003 {
+      } else if let error = response.result.error where error.code == -1004 {
           completion(Result.Failure(Errors.WrongNetworkFailure))
       } else if let code = response.response?.statusCode where code == 404 {
         completion(Result.Failure(Errors.NotFound))
@@ -71,12 +71,11 @@ class LunchKit {
         }
       
         // Set lunch properties
-        var lunch = Lunch()
+        let lunch = Lunch()
         lunch.dateWithYear = date
         lunch.date = date.getTodayString()
         lunch.fullMenu = menu
         lunch.imageURL = imageURL
-        lunch.getDishes()
         self.lunches.append(lunch)
         completion(Result.Success(Box(value: lunchDate)))
       case .Failure(let error):

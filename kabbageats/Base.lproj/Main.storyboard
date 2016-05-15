@@ -25,23 +25,6 @@
                                     <segue destination="rt9-WQ-THP" kind="embed" id="T3g-lT-7bo"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
-                                <rect key="frame" x="263" y="316" width="75" height="75"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
-                                        <rect key="frame" x="19" y="19" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="Egp-0Y-9uG"/>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="leading" secondItem="SO3-84-C0i" secondAttribute="leading" constant="19" id="JoA-VU-hCO"/>
-                                    <constraint firstAttribute="height" constant="75" id="QFt-eE-mPj"/>
-                                    <constraint firstAttribute="bottom" secondItem="bYp-7P-enr" secondAttribute="bottom" constant="19" id="Qgc-CV-Uck"/>
-                                    <constraint firstAttribute="trailing" secondItem="bYp-7P-enr" secondAttribute="trailing" constant="19" id="W2w-U5-9dl"/>
-                                    <constraint firstItem="bYp-7P-enr" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="top" constant="19" id="tMQ-0q-stS"/>
-                                </constraints>
-                            </view>
                             <navigationBar contentMode="scaleToFill" restorationIdentifier="DateNavigationBar" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
@@ -56,6 +39,23 @@
                                     <navigationItem title="Grabbing lunch..." id="P4a-hx-bBb"/>
                                 </items>
                             </navigationBar>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
+                                <rect key="frame" x="263" y="316" width="75" height="75"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bYp-7P-enr">
+                                        <rect key="frame" x="19" y="19" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="Egp-0Y-9uG"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="leading" secondItem="SO3-84-C0i" secondAttribute="leading" constant="19" id="JoA-VU-hCO"/>
+                                    <constraint firstAttribute="height" constant="75" id="QFt-eE-mPj"/>
+                                    <constraint firstAttribute="bottom" secondItem="bYp-7P-enr" secondAttribute="bottom" constant="19" id="Qgc-CV-Uck"/>
+                                    <constraint firstAttribute="trailing" secondItem="bYp-7P-enr" secondAttribute="trailing" constant="19" id="W2w-U5-9dl"/>
+                                    <constraint firstItem="bYp-7P-enr" firstAttribute="top" secondItem="SO3-84-C0i" secondAttribute="top" constant="19" id="tMQ-0q-stS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

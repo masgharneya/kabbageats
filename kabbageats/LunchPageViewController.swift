@@ -9,10 +9,15 @@
 import UIKit
 
 class LunchPageViewController: UIPageViewController {
-  var lunches: [Lunch]!
+  var lunches: [Lunch]
   var currentIndex: Int!
   var lunchDate = NSDate()
   var isLoading = false
+  
+  required init?(coder aDecoder: NSCoder) {
+    lunches = [Lunch]()
+    super.init(coder: aDecoder)
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +26,17 @@ class LunchPageViewController: UIPageViewController {
     loadLunches()
     
     dataSource = self
+  }
+  
+  // MARK: Methods
+  
+  func documentsDirectory() -> String {
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    return paths[0]
+  }
+  
+  func dataFilePath() -> String {
+    return (documentsDirectory() as NSString).stringByAppendingPathComponent("kabbageats.plist")
   }
   
   func lunchViewController(index: Int) -> LunchViewController? {
@@ -40,7 +56,7 @@ class LunchPageViewController: UIPageViewController {
     return nil
   }
   
-  func loadLunches() {
+  func getLunches() {
     // Make Get Request
     isLoading = true
     showLoading()
@@ -49,8 +65,9 @@ class LunchPageViewController: UIPageViewController {
       self.isLoading = false
       self.showLoading()
       switch result {
-      case .Success(let box):
-        self.lunches = box.value
+      case .Success(_):
+        self.lunches = LunchKit.sharedInstance.lunches
+        self.saveLunches()
         self.currentIndex = 1
         if let viewController = self.lunchViewController(self.currentIndex ?? 0) {
           let viewControllers = [viewController]
@@ -67,29 +84,47 @@ class LunchPageViewController: UIPageViewController {
     })
   }
   
-  // MARK: - Helper Methods
-  func setStartDate() {
-    // if Sunday, set start day at Friday
-    if lunchDate.dayOfWeek() == 1 {
-     lunchDate = lunchDate.updateByNumOfDays(-2)
-      
-      // if Monday, set start day at Friday
-    } else if lunchDate.dayOfWeek() == 2 {
-      lunchDate = lunchDate.updateByNumOfDays(-3)
-      
-      // Otherwise, set start day one day back
-    } else {
-      lunchDate = lunchDate.updateByNumOfDays(-1)
-    }
+  func saveLunches() {
+    let data = NSMutableData()
+    let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+    archiver.encodeObject(lunches, forKey: "Lunches")
+    archiver.finishEncoding()
+    data.writeToFile(dataFilePath(), atomically: true)
   }
   
-  // Sets a specific date for testing when there is no future data
-  func setSpecificDate() -> NSDate {
-    let comps = NSDateComponents()
-    comps.day = 24
-    comps.month = 5
-    comps.year = 2016
-    return NSCalendar.currentCalendar().dateFromComponents(comps)!
+  func loadLunches() {
+    let path = dataFilePath()
+    
+    // Check whether kabbageats.plist exists, and if so, grab and decode data
+    if NSFileManager.defaultManager().fileExistsAtPath(path) {
+      if let data = NSData(contentsOfFile: path) {
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+        lunches = unarchiver.decodeObjectForKey("Lunches") as! [Lunch]
+        print("Lunches: \(lunches.count)")
+        LunchKit.sharedInstance.lunches = lunches
+        unarchiver.finishDecoding()
+        
+        // Get today's date and check if menu for today is saved. If saved already, load from file
+        let today = NSDate()
+        let todayString = "2016-05-25" //today.apiDateStringFromDate()
+        for lunch in lunches {
+          print("lunch date w year: \(lunch.dateWithYear) and todayString: \(todayString)")
+          if lunch.dateWithYear == todayString {
+            if let startingIndex = lunches.indexOf(lunch) {
+              if let viewController = lunchViewController(startingIndex) {
+                let viewControllers = [viewController]
+                self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+              }
+            return
+            }
+          }
+        }
+        // if no menu for toay is stored in file, the get lunches
+        getLunches()
+      }
+    }
+    // if file does not exist or bad data, get lunches
+    getLunches()
   }
   
   func showAlert(message: String) {
@@ -126,8 +161,34 @@ class LunchPageViewController: UIPageViewController {
       }
     }
   }
+  
+  // MARK: - Helper Methods
+  func setStartDate() {
+    // if Sunday, set start day at Friday
+    if lunchDate.dayOfWeek() == 1 {
+     lunchDate = lunchDate.updateByNumOfDays(-2)
+      
+      // if Monday, set start day at Friday
+    } else if lunchDate.dayOfWeek() == 2 {
+      lunchDate = lunchDate.updateByNumOfDays(-3)
+      
+      // Otherwise, set start day one day back
+    } else {
+      lunchDate = lunchDate.updateByNumOfDays(-1)
+    }
+  }
+  
+  // Sets a specific date for testing when there is no future data
+  func setSpecificDate() -> NSDate {
+    let comps = NSDateComponents()
+    comps.day = 24
+    comps.month = 5
+    comps.year = 2016
+    return NSCalendar.currentCalendar().dateFromComponents(comps)!
+  }
 }
 
+// MARK: - Extensions
 extension LunchPageViewController: UIPageViewControllerDataSource {
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
     if let viewController = viewController as? LunchViewController {
@@ -159,6 +220,7 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
             switch result {
             case .Success(_):
               self.lunches = LunchKit.sharedInstance.lunches
+              self.saveLunches()
               if let viewController = self.lunchViewController(index - 1) {
                 let viewControllers = [viewController]
                 self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)

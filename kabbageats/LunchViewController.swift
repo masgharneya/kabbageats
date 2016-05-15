@@ -31,6 +31,7 @@ class LunchViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    /*
     // Hide bottom border on navigation bar
     for parent in self.navigationController!.navigationBar.subviews {
       for childView in parent.subviews {
@@ -39,6 +40,7 @@ class LunchViewController: UIViewController {
         }
       }
     }
+ */
     
     // Load data
     if !mainDish.isEmpty {
