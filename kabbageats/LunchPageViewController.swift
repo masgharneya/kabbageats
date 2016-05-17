@@ -13,6 +13,7 @@ class LunchPageViewController: UIPageViewController {
   var currentIndex: Int!
   var lunchDate = NSDate()
   var isLoading = false
+  var parentController: MainViewController!
   
   required init?(coder aDecoder: NSCoder) {
     lunches = [Lunch]()
@@ -28,6 +29,7 @@ class LunchPageViewController: UIPageViewController {
     loadLunches()
     
     dataSource = self
+    print("mainVC: \(parentController)")
   }
   
   // MARK: Methods
@@ -53,11 +55,11 @@ class LunchPageViewController: UIPageViewController {
   func getLunches() {
     // Make Get Request
     isLoading = true
-    showLoading()
+    toggleLoading()
     LunchKit.sharedInstance.getLunches(lunchDate, completion: {
       result in
       self.isLoading = false
-      self.showLoading()
+      self.toggleLoading()
       switch result {
       case .Success(_):
         self.lunches = LunchKit.sharedInstance.lunches
@@ -87,6 +89,8 @@ class LunchPageViewController: UIPageViewController {
   }
   
   func loadLunches() {
+    isLoading = true
+    toggleLoading()
     let path = dataFilePath()
     
     // Check whether kabbageats.plist exists, and if so, grab and decode data
@@ -108,7 +112,9 @@ class LunchPageViewController: UIPageViewController {
                 let viewControllers = [viewController]
                 self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
               }
-            return
+              isLoading = false
+              toggleLoading()
+              return
             }
           }
         }
@@ -150,16 +156,13 @@ class LunchPageViewController: UIPageViewController {
     presentViewController(alert, animated: true, completion: nil)
   }
   
-  func showLoading() {
-    if let mainVC = self.parentViewController as? MainViewController {
-      if isLoading {
-        mainVC.indicatorView.hidden = false
-        mainVC.activityIndicator.hidden = false
-        mainVC.activityIndicator.startAnimating()
-      } else {
-        mainVC.activityIndicator.stopAnimating()
-        mainVC.indicatorView.hidden = true
-      }
+  func toggleLoading() {
+    if isLoading {
+      parentController.indicatorView.hidden = false
+      parentController.activityIndicator.startAnimating()
+    } else {
+      parentController.activityIndicator.stopAnimating()
+      parentController.indicatorView.hidden = true
     }
   }
   

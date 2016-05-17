@@ -14,10 +14,16 @@ class MainViewController: UIViewController {
   @IBOutlet weak var indicatorView: UIView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      indicatorView.layer.cornerRadius = 5
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    indicatorView.layer.cornerRadius = 5
+  }
   
-
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "LoadLunches" {
+      let lunchPageVC = segue.destinationViewController as! LunchPageViewController
+      lunchPageVC.parentController = self
+    }
+  }
+  
 }
