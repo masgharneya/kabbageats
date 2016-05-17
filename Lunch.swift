@@ -36,13 +36,6 @@ class Lunch: NSObject, NSCoding {
     return formatter
   }()
   
-  func encodeWithCoder(aCoder: NSCoder) {
-    aCoder.encodeObject(fullMenu, forKey: "FullMenu")
-    aCoder.encodeObject(imageURL, forKey: "ImageURL")
-    aCoder.encodeObject(date, forKey: "Date")
-    aCoder.encodeObject(dateWithYear, forKey: "DateWithYear")
-  }
-  
   required init?(coder aDecoder: NSCoder) {
     fullMenu = aDecoder.decodeObjectForKey("FullMenu") as! String
     imageURL = aDecoder.decodeObjectForKey("ImageURL") as! String
@@ -55,6 +48,13 @@ class Lunch: NSObject, NSCoding {
     super.init()
   }
   
+  func encodeWithCoder(aCoder: NSCoder) {
+    aCoder.encodeObject(fullMenu, forKey: "FullMenu")
+    aCoder.encodeObject(imageURL, forKey: "ImageURL")
+    aCoder.encodeObject(date, forKey: "Date")
+    aCoder.encodeObject(dateWithYear, forKey: "DateWithYear")
+  }
+  
   func scheduleNotification() {
     if let date = dateWithYear.getDateFromString() {
       let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
@@ -64,6 +64,7 @@ class Lunch: NSObject, NSCoding {
         let localNotification = UILocalNotification()
         localNotification.fireDate = notifyDate
         localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.alertTitle = self.date
         localNotification.alertBody = fullMenu
         localNotification.userInfo = ["Date": dateWithYear]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
