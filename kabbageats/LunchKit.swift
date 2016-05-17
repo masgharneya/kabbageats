@@ -23,7 +23,7 @@ class LunchKit {
       print(response)
       if let result = response.result.value {
         completion(Result.Success(Box(value: result)))
-      } else if let error = response.result.error where error.code == -1004 {
+      } else if let error = response.result.error where error.code == -1004 || error.code == -1003 {
           completion(Result.Failure(Errors.WrongNetworkFailure))
       } else if let code = response.response?.statusCode where code == 404 {
         completion(Result.Failure(Errors.NotFound))

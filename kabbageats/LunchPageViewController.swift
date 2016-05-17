@@ -17,12 +17,14 @@ class LunchPageViewController: UIPageViewController {
   required init?(coder aDecoder: NSCoder) {
     lunches = [Lunch]()
     super.init(coder: aDecoder)
+    
+    print(dataFilePath())
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    //setStartDate()
-    lunchDate = setSpecificDate()
+    setStartDate()
+    //lunchDate = setSpecificDate()
     loadLunches()
     
     dataSource = self
@@ -106,7 +108,7 @@ class LunchPageViewController: UIPageViewController {
         
         // Get today's date and check if menu for today is saved. If saved already, load from file
         let today = NSDate()
-        let todayString = "2016-05-25" //today.apiDateStringFromDate()
+        let todayString = today.apiDateStringFromDate()
         for lunch in lunches {
           print("lunch date w year: \(lunch.dateWithYear) and todayString: \(todayString)")
           if lunch.dateWithYear == todayString {
@@ -119,8 +121,17 @@ class LunchPageViewController: UIPageViewController {
             }
           }
         }
-        // if no menu for toay is stored in file, the get lunches
-        getLunches()
+        // if no menu for today is stored in file, delete the file, then get new lunches. If menu for today is not in file, assumption is the data must be old since only consecutive data can be stored.
+        do {
+          try NSFileManager.defaultManager().removeItemAtPath(path)
+          LunchKit.sharedInstance.lunches = [Lunch]()
+          lunches = LunchKit.sharedInstance.lunches
+          getLunches()
+          return
+        } catch {
+          print("Unable to delete file")
+          showAlert("Unable to load lunches")
+        }
       }
     }
     // if file does not exist or bad data, get lunches
@@ -128,7 +139,7 @@ class LunchPageViewController: UIPageViewController {
   }
   
   func showAlert(message: String) {
-    let alert = UIAlertController(title: "Whoops...", message: message, preferredStyle: .Alert)
+    let alert = UIAlertController(title: "Whoops..", message: message, preferredStyle: .Alert)
     let OKaction = UIAlertAction(title: "OK", style: .Default, handler: nil)
     alert.addAction(OKaction)
     
@@ -136,13 +147,13 @@ class LunchPageViewController: UIPageViewController {
   }
   
   func showWrongNetworkError(message: String) {
-    let alert = UIAlertController(title: "Whoops...", message: message, preferredStyle: .Alert)
-    let OKaction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    let alert = UIAlertController(title: "Whoops..", message: message, preferredStyle: .Alert)
+    let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
     let tryAgain = UIAlertAction(title: "Try Again", style: .Default, handler: {
       _ in
-      self.loadLunches()
+      self.getLunches()
     })
-    alert.addAction(OKaction)
+    alert.addAction(cancel)
     alert.addAction(tryAgain)
     
     presentViewController(alert, animated: true, completion: nil)
@@ -227,6 +238,10 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
               }
             case .Failure(let error):
               switch error {
+              case Errors.WrongNetworkFailure:
+                self.showWrongNetworkError("Join Kabbage network to see future dates")
+                viewController.activityIndicator.stopAnimating()
+                viewController.indicatorView.hidden = true
               case Errors.NotFound:
                 print("No lunch tomorrow \(date)")
                 viewController.activityIndicator.stopAnimating()
