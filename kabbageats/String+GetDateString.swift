@@ -13,6 +13,7 @@ extension String {
   func getDateFromString() -> NSDate? {
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
     return dateFormatter.dateFromString(self)
   }
   
@@ -26,9 +27,9 @@ extension String {
   func getTodayString() -> String {
     if let date = self.getDateFromString() {
       // Convert date to sentence string
-      let strFormatter = NSDateFormatter()
-      strFormatter.dateFormat = "EEEE, MMMM d"
-      return strFormatter.stringFromDate(date)
+      let dateFormatter = NSDateFormatter()
+      dateFormatter.dateFormat = "EEEE, MMMM d"
+      return dateFormatter.stringFromDate(date)
     }
     return self
   }

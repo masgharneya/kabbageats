@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    let notificationSettings = UIUserNotificationSettings(
+      forTypes: [.Alert], categories: nil)
+    UIApplication.sharedApplication().registerUserNotificationSettings(
+        notificationSettings)
+    
     if let easternTZ = NSTimeZone(name: "America/New_York") {
       NSTimeZone.setDefaultTimeZone(easternTZ)
     }

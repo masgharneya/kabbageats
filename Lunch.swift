@@ -57,14 +57,12 @@ class Lunch: NSObject, NSCoding {
   
   func scheduleNotification() {
     if let date = dateWithYear.getDateFromString() {
-      let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
-      if date.compare(today) != .OrderedAscending {
-        let notifyDate = NSCalendar.currentCalendar().dateBySettingHour(11, minute: 0, second: 0, ofDate: date, options: .WrapComponents)
+      if date.compare(NSDate()) != .OrderedAscending {
+        let notifyDate = NSCalendar.currentCalendar().dateBySettingHour(10, minute: 0, second: 0, ofDate: date, options: .WrapComponents)
         
         let localNotification = UILocalNotification()
         localNotification.fireDate = notifyDate
         localNotification.timeZone = NSTimeZone.defaultTimeZone()
-        localNotification.alertTitle = self.date
         localNotification.alertBody = fullMenu
         localNotification.userInfo = ["Date": dateWithYear]
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
