@@ -55,7 +55,7 @@ class LunchKit {
   
   func getLunch(date: NSDate, completion: Result<NSDate> -> Void) {
     let lunchDate = date
-    let dateStr = lunchDate.apiDateStringFromDate()
+    let dateStr = lunchDate.getStringFromDate()
     // Make Get Request
     GET("\(baseURL)\(dateStr)/", params: nil) {
       result in
@@ -77,6 +77,7 @@ class LunchKit {
         lunch.fullMenu = menu
         lunch.imageURL = imageURL
         self.lunches.append(lunch)
+        lunch.scheduleNotification()
         completion(Result.Success(Box(value: lunchDate)))
       case .Failure(let error):
         completion(Result.Failure(error))

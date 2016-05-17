@@ -10,20 +10,26 @@ import Foundation
 import UIKit
 
 class Lunch: NSObject, NSCoding {
+  var date = ""
+  var dateWithYear = ""
   var fullMenu = ""
+  var imageURL = ""
+  var image: UIImage?
   var dishes: [String] {
     if !fullMenu.isEmpty {
       return fullMenu.componentsSeparatedByString("; ")
     }
     return [String]()
   }
-  //var dishes = [String]()
-  var imageURL = ""
-  var image: UIImage?
-  var date = ""
-  var dateWithYear = ""
   
-
+  var sideDishes: String {
+    if dishes.count > 1 {
+      return "with \(dishes[1]) and \(dishes[2])"
+    } else {
+      return ""
+    }
+  }
+  
   let jsonFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"
@@ -48,19 +54,22 @@ class Lunch: NSObject, NSCoding {
   override init() {
     super.init()
   }
-
-  /*
-  func getDishes() {
-    if !fullMenu.isEmpty {
-      dishes = fullMenu.componentsSeparatedByString("; ")
+  
+  func scheduleNotification() {
+    if let date = dateWithYear.getDateFromString() {
+      let today = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
+      if date.compare(today) != .OrderedAscending {
+        let notifyDate = NSCalendar.currentCalendar().dateBySettingHour(11, minute: 0, second: 0, ofDate: date, options: .WrapComponents)
+        
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = notifyDate
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.alertBody = fullMenu
+        localNotification.userInfo = ["Date": dateWithYear]
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+      }
     }
   }
- */
-  
-  var sideDishes: String {
-    return "with \(dishes[1]) and \(dishes[2])"
-  }
-  
 }
 
 

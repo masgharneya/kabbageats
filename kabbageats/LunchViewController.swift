@@ -17,20 +17,12 @@ class LunchViewController: UIViewController {
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var menuView: UIView!
   
-  var dishes = [String]()
-  var mainDish = ""
-  var sideDish = ""
-  var date = ""
-  var dateWithYear = ""
-  var imageURL = ""
-  var image: UIImage?
+  var lunch: Lunch!
   var lunchIndex = 0
-  var lunchDate = NSDate()
   
   // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     /*
     // Hide bottom border on navigation bar
     for parent in self.navigationController!.navigationBar.subviews {
@@ -43,30 +35,30 @@ class LunchViewController: UIViewController {
  */
     
     // Load data
-    if !mainDish.isEmpty {
-      mainDishLabel.text = mainDish
-      sideDishLabel.text = sideDish
+    if !lunch.dishes.isEmpty {
+      mainDishLabel.text = lunch.dishes[0]
+      sideDishLabel.text = lunch.sideDishes
       // If there is no image, show no image placeholder
-      if imageURL == "404" {
+      if lunch.imageURL == "404" {
         lunchImage.image = UIImage(named: "NoImage")
       } else {
-        // If there is an image, load image
-        if image == nil {
+        // If there is not an image, load image
+        if lunch.image == nil {
           activityIndicator.startAnimating()
           indicatorView.hidden = false
-          LunchKit.sharedInstance.getImage(imageURL, completion: {
+          LunchKit.sharedInstance.getImage(lunch.imageURL, completion: {
             data in
             guard let img = UIImage(data: data) else { return }
             self.lunchImage.image = img
-            self.image = img
+            self.lunch.image = img
             LunchKit.sharedInstance.lunches[self.lunchIndex].image = img
             self.activityIndicator.stopAnimating()
             self.indicatorView.hidden = true
           })
         } else {
-          lunchImage.image = image
-          self.activityIndicator.stopAnimating()
-          self.indicatorView.hidden = true
+          lunchImage.image = lunch.image
+          activityIndicator.stopAnimating()
+          indicatorView.hidden = true
         }
       }
     }
@@ -75,7 +67,7 @@ class LunchViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     if let mainVC = self.parentViewController?.parentViewController as? MainViewController {
-      mainVC.dateNav.title = date
+      mainVC.dateNav.title = lunch.date
     }
     indicatorView.layer.cornerRadius = 5
     //activityIndicator.stopAnimating()
@@ -85,12 +77,12 @@ class LunchViewController: UIViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "RateLunch" {
       let rateVC = segue.destinationViewController as! RateViewController
-      rateVC.dishes = dishes
-      rateVC.date = dateWithYear
+      rateVC.dishes = lunch.dishes
+      rateVC.date = lunch.dateWithYear
     }
     if segue.identifier == "Comment" {
       let commentVC = segue.destinationViewController as! CommentViewController
-      commentVC.date = dateWithYear
+      commentVC.date = lunch.dateWithYear
     }
   }
   

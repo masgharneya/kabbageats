@@ -9,23 +9,22 @@
 import Foundation
 
 extension String {
-  func getNextDateFromString() -> NSDate? {
-    // Convert string to a date
+  
+  func getDateFromString() -> NSDate? {
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    if let date = dateFormatter.dateFromString(self) {
+    return dateFormatter.dateFromString(self)
+  }
+  
+  func getNextDateFromString() -> NSDate? {
+    if let date = self.getDateFromString() {
       return date.getNextWeekday()
     }
     return nil
   }
   
   func getTodayString() -> String {
-    // Convert string to a date
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    let date = dateFormatter.dateFromString(self)
-    
-    if let date = date {
+    if let date = self.getDateFromString() {
       // Convert date to sentence string
       let strFormatter = NSDateFormatter()
       strFormatter.dateFormat = "EEEE, MMMM d"
@@ -35,13 +34,8 @@ extension String {
   }
   
   func getJSONStringFromString() -> String {
-    // Convert string to date
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    if let date = dateFormatter.dateFromString(self) {
-      let nextDate = date.getNextWeekday()
-      
-      return nextDate.apiDateStringFromDate()
+    if let date = self.getNextDateFromString() {
+      return date.getStringFromDate()
     }
     return self
   }

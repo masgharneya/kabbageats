@@ -42,18 +42,10 @@ class LunchPageViewController: UIPageViewController {
   }
   
   func lunchViewController(index: Int) -> LunchViewController? {
-    if let lunch = storyboard?.instantiateViewControllerWithIdentifier("LunchViewController") as? LunchViewController {
-      lunch.date = lunches[index].date
-      lunch.dateWithYear = lunches[index].dateWithYear
-      lunch.dishes = lunches[index].dishes
-      lunch.mainDish = lunches[index].dishes[0]
-      lunch.sideDish = lunches[index].sideDishes
-      lunch.imageURL = lunches[index].imageURL
-      lunch.lunchIndex = index
-      if let img = lunches[index].image {
-        lunch.image = img
-      } 
-      return lunch
+    if let lunchVC = storyboard?.instantiateViewControllerWithIdentifier("LunchViewController") as? LunchViewController {
+      lunchVC.lunch = lunches[index]
+      lunchVC.lunchIndex = index
+      return lunchVC
     }
     return nil
   }
@@ -102,13 +94,12 @@ class LunchPageViewController: UIPageViewController {
       if let data = NSData(contentsOfFile: path) {
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
         lunches = unarchiver.decodeObjectForKey("Lunches") as! [Lunch]
-        print("Lunches: \(lunches.count)")
         LunchKit.sharedInstance.lunches = lunches
         unarchiver.finishDecoding()
         
         // Get today's date and check if menu for today is saved. If saved already, load from file
         let today = NSDate()
-        let todayString = today.apiDateStringFromDate()
+        let todayString = today.getStringFromDate()
         for lunch in lunches {
           print("lunch date w year: \(lunch.dateWithYear) and todayString: \(todayString)")
           if lunch.dateWithYear == todayString {
@@ -161,7 +152,6 @@ class LunchPageViewController: UIPageViewController {
   
   func showLoading() {
     if let mainVC = self.parentViewController as? MainViewController {
-      print("Loading: \(isLoading)")
       if isLoading {
         mainVC.indicatorView.hidden = false
         mainVC.activityIndicator.hidden = false
