@@ -17,7 +17,6 @@
 		76B5DF171CC5312E00166200 /* kabbageatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF161CC5312E00166200 /* kabbageatsUITests.swift */; };
 		76B5DF251CC58B7200166200 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B5DF241CC58B7200166200 /* Alamofire.framework */; };
 		76B5DF2A1CC5DB9900166200 /* Lunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF291CC5DB9900166200 /* Lunch.swift */; };
-		76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */; };
 		76B5DF301CC6C86800166200 /* NSDate+GetWeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */; };
 		76B5DF571CC824F900166200 /* LunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5DF561CC824F900166200 /* LunchPageViewController.swift */; };
 		76BAC9C21CDE8EE400238813 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BAC9C11CDE8EE400238813 /* Box.swift */; };
@@ -63,7 +62,6 @@
 		76B5DF181CC5312E00166200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76B5DF241CC58B7200166200 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		76B5DF291CC5DB9900166200 /* Lunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lunch.swift; path = ../Lunch.swift; sourceTree = "<group>"; };
-		76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+GetWeekDay.swift"; path = "../NSDate+GetWeekDay.swift"; sourceTree = "<group>"; };
 		76B5DF561CC824F900166200 /* LunchPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunchPageViewController.swift; sourceTree = "<group>"; };
 		76BAC9C11CDE8EE400238813 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 		76B5DF311CC6C87200166200 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				76B5DF2B1CC5EA4C00166200 /* UIImageView+DownloadImage.swift */,
 				76B5DF2F1CC6C86800166200 /* NSDate+GetWeekDay.swift */,
 				76F5D68E1CD19B9600517E9D /* String+GetDateString.swift */,
 			);
@@ -342,7 +339,6 @@
 				76B5DEF41CC5312E00166200 /* AppDelegate.swift in Sources */,
 				76F5D6931CD26BCF00517E9D /* LunchKit.swift in Sources */,
 				76F5D68F1CD19B9600517E9D /* String+GetDateString.swift in Sources */,
-				76B5DF2C1CC5EA4C00166200 /* UIImageView+DownloadImage.swift in Sources */,
 				76F5D6801CC9A9B600517E9D /* MainViewController.swift in Sources */,
 				76F5D6891CCEB80000517E9D /* CommentViewController.swift in Sources */,
 			);

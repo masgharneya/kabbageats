@@ -32,16 +32,6 @@ class LunchPageViewController: UIPageViewController {
   }
   
   // MARK: Methods
-  
-  func documentsDirectory() -> String {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-    return paths[0]
-  }
-  
-  func dataFilePath() -> String {
-    return (documentsDirectory() as NSString).stringByAppendingPathComponent("kabbageats.plist")
-  }
-  
   func lunchViewController(index: Int) -> LunchViewController? {
     if let lunchVC = storyboard?.instantiateViewControllerWithIdentifier("LunchViewController") as? LunchViewController {
       lunchVC.lunch = lunches[index]
@@ -54,11 +44,11 @@ class LunchPageViewController: UIPageViewController {
   func getLunches() {
     // Make Get Request
     isLoading = true
-    toggleLoading()
+    toggleLoadingIndicator()
     LunchKit.sharedInstance.getLunches(lunchDate, completion: {
       result in
       self.isLoading = false
-      self.toggleLoading()
+      self.toggleLoadingIndicator()
       switch result {
       case .Success(_):
         self.lunches = LunchKit.sharedInstance.lunches
@@ -89,7 +79,7 @@ class LunchPageViewController: UIPageViewController {
   
   internal func loadLunches() {
     isLoading = true
-    toggleLoading()
+    toggleLoadingIndicator()
     let path = dataFilePath()
     
     // Check whether kabbageats.plist exists, and if so, grab and decode data
@@ -111,7 +101,7 @@ class LunchPageViewController: UIPageViewController {
                 self.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
               }
               isLoading = false
-              toggleLoading()
+              toggleLoadingIndicator()
               return
             }
           }
@@ -158,7 +148,7 @@ class LunchPageViewController: UIPageViewController {
     presentViewController(alert, animated: true, completion: nil)
   }
   
-  func toggleLoading() {
+  func toggleLoadingIndicator() {
     if isLoading {
       parentController.indicatorView.hidden = false
       parentController.activityIndicator.startAnimating()
@@ -192,6 +182,16 @@ class LunchPageViewController: UIPageViewController {
     comps.year = 2016
     return NSCalendar.currentCalendar().dateFromComponents(comps)!
   }
+  
+  func documentsDirectory() -> String {
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    return paths[0]
+  }
+  
+  func dataFilePath() -> String {
+    return (documentsDirectory() as NSString).stringByAppendingPathComponent("kabbageats.plist")
+  }
+  
 }
 
 // MARK: - Extensions
