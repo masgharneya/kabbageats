@@ -71,8 +71,6 @@ class LunchViewController: UIViewController {
       lunchPageVC.parentController.dateNav.title = lunch.date
     }
     indicatorView.layer.cornerRadius = 5
-    activityIndicator.stopAnimating()
-    indicatorView.hidden = true
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
