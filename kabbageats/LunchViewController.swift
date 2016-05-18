@@ -38,6 +38,7 @@ class LunchViewController: UIViewController {
     if !lunch.dishes.isEmpty {
       mainDishLabel.text = lunch.dishes[0]
       sideDishLabel.text = lunch.sideDishes
+      
       // If there is no image, show no image placeholder
       if lunch.imageURL == "404" {
         lunchImage.image = UIImage(named: "NoImage")

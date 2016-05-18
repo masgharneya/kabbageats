@@ -10,7 +10,7 @@
         <!--Lunch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="kabbagEATS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -140,7 +140,7 @@
         <!--Lunch Page View Controller-->
         <scene sceneID="Bk9-jH-gz2">
             <objects>
-                <pageViewController storyboardIdentifier="LunchPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rt9-WQ-THP" customClass="LunchPageViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="LunchPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rt9-WQ-THP" customClass="LunchPageViewController" customModule="kabbagEATS" customModuleProvider="target" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="492"/>
                 </pageViewController>
@@ -151,7 +151,7 @@
         <!--Lunch View Controller-->
         <scene sceneID="XPd-V7-0LY">
             <objects>
-                <viewController storyboardIdentifier="LunchViewController" id="acV-5x-bL2" customClass="LunchViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LunchViewController" id="acV-5x-bL2" customClass="LunchViewController" customModule="kabbagEATS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I9x-w2-qNl"/>
                         <viewControllerLayoutGuide type="bottom" id="KYY-hp-uMs"/>
@@ -332,7 +332,7 @@
         <!--Rate View Controller-->
         <scene sceneID="sHI-D0-6Gc">
             <objects>
-                <viewController id="qQe-pu-78k" customClass="RateViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qQe-pu-78k" customClass="RateViewController" customModule="kabbagEATS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8IO-MT-3J0"/>
                         <viewControllerLayoutGuide type="bottom" id="QlB-9h-gsg"/>
@@ -567,7 +567,7 @@
         <!--Comment View Controller-->
         <scene sceneID="7GU-P1-5lQ">
             <objects>
-                <viewController id="5KF-dA-pLT" customClass="CommentViewController" customModule="kabbageats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5KF-dA-pLT" customClass="CommentViewController" customModule="kabbagEATS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QsK-Cc-APT"/>
                         <viewControllerLayoutGuide type="bottom" id="W9g-b2-ncD"/>

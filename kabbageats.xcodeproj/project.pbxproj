@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		76B5DEF01CC5312E00166200 /* kabbageats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kabbageats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76B5DEF01CC5312E00166200 /* kabbagEATS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kabbagEATS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76B5DEF31CC5312E00166200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76B5DEF51CC5312E00166200 /* LunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchViewController.swift; sourceTree = "<group>"; };
 		76B5DEF81CC5312E00166200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		76B5DEF11CC5312E00166200 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				76B5DEF01CC5312E00166200 /* kabbageats.app */,
+				76B5DEF01CC5312E00166200 /* kabbagEATS.app */,
 				76B5DF071CC5312E00166200 /* kabbageatsTests.xctest */,
 				76B5DF121CC5312E00166200 /* kabbageatsUITests.xctest */,
 			);
@@ -196,7 +196,7 @@
 			);
 			name = kabbageats;
 			productName = kabbageats;
-			productReference = 76B5DEF01CC5312E00166200 /* kabbageats.app */;
+			productReference = 76B5DEF01CC5312E00166200 /* kabbagEATS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		76B5DF061CC5312E00166200 /* kabbageatsTests */ = {
@@ -493,7 +493,7 @@
 				INFOPLIST_FILE = kabbageats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kabbagEATS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -512,7 +512,7 @@
 				INFOPLIST_FILE = kabbageats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.marisalaneous.kabbageats;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kabbagEATS;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
