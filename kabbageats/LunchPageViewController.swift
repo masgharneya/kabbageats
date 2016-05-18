@@ -29,7 +29,6 @@ class LunchPageViewController: UIPageViewController {
     loadLunches()
     
     dataSource = self
-    print("mainVC: \(parentController)")
   }
   
   // MARK: Methods
@@ -88,7 +87,7 @@ class LunchPageViewController: UIPageViewController {
     data.writeToFile(dataFilePath(), atomically: true)
   }
   
-  func loadLunches() {
+  internal func loadLunches() {
     isLoading = true
     toggleLoading()
     let path = dataFilePath()
@@ -105,7 +104,6 @@ class LunchPageViewController: UIPageViewController {
         let today = NSDate()
         let todayString = today.getStringFromDate()
         for lunch in lunches {
-          print("lunch date w year: \(lunch.dateWithYear) and todayString: \(todayString)")
           if lunch.dateWithYear == todayString {
             if let startingIndex = lunches.indexOf(lunch) {
               if let viewController = lunchViewController(startingIndex) {
@@ -145,13 +143,17 @@ class LunchPageViewController: UIPageViewController {
   
   func showWrongNetworkError(message: String) {
     let alert = UIAlertController(title: "Whoops..", message: message, preferredStyle: .Alert)
-    let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+    let ok = UIAlertAction(title: "OK", style: .Default, handler: nil)
     let tryAgain = UIAlertAction(title: "Try Again", style: .Default, handler: {
       _ in
       self.getLunches()
     })
-    alert.addAction(cancel)
-    alert.addAction(tryAgain)
+    // If no lunches have been loaded, try to load lunches. Otherwise, alert is only informational
+    if LunchKit.sharedInstance.lunches.count > 0 {
+      alert.addAction(ok)
+    } else {
+      alert.addAction(tryAgain)
+    }
     
     presentViewController(alert, animated: true, completion: nil)
   }
@@ -182,7 +184,7 @@ class LunchPageViewController: UIPageViewController {
     }
   }
   
-  // Sets a specific date for testing when there is no future data
+  // Sets a specific date for testing
   func setSpecificDate() -> NSDate {
     let comps = NSDateComponents()
     comps.day = 24
@@ -219,6 +221,7 @@ extension LunchPageViewController: UIPageViewControllerDataSource {
         let lastDayInArray = lunches[lunches.count - 1].dateWithYear
         if let date = lastDayInArray.getNextDateFromString() {
           
+          lunchDate = date
           LunchKit.sharedInstance.getLunch(date, completion: {
             result in
             switch result {

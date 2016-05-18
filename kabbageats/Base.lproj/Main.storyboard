@@ -19,12 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZ5-16-2d9">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
-                                <connections>
-                                    <segue destination="rt9-WQ-THP" kind="embed" identifier="LoadLunches" id="T3g-lT-7bo"/>
-                                </connections>
-                            </containerView>
                             <navigationBar contentMode="scaleToFill" restorationIdentifier="DateNavigationBar" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2n-sU-KED" userLabel="Date Navigation Bar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
@@ -39,6 +33,12 @@
                                     <navigationItem title="Grabbing lunch..." id="P4a-hx-bBb"/>
                                 </items>
                             </navigationBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZ5-16-2d9">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <connections>
+                                    <segue destination="rt9-WQ-THP" kind="embed" identifier="LoadLunches" id="T3g-lT-7bo"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SO3-84-C0i">
                                 <rect key="frame" x="263" y="316" width="75" height="75"/>
                                 <subviews>

@@ -17,7 +17,7 @@ class LunchKit {
   let baseURL = "https://lunch.kabbage.com/api/v2/lunches/"
   var lunches = [Lunch]()
   
-  func GET(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
+  private func GET(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
     Manager.request(.GET, url, parameters: params).validate().responseJSON {
       response in
       print(response)
@@ -34,7 +34,7 @@ class LunchKit {
     }
   }
   
-  func POST(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
+  private func POST(url: String, params: [String:AnyObject]?, completion: (Result<AnyObject>) -> Void) {
     Manager.request(.POST, url, parameters: params).responseJSON {
       response in
       print(response)
@@ -56,8 +56,11 @@ class LunchKit {
   func getLunch(date: NSDate, completion: Result<NSDate> -> Void) {
     let lunchDate = date
     let dateStr = lunchDate.getStringFromDate()
+    let endpoint = baseURL + dateStr
+    print("GET LUNCH ENDPOINT: \(endpoint)")
+    
     // Make Get Request
-    GET("\(baseURL)\(dateStr)/", params: nil) {
+    GET(endpoint, params: nil) {
       result in
       switch result {
       case .Success(let box):
@@ -121,13 +124,16 @@ class LunchKit {
   // MARK: Rate Lunch Methods
   
   func postDishRating(dish: String, date: String, rating: Int, completion: (Result<Bool>) -> Void) {
+    let endpoint = baseURL + date + "/ratings"
+    print("RATING ENDPOINT: \(endpoint)")
+    
     let params: [String : AnyObject] = [
       "dish": "\(dish)",
       "rating": rating,
       "source": "iOS App"
     ]
     
-    POST("\(baseURL)\(date)/ratings", params: params, completion: {
+    POST(endpoint, params: params, completion: {
       result in
       switch result {
       case .Success(_):
@@ -141,12 +147,15 @@ class LunchKit {
   
   // MARK: Comment on Lunch Methods
   func sendComment(message: String, name: String?, date: String, completion: (Result<Bool>) -> Void) {
+    let endpoint = baseURL + date + "/comments"
+    print("COMMENT ENDPOINT: \(endpoint)")
+    
     var params = ["message": message]
     if let name = name {
       params.updateValue(name, forKey: "name")
     }
     
-    POST("\(baseURL)\(date)/comments", params: params, completion: {
+    POST(endpoint, params: params, completion: {
       result in
       switch result {
       case .Success(_):

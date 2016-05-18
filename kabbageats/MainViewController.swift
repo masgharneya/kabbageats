@@ -25,5 +25,5 @@ class MainViewController: UIViewController {
       lunchPageVC.parentController = self
     }
   }
-  
+
 }
