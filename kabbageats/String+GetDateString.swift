@@ -33,11 +33,4 @@ extension String {
     }
     return self
   }
-  
-  func getJSONStringFromString() -> String {
-    if let date = self.getNextDateFromString() {
-      return date.getStringFromDate()
-    }
-    return self
-  }
 }

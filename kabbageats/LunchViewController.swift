@@ -23,16 +23,6 @@ class LunchViewController: UIViewController {
   // MARK: - View Controller Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    /*
-    // Hide bottom border on navigation bar
-    for parent in self.navigationController!.navigationBar.subviews {
-      for childView in parent.subviews {
-        if(childView is UIImageView) {
-          childView.removeFromSuperview()
-        }
-      }
-    }
- */
     
     // Load data
     if !lunch.dishes.isEmpty {
@@ -49,17 +39,19 @@ class LunchViewController: UIViewController {
           indicatorView.hidden = false
           LunchKit.sharedInstance.getImage(lunch.imageURL, completion: {
             data in
-            guard let img = UIImage(data: data) else { return }
+            guard let img = UIImage(data: data) else {
+              self.lunchImage.image = UIImage(named: "NoImage")
+              self.hideIndicator()
+              return
+            }
             self.lunchImage.image = img
             self.lunch.image = img
             LunchKit.sharedInstance.lunches[self.lunchIndex].image = img
-            self.activityIndicator.stopAnimating()
-            self.indicatorView.hidden = true
+            self.hideIndicator()
           })
         } else {
           lunchImage.image = lunch.image
-          activityIndicator.stopAnimating()
-          indicatorView.hidden = true
+          hideIndicator()
         }
       }
     }
@@ -71,8 +63,6 @@ class LunchViewController: UIViewController {
       lunchPageVC.parentController.dateNav.title = lunch.date
     }
     indicatorView.layer.cornerRadius = 5
-    activityIndicator.stopAnimating()
-    indicatorView.hidden = true
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -87,9 +77,15 @@ class LunchViewController: UIViewController {
     }
   }
   
+  func hideIndicator() {
+    activityIndicator.stopAnimating()
+    indicatorView.hidden = true
+  }
+  
   @IBAction func rateLunch(sender: UIButton) {
     performSegueWithIdentifier("RateLunch", sender: sender)
   }
+  
   // MARK: - Actions
   /*
   @IBAction func refreshLunch(sender: UIBarButtonItem) {
