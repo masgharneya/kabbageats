@@ -77,7 +77,7 @@ class LunchPageViewController: UIPageViewController {
     data.writeToFile(dataFilePath(), atomically: true)
   }
   
-  internal func loadLunches() {
+  func loadLunches() {
     isLoading = true
     toggleLoadingIndicator()
     let path = dataFilePath()

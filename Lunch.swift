@@ -29,13 +29,7 @@ class Lunch: NSObject, NSCoding {
       return ""
     }
   }
-  
-  let jsonFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter
-  }()
-  
+   
   required init?(coder aDecoder: NSCoder) {
     fullMenu = aDecoder.decodeObjectForKey("FullMenu") as! String
     imageURL = aDecoder.decodeObjectForKey("ImageURL") as! String

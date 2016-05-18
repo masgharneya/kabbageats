@@ -24,7 +24,7 @@ class RateViewController: UIViewController {
   }
   
   override func viewDidLoad() {
-      super.viewDidLoad()
+    super.viewDidLoad()
     popupView.layer.cornerRadius = 10
     
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RateViewController.close))
