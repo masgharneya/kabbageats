@@ -12,8 +12,8 @@ class LunchPageViewController: UIPageViewController {
   var lunches: [Lunch]
   var currentIndex: Int!
   var lunchDate = NSDate()
-  var isLoading = false
-  var parentController: MainViewController!
+  var isLoading = false // Having a state like isLoading is kind of difficult to manage and could create bugs for you in the future.
+  var parentController: MainViewController! // Looks like the reason you are holding on to a MainVC just to present the spinner. Any reason you can't just present the spinner from the LunchPageViewController?
   
   required init?(coder aDecoder: NSCoder) {
     lunches = [Lunch]()
@@ -69,6 +69,7 @@ class LunchPageViewController: UIPageViewController {
     })
   }
   
+  // A function like saveLunches should probably be the responsibility of LunchKit, or some kind of data manager
   func saveLunches() {
     let data = NSMutableData()
     let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -77,6 +78,8 @@ class LunchPageViewController: UIPageViewController {
     data.writeToFile(dataFilePath(), atomically: true)
   }
   
+  
+  // Same with some of this caching logic. It can probably be moved somewhere else outsize of this view controller code
   func loadLunches() {
     isLoading = true
     toggleLoadingIndicator()

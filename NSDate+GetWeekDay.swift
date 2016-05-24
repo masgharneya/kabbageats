@@ -8,6 +8,8 @@
 
 import Foundation
 
+// If you use specific date formatters alot, it might be good to make them static because they are apparently very expensive to make
+
 extension NSDate {
   func dayOfWeek() -> Int? {
     guard let cal: NSCalendar = NSCalendar.currentCalendar(),

@@ -10,6 +10,7 @@ import UIKit
 
 class RateViewController: UIViewController {
   
+  // Might be cool to put these labels in a stackView or a tableView. That way you can dynamically create as many dish ratings that you need, instead of hardcoding 1 main, 2 side
   @IBOutlet weak var mainDishLabel: UILabel!
   @IBOutlet weak var sideDish1Label: UILabel!
   @IBOutlet weak var sideDish2Labael: UILabel!

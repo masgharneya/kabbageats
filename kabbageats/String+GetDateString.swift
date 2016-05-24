@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Might also be good to make a static date formatter for these
+
 extension String {
   
   func getDateFromString() -> NSDate? {

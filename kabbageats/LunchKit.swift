@@ -168,6 +168,7 @@ class LunchKit {
   }
 }
 
+// Using "Errors" as the enum keyword is probably too generic and I don't think it should be plural. "KabbageEatError" or something like that is probably a better choice
 enum Errors: ErrorType {
   
   case WrongNetworkFailure
